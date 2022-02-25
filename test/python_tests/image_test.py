@@ -18,7 +18,7 @@ if PYTHON3:
 def setup():
     # All of the paths used are relative, if we run the tests
     # from another directory we need to chdir()
-    os.chdir(execution_path('.'))
+    os.chdir(execution_path("."))
 
 
 def test_type():
@@ -162,7 +162,7 @@ def test_set_and_get_pixel():
 
 def test_pixel_gray8():
     im = mapnik.Image(4, 4, mapnik.ImageType.gray8)
-    val_list = range(20)
+    val_list = list(range(20))
     for v in val_list:
         im.set_pixel(0, 0, v)
         eq_(im.get_pixel(0, 0), v)
@@ -172,7 +172,7 @@ def test_pixel_gray8():
 
 def test_pixel_gray8s():
     im = mapnik.Image(4, 4, mapnik.ImageType.gray8s)
-    val_list = range(20)
+    val_list = list(range(20))
     for v in val_list:
         im.set_pixel(0, 0, v)
         eq_(im.get_pixel(0, 0), v)
@@ -182,7 +182,7 @@ def test_pixel_gray8s():
 
 def test_pixel_gray16():
     im = mapnik.Image(4, 4, mapnik.ImageType.gray16)
-    val_list = range(20)
+    val_list = list(range(20))
     for v in val_list:
         im.set_pixel(0, 0, v)
         eq_(im.get_pixel(0, 0), v)
@@ -192,7 +192,7 @@ def test_pixel_gray16():
 
 def test_pixel_gray16s():
     im = mapnik.Image(4, 4, mapnik.ImageType.gray16s)
-    val_list = range(20)
+    val_list = list(range(20))
     for v in val_list:
         im.set_pixel(0, 0, v)
         eq_(im.get_pixel(0, 0), v)
@@ -202,7 +202,7 @@ def test_pixel_gray16s():
 
 def test_pixel_gray32():
     im = mapnik.Image(4, 4, mapnik.ImageType.gray32)
-    val_list = range(20)
+    val_list = list(range(20))
     for v in val_list:
         im.set_pixel(0, 0, v)
         eq_(im.get_pixel(0, 0), v)
@@ -212,7 +212,7 @@ def test_pixel_gray32():
 
 def test_pixel_gray32s():
     im = mapnik.Image(4, 4, mapnik.ImageType.gray32s)
-    val_list = range(20)
+    val_list = list(range(20))
     for v in val_list:
         im.set_pixel(0, 0, v)
         eq_(im.get_pixel(0, 0), v)
@@ -222,7 +222,7 @@ def test_pixel_gray32s():
 
 def test_pixel_gray64():
     im = mapnik.Image(4, 4, mapnik.ImageType.gray64)
-    val_list = range(20)
+    val_list = list(range(20))
     for v in val_list:
         im.set_pixel(0, 0, v)
         eq_(im.get_pixel(0, 0), v)
@@ -232,7 +232,7 @@ def test_pixel_gray64():
 
 def test_pixel_gray64s():
     im = mapnik.Image(4, 4, mapnik.ImageType.gray64s)
-    val_list = range(20)
+    val_list = list(range(20))
     for v in val_list:
         im.set_pixel(0, 0, v)
         eq_(im.get_pixel(0, 0), v)
@@ -278,14 +278,14 @@ def test_pixel_underflow():
 @raises(IndexError)
 def test_set_pixel_out_of_range_1():
     im = mapnik.Image(4, 4)
-    c = mapnik.Color('blue')
+    c = mapnik.Color("blue")
     im.set_pixel(5, 5, c)
 
 
 @raises(OverflowError)
 def test_set_pixel_out_of_range_2():
     im = mapnik.Image(4, 4)
-    c = mapnik.Color('blue')
+    c = mapnik.Color("blue")
     im.set_pixel(-1, 1, c)
 
 
@@ -315,10 +315,10 @@ def test_get_pixel_color_out_of_range_2():
 
 def test_set_color_to_alpha():
     im = mapnik.Image(256, 256)
-    im.fill(mapnik.Color('rgba(12,12,12,255)'))
-    eq_(get_unique_colors(im), ['rgba(12,12,12,255)'])
-    im.set_color_to_alpha(mapnik.Color('rgba(12,12,12,0)'))
-    eq_(get_unique_colors(im), ['rgba(0,0,0,0)'])
+    im.fill(mapnik.Color("rgba(12,12,12,255)"))
+    eq_(get_unique_colors(im), ["rgba(12,12,12,255)"])
+    im.set_color_to_alpha(mapnik.Color("rgba(12,12,12,0)"))
+    eq_(get_unique_colors(im), ["rgba(0,0,0,0)"])
 
 
 @raises(RuntimeError)
@@ -332,10 +332,10 @@ def test_negative_image_dimensions():
 
 
 def test_jpeg_round_trip():
-    filepath = '/tmp/mapnik-jpeg-io.jpeg'
+    filepath = "/tmp/mapnik-jpeg-io.jpeg"
     im = mapnik.Image(255, 267)
-    im.fill(mapnik.Color('rgba(1,2,3,.5)'))
-    im.save(filepath, 'jpeg')
+    im.fill(mapnik.Color("rgba(1,2,3,.5)"))
+    im.save(filepath, "jpeg")
     im2 = mapnik.Image.open(filepath)
     with open(filepath, READ_FLAGS) as f:
         im3 = mapnik.Image.fromstring(f.read())
@@ -344,16 +344,16 @@ def test_jpeg_round_trip():
     eq_(im.width(), im3.width())
     eq_(im.height(), im3.height())
     eq_(len(im.tostring()), len(im2.tostring()))
-    eq_(len(im.tostring('jpeg')), len(im2.tostring('jpeg')))
+    eq_(len(im.tostring("jpeg")), len(im2.tostring("jpeg")))
     eq_(len(im.tostring()), len(im3.tostring()))
-    eq_(len(im.tostring('jpeg')), len(im3.tostring('jpeg')))
+    eq_(len(im.tostring("jpeg")), len(im3.tostring("jpeg")))
 
 
 def test_png_round_trip():
-    filepath = '/tmp/mapnik-png-io.png'
+    filepath = "/tmp/mapnik-png-io.png"
     im = mapnik.Image(255, 267)
-    im.fill(mapnik.Color('rgba(1,2,3,.5)'))
-    im.save(filepath, 'png')
+    im.fill(mapnik.Color("rgba(1,2,3,.5)"))
+    im.save(filepath, "png")
     im2 = mapnik.Image.open(filepath)
     with open(filepath, READ_FLAGS) as f:
         im3 = mapnik.Image.fromstring(f.read())
@@ -362,29 +362,30 @@ def test_png_round_trip():
     eq_(im.width(), im3.width())
     eq_(im.height(), im3.height())
     eq_(len(im.tostring()), len(im2.tostring()))
-    eq_(len(im.tostring('png')), len(im2.tostring('png')))
-    eq_(len(im.tostring('png8')), len(im2.tostring('png8')))
+    eq_(len(im.tostring("png")), len(im2.tostring("png")))
+    eq_(len(im.tostring("png8")), len(im2.tostring("png8")))
     eq_(len(im.tostring()), len(im3.tostring()))
-    eq_(len(im.tostring('png')), len(im3.tostring('png')))
-    eq_(len(im.tostring('png8')), len(im3.tostring('png8')))
+    eq_(len(im.tostring("png")), len(im3.tostring("png")))
+    eq_(len(im.tostring("png8")), len(im3.tostring("png8")))
 
 
 def test_image_open_from_string():
-    filepath = '../data/images/dummy.png'
+    filepath = "../data/images/dummy.png"
     im1 = mapnik.Image.open(filepath)
     with open(filepath, READ_FLAGS) as f:
         im2 = mapnik.Image.fromstring(f.read())
     eq_(im1.width(), im2.width())
     length = len(im1.tostring())
     eq_(length, len(im2.tostring()))
-    eq_(len(mapnik.Image.fromstring(im1.tostring('png')).tostring()), length)
-    eq_(len(mapnik.Image.fromstring(im1.tostring('jpeg')).tostring()), length)
-    eq_(len(mapnik.Image.frombuffer(buffer(im1.tostring('png'))).tostring()), length)
-    eq_(len(mapnik.Image.frombuffer(buffer(im1.tostring('jpeg'))).tostring()), length)
+    eq_(len(mapnik.Image.fromstring(im1.tostring("png")).tostring()), length)
+    eq_(len(mapnik.Image.fromstring(im1.tostring("jpeg")).tostring()), length)
+    eq_(len(mapnik.Image.frombuffer(buffer(im1.tostring("png"))).tostring()), length)
+    eq_(len(mapnik.Image.frombuffer(buffer(im1.tostring("jpeg"))).tostring()), length)
 
     # TODO - https://github.com/mapnik/mapnik/issues/1831
-    eq_(len(mapnik.Image.fromstring(im1.tostring('tiff')).tostring()), length)
-    eq_(len(mapnik.Image.frombuffer(buffer(im1.tostring('tiff'))).tostring()), length)
+    eq_(len(mapnik.Image.fromstring(im1.tostring("tiff")).tostring()), length)
+    eq_(len(mapnik.Image.frombuffer(buffer(im1.tostring("tiff"))).tostring()), length)
+
 
 if __name__ == "__main__":
     setup()

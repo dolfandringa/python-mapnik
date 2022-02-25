@@ -13,7 +13,7 @@ from .utilities import execution_path, run_all
 def setup():
     # All of the paths used are relative, if we run the tests
     # from another directory we need to chdir()
-    os.chdir(execution_path('.'))
+    os.chdir(execution_path("."))
 
 
 def test_image_16_8_simple():
@@ -98,6 +98,7 @@ def test_image_16_32f_scale_and_offset():
     eq_(im3.get_pixel(0, 1), 258)
     eq_(im3.get_pixel(1, 0), 0)
     eq_(im3.get_pixel(1, 1), 615)
+
 
 if __name__ == "__main__":
     setup()

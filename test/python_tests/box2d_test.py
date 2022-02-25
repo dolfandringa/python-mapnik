@@ -63,9 +63,9 @@ def test_envelope_init():
 
 
 def test_envelope_static_init():
-    e = mapnik.Box2d.from_string('100 100 200 200')
-    e2 = mapnik.Box2d.from_string('100,100,200,200')
-    e3 = mapnik.Box2d.from_string('100 , 100 , 200 , 200')
+    e = mapnik.Box2d.from_string("100 100 200 200")
+    e2 = mapnik.Box2d.from_string("100,100,200,200")
+    e3 = mapnik.Box2d.from_string("100 , 100 , 200 , 200")
     eq_(e, e2)
     eq_(e, e3)
 
@@ -179,6 +179,7 @@ def test_envelope_clipping():
     e2 = mapnik.Box2d(173.7378, -39.6395, 174.4849, -38.9252)
     e1.clip(e2)
     eq_(e1, e2)
+
 
 if __name__ == "__main__":
     exit(run_all(eval(x) for x in dir() if x.startswith("test_")))

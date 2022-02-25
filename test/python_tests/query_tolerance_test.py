@@ -12,13 +12,15 @@ from .utilities import execution_path, run_all
 def setup():
     # All of the paths used are relative, if we run the tests
     # from another directory we need to chdir()
-    os.chdir(execution_path('.'))
+    os.chdir(execution_path("."))
 
-if 'shape' in mapnik.DatasourceCache.plugin_names():
+
+if "shape" in mapnik.DatasourceCache.plugin_names():
+
     def test_query_tolerance():
-        srs = '+init=epsg:4326'
-        lyr = mapnik.Layer('test')
-        ds = mapnik.Shapefile(file='../data/shp/arrows.shp')
+        srs = "+init=epsg:4326"
+        lyr = mapnik.Layer("test")
+        ds = mapnik.Shapefile(file="../data/shp/arrows.shp")
         lyr.datasource = ds
         lyr.srs = srs
         _width = 256
@@ -42,6 +44,7 @@ if 'shape' in mapnik.DatasourceCache.plugin_names():
         x = 2.0 + tol * 1.1
         features = _map.query_point(0, x, y)
         eq_(len(list(features)), 0)
+
 
 if __name__ == "__main__":
     setup()

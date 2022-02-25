@@ -11,7 +11,7 @@ from nose.tools import assert_almost_equal
 import mapnik
 
 PYTHON3 = sys.version_info[0] == 3
-READ_FLAGS = 'rb' if PYTHON3 else 'r'
+READ_FLAGS = "rb" if PYTHON3 else "r"
 if PYTHON3:
     xrange = range
 
@@ -19,8 +19,7 @@ HERE = os.path.dirname(__file__)
 
 
 def execution_path(filename):
-    return os.path.join(os.path.dirname(
-        sys._getframe(1).f_code.co_filename), filename)
+    return os.path.join(os.path.dirname(sys._getframe(1).f_code.co_filename), filename)
 
 
 class Todo(Exception):
@@ -30,7 +29,7 @@ class Todo(Exception):
 class TodoPlugin(ErrorClassPlugin):
     name = "todo"
 
-    todo = ErrorClass(Todo, label='TODO', isfailure=False)
+    todo = ErrorClass(Todo, label="TODO", isfailure=False)
 
 
 def contains_word(word, bytestring_):
@@ -51,20 +50,20 @@ def contains_word(word, bytestring_):
     """
     n = len(word)
     assert len(bytestring_) % n == 0, "len(bytestring_) not multiple of len(word)"
-    chunks = [bytestring_[i:i + n] for i in xrange(0, len(bytestring_), n)]
+    chunks = [bytestring_[i : i + n] for i in range(0, len(bytestring_), n)]
     return word in chunks
 
 
 def pixel2channels(pixel):
-    alpha = (pixel >> 24) & 0xff
-    red = pixel & 0xff
-    green = (pixel >> 8) & 0xff
-    blue = (pixel >> 16) & 0xff
+    alpha = (pixel >> 24) & 0xFF
+    red = pixel & 0xFF
+    green = (pixel >> 8) & 0xFF
+    blue = (pixel >> 16) & 0xFF
     return red, green, blue, alpha
 
 
 def pixel2rgba(pixel):
-    return 'rgba(%s,%s,%s,%s)' % pixel2channels(pixel)
+    return "rgba(%s,%s,%s,%s)" % pixel2channels(pixel)
 
 
 def get_unique_colors(im):
@@ -94,7 +93,11 @@ def run_all(iterable):
             sys.stderr.write("  Traceback:\n")
             for mline in traceback.format_tb(exc_tb):
                 for line in mline.rstrip().split("\n"):
-                    if not 'utilities.py' in line and not 'trivial.py' in line and not line.strip() == 'test()':
+                    if (
+                        not "utilities.py" in line
+                        and not "trivial.py" in line
+                        and not line.strip() == "test()"
+                    ):
                         sys.stderr.write("  " + line + "\n")
         sys.stderr.flush()
     return failed
@@ -107,29 +110,21 @@ def side_by_side_image(left_im, right_im):
     im.composite(left_im, mapnik.CompositeOp.src_over, 1.0, 0, 0)
     if width > 80:
         im.composite(
-            mapnik.Image.open(
-                HERE +
-                '/images/expected.png'),
+            mapnik.Image.open(HERE + "/images/expected.png"),
             mapnik.CompositeOp.difference,
             1.0,
             0,
-            0)
-    im.composite(
-        right_im,
-        mapnik.CompositeOp.src_over,
-        1.0,
-        left_im.width() + 1,
-        0)
+            0,
+        )
+    im.composite(right_im, mapnik.CompositeOp.src_over, 1.0, left_im.width() + 1, 0)
     if width > 80:
         im.composite(
-            mapnik.Image.open(
-                HERE +
-                '/images/actual.png'),
+            mapnik.Image.open(HERE + "/images/actual.png"),
             mapnik.CompositeOp.difference,
             1.0,
-            left_im.width() +
-            1,
-            0)
+            left_im.width() + 1,
+            0,
+        )
     return im
 
 

@@ -14,7 +14,8 @@ PYTHON3 = sys.version_info[0] == 3
 def setup():
     # All of the paths used are relative, if we run the tests
     # from another directory we need to chdir()
-    os.chdir(execution_path('.'))
+    os.chdir(execution_path("."))
+
 
 # test discrete colorizer mode
 
@@ -40,6 +41,7 @@ def test_get_color_discrete():
     eq_(colorizer.get_color(20), mapnik.Color(200, 200, 200, 200))
     eq_(colorizer.get_color(1000), mapnik.Color(200, 200, 200, 200))
 
+
 # test exact colorizer mode
 
 
@@ -62,6 +64,7 @@ def test_get_color_exact():
 
     # should be stop 2
     eq_(colorizer.get_color(20), mapnik.Color(200, 200, 200, 200))
+
 
 # test linear colorizer mode
 
@@ -93,14 +96,14 @@ def test_get_color_linear():
 
 
 def test_stop_label():
-    stop = mapnik.ColorizerStop(
-        1, mapnik.COLORIZER_LINEAR, mapnik.Color('red'))
+    stop = mapnik.ColorizerStop(1, mapnik.COLORIZER_LINEAR, mapnik.Color("red"))
     assert not stop.label
-    label = u"32º C"
+    label = "32º C"
     if not PYTHON3:
-        label = label.encode('utf8')
+        label = label.encode("utf8")
     stop.label = label
     assert stop.label == label, stop.label
+
 
 if __name__ == "__main__":
     setup()

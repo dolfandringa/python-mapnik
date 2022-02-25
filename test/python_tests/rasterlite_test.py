@@ -12,16 +12,13 @@ from .utilities import execution_path, run_all
 def setup():
     # All of the paths used are relative, if we run the tests
     # from another directory we need to chdir()
-    os.chdir(execution_path('.'))
+    os.chdir(execution_path("."))
 
 
-if 'rasterlite' in mapnik.DatasourceCache.plugin_names():
+if "rasterlite" in mapnik.DatasourceCache.plugin_names():
 
     def test_rasterlite():
-        ds = mapnik.Rasterlite(
-            file='../data/rasterlite/globe.sqlite',
-            table='globe'
-        )
+        ds = mapnik.Rasterlite(file="../data/rasterlite/globe.sqlite", table="globe")
         e = ds.envelope()
 
         assert_almost_equal(e.minx, -180, places=5)
@@ -33,9 +30,10 @@ if 'rasterlite' in mapnik.DatasourceCache.plugin_names():
         for fld in ds.fields():
             query.add_property_name(fld)
         fs = ds.features(query)
-        feat = fs.next()
+        feat = next(fs)
         eq_(feat.id(), 1)
         eq_(feat.attributes, {})
+
 
 if __name__ == "__main__":
     setup()

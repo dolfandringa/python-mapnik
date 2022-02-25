@@ -13,13 +13,13 @@ from .utilities import execution_path, run_all
 def setup():
     # All of the paths used are relative, if we run the tests
     # from another directory we need to chdir()
-    os.chdir(execution_path('.'))
+    os.chdir(execution_path("."))
 
 
 def test_another_compare():
     im = mapnik.Image(5, 5)
     im2 = mapnik.Image(5, 5)
-    im2.fill(mapnik.Color('rgba(255,255,255,0)'))
+    im2.fill(mapnik.Color("rgba(255,255,255,0)"))
     eq_(im.compare(im2, 16), im.width() * im.height())
 
 
@@ -48,7 +48,7 @@ def test_compare_rgba8():
 def test_compare_2_image():
     im = mapnik.Image(5, 5)
     im.set_pixel(0, 0, mapnik.Color(254, 254, 254, 254))
-    im.set_pixel(4, 4, mapnik.Color('white'))
+    im.set_pixel(4, 4, mapnik.Color("white"))
     im2 = mapnik.Image(5, 5)
     eq_(im2.compare(im, 16), 2)
 
@@ -118,6 +118,7 @@ def test_compare_gray32f():
     eq_(im.compare(im3, 1.0), 2)
     eq_(im.compare(im3, 2.0), 1)
     eq_(im.compare(im3, 3.0), 0)
+
 
 if __name__ == "__main__":
     setup()

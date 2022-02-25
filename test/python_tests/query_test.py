@@ -13,7 +13,7 @@ from .utilities import execution_path, run_all
 def setup():
     # All of the paths used are relative, if we run the tests
     # from another directory we need to chdir()
-    os.chdir(execution_path('.'))
+    os.chdir(execution_path("."))
 
 
 def test_query_init():
@@ -24,8 +24,9 @@ def test_query_init():
     assert_almost_equal(r[1], 1.0, places=7)
     # https://github.com/mapnik/mapnik/issues/1762
     eq_(query.property_names, [])
-    query.add_property_name('migurski')
-    eq_(query.property_names, ['migurski'])
+    query.add_property_name("migurski")
+    eq_(query.property_names, ["migurski"])
+
 
 # Converting *from* tuples *to* resolutions is not yet supported
 
@@ -38,6 +39,7 @@ def test_query_resolution():
     r = query.resolution
     assert_almost_equal(r[0], init_res[0], places=7)
     assert_almost_equal(r[1], init_res[1], places=7)
+
 
 if __name__ == "__main__":
     setup()

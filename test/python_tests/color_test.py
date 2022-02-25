@@ -13,7 +13,7 @@ from .utilities import execution_path, run_all
 def setup():
     # All of the paths used are relative, if we run the tests
     # from another directory we need to chdir()
-    os.chdir(execution_path('.'))
+    os.chdir(execution_path("."))
 
 
 def test_color_init():
@@ -35,19 +35,19 @@ def test_color_init():
     eq_(c.b, 64)
     eq_(c.a, 128)
     eq_(True, c.get_premultiplied())
-    c = mapnik.Color('rgba(16,32,64,0.5)')
+    c = mapnik.Color("rgba(16,32,64,0.5)")
     eq_(c.r, 16)
     eq_(c.g, 32)
     eq_(c.b, 64)
     eq_(c.a, 128)
     eq_(False, c.get_premultiplied())
-    c = mapnik.Color('rgba(16,32,64,0.5)', True)
+    c = mapnik.Color("rgba(16,32,64,0.5)", True)
     eq_(c.r, 16)
     eq_(c.g, 32)
     eq_(c.b, 64)
     eq_(c.a, 128)
     eq_(True, c.get_premultiplied())
-    hex_str = '#10204080'
+    hex_str = "#10204080"
     c = mapnik.Color(hex_str)
     eq_(c.r, 16)
     eq_(c.g, 32)
@@ -115,6 +115,7 @@ def test_color_premultiply():
     eq_(c.g, 33)
     eq_(c.b, 255)
     eq_(c.a, 128)
+
 
 if __name__ == "__main__":
     setup()

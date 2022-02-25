@@ -11,13 +11,13 @@ from .utilities import run_all
 PYTHON3 = sys.version_info[0] == 3
 if PYTHON3:
     long = int
-    unicode = str
+    str = str
 
 
-if hasattr(mapnik, 'Expression'):
+if hasattr(mapnik, "Expression"):
     mapnik.Filter = mapnik.Expression
 
-map_ = '''<Map>
+map_ = """<Map>
     <Style name="s">
         <Rule>
             <Filter><![CDATA[(([region]>=0) and ([region]<=50))]]></Filter>
@@ -57,7 +57,7 @@ map_ = '''<Map>
         <Rule>
         </Rule>
     </Style>
-</Map>'''
+</Map>"""
 
 
 def test_filter_init():
@@ -67,19 +67,29 @@ def test_filter_init():
     filters.append(mapnik.Filter("([region]>=0) and ([region]<=50)"))
     filters.append(mapnik.Filter("(([region]>=0) and ([region]<=50))"))
     filters.append(mapnik.Filter("((([region]>=0) and ([region]<=50)))"))
-    filters.append(mapnik.Filter('((([region]>=0) and ([region]<=50)))'))
-    filters.append(mapnik.Filter('''((([region]>=0) and ([region]<=50)))'''))
-    filters.append(mapnik.Filter('''
+    filters.append(mapnik.Filter("((([region]>=0) and ([region]<=50)))"))
+    filters.append(mapnik.Filter("""((([region]>=0) and ([region]<=50)))"""))
+    filters.append(
+        mapnik.Filter(
+            """
     ((([region]>=0)
     and
     ([region]<=50)))
-    '''))
-    filters.append(mapnik.Filter('''
+    """
+        )
+    )
+    filters.append(
+        mapnik.Filter(
+            """
     ([region]>=0)
     and
     ([region]<=50)
-    '''))
-    filters.append(mapnik.Filter('''
+    """
+        )
+    )
+    filters.append(
+        mapnik.Filter(
+            """
     ([region]
     >=
     0)
@@ -87,9 +97,11 @@ def test_filter_init():
     ([region]
     <=
     50)
-    '''))
+    """
+        )
+    )
 
-    s = m.find_style('s')
+    s = m.find_style("s")
 
     for r in s.rules:
         filters.append(r.filter)
@@ -98,7 +110,7 @@ def test_filter_init():
     for f in filters:
         eq_(str(first), str(f))
 
-    s = m.find_style('s2')
+    s = m.find_style("s2")
 
     eq_(s.filter_mode, mapnik.filter_mode.FIRST)
 
@@ -106,9 +118,9 @@ def test_filter_init():
 def test_geometry_type_eval():
     # clashing field called 'mapnik::geometry'
     context2 = mapnik.Context()
-    context2.push('mapnik::geometry_type')
+    context2.push("mapnik::geometry_type")
     f = mapnik.Feature(context2, 0)
-    f["mapnik::geometry_type"] = 'sneaky'
+    f["mapnik::geometry_type"] = "sneaky"
     expr = mapnik.Expression("[mapnik::geometry_type]")
     eq_(expr.evaluate(f), 0)
 
@@ -122,60 +134,57 @@ def test_geometry_type_eval():
 
     # POINT = 1
     f = mapnik.Feature(context, 0)
-    f.geometry = mapnik.Geometry.from_wkt('POINT(10 40)')
+    f.geometry = mapnik.Geometry.from_wkt("POINT(10 40)")
     eq_(expr.evaluate(f), 1)
     eq_(mapnik.Expression("[mapnik::geometry_type]=point").evaluate(f), True)
 
     # LINESTRING = 2
     f = mapnik.Feature(context, 0)
-    f.geometry = mapnik.Geometry.from_wkt('LINESTRING (30 10, 10 30, 40 40)')
+    f.geometry = mapnik.Geometry.from_wkt("LINESTRING (30 10, 10 30, 40 40)")
     eq_(expr.evaluate(f), 2)
-    eq_(mapnik.Expression(
-        "[mapnik::geometry_type] = linestring").evaluate(f), True)
+    eq_(mapnik.Expression("[mapnik::geometry_type] = linestring").evaluate(f), True)
 
     # POLYGON = 3
     f = mapnik.Feature(context, 0)
-    f.geometry = mapnik.Geometry.from_wkt(
-        'POLYGON ((30 10, 10 20, 20 40, 40 40, 30 10))')
+    f.geometry = mapnik.Geometry.from_wkt("POLYGON ((30 10, 10 20, 20 40, 40 40, 30 10))")
     eq_(expr.evaluate(f), 3)
-    eq_(mapnik.Expression(
-        "[mapnik::geometry_type] = polygon").evaluate(f), True)
+    eq_(mapnik.Expression("[mapnik::geometry_type] = polygon").evaluate(f), True)
 
     # COLLECTION = 4
     f = mapnik.Feature(context, 0)
     geom = mapnik.Geometry.from_wkt(
-        'GEOMETRYCOLLECTION(POLYGON((1 1,2 1,2 2,1 2,1 1)),POINT(2 3),LINESTRING(2 3,3 4))')
+        "GEOMETRYCOLLECTION(POLYGON((1 1,2 1,2 2,1 2,1 1)),POINT(2 3),LINESTRING(2 3,3 4))"
+    )
     f.geometry = geom
     eq_(expr.evaluate(f), 4)
-    eq_(mapnik.Expression(
-        "[mapnik::geometry_type] = collection").evaluate(f), True)
+    eq_(mapnik.Expression("[mapnik::geometry_type] = collection").evaluate(f), True)
 
 
 def test_regex_match():
     context = mapnik.Context()
-    context.push('name')
+    context.push("name")
     f = mapnik.Feature(context, 0)
-    f["name"] = 'test'
+    f["name"] = "test"
     expr = mapnik.Expression("[name].match('test')")
     eq_(expr.evaluate(f), True)  # 1 == True
 
 
 def test_unicode_regex_match():
     context = mapnik.Context()
-    context.push('name')
+    context.push("name")
     f = mapnik.Feature(context, 0)
-    f["name"] = 'Québec'
+    f["name"] = "Québec"
     expr = mapnik.Expression("[name].match('Québec')")
     eq_(expr.evaluate(f), True)  # 1 == True
 
 
 def test_regex_replace():
     context = mapnik.Context()
-    context.push('name')
+    context.push("name")
     f = mapnik.Feature(context, 0)
-    f["name"] = 'test'
+    f["name"] = "test"
     expr = mapnik.Expression("[name].replace('(\\B)|( )','$1 ')")
-    eq_(expr.evaluate(f), 't e s t')
+    eq_(expr.evaluate(f), "t e s t")
 
 
 def test_unicode_regex_replace_to_str():
@@ -185,17 +194,17 @@ def test_unicode_regex_replace_to_str():
 
 def test_unicode_regex_replace():
     context = mapnik.Context()
-    context.push('name')
+    context.push("name")
     f = mapnik.Feature(context, 0)
-    f["name"] = 'Québec'
+    f["name"] = "Québec"
     expr = mapnik.Expression("[name].replace('(\\B)|( )','$1 ')")
     # will fail if -DBOOST_REGEX_HAS_ICU is not defined
-    eq_(expr.evaluate(f), u'Q u é b e c')
+    eq_(expr.evaluate(f), "Q u é b e c")
 
 
 def test_float_precision():
     context = mapnik.Context()
-    context.push('num')
+    context.push("num")
     f = mapnik.Feature(context, 0)
     f["num1"] = 1.0000
     f["num2"] = 1.0001
@@ -213,7 +222,7 @@ def test_float_precision():
 
 def test_string_matching_on_precision():
     context = mapnik.Context()
-    context.push('num')
+    context.push("num")
     f = mapnik.Feature(context, 0)
     f["num"] = "1.0000"
     eq_(f["num"], "1.0000")
@@ -223,7 +232,7 @@ def test_string_matching_on_precision():
 
 def test_creation_of_null_value():
     context = mapnik.Context()
-    context.push('nv')
+    context.push("nv")
     f = mapnik.Feature(context, 0)
     f["nv"] = None
     eq_(f["nv"], None)
@@ -236,20 +245,20 @@ def test_creation_of_null_value():
 
 def test_creation_of_bool():
     context = mapnik.Context()
-    context.push('bool')
+    context.push("bool")
     f = mapnik.Feature(context, 0)
     f["bool"] = True
     eq_(f["bool"], True)
     # TODO - will become int of 1 do to built in boost python conversion
     # https://github.com/mapnik/mapnik/issues/1873
-    eq_(isinstance(f["bool"], bool) or isinstance(f["bool"], long), True)
+    eq_(isinstance(f["bool"], bool) or isinstance(f["bool"], int), True)
     f["bool"] = False
     eq_(f["bool"], False)
-    eq_(isinstance(f["bool"], bool) or isinstance(f["bool"], long), True)
+    eq_(isinstance(f["bool"], bool) or isinstance(f["bool"], int), True)
     # test NoneType
     f["bool"] = None
     eq_(f["bool"], None)
-    eq_(isinstance(f["bool"], bool) or isinstance(f["bool"], long), False)
+    eq_(isinstance(f["bool"], bool) or isinstance(f["bool"], int), False)
     # test integer
     f["bool"] = 0
     eq_(f["bool"], 0)
@@ -257,21 +266,22 @@ def test_creation_of_bool():
     # ugh, boost_python's built into converter does not work right
     # eq_(isinstance(f["bool"],bool),False)
 
+
 null_equality = [
-    ['hello', False, unicode],
-    [u'', False, unicode],
-    [0, False, long],
-    [123, False, long],
+    ["hello", False, str],
+    ["", False, str],
+    [0, False, int],
+    [123, False, int],
     [0.0, False, float],
     [123.123, False, float],
-    [.1, False, float],
+    [0.1, False, float],
     # TODO - should become bool: https://github.com/mapnik/mapnik/issues/1873
-    [False, False, long],
+    [False, False, int],
     # TODO - should become bool: https://github.com/mapnik/mapnik/issues/1873
-    [True, False, long],
+    [True, False, int],
     [None, True, None],
-    [2147483648, False, long],
-    [922337203685477580, False, long]
+    [2147483648, False, int],
+    [922337203685477580, False, int],
 ]
 
 
@@ -284,8 +294,11 @@ def test_expressions_with_null_equality():
         if eq[0] is None:
             eq_(f["prop"] is None, True)
         else:
-            eq_(isinstance(f['prop'], eq[2]), True,
-                '%s is not an instance of %s' % (f['prop'], eq[2]))
+            eq_(
+                isinstance(f["prop"], eq[2]),
+                True,
+                "%s is not an instance of %s" % (f["prop"], eq[2]),
+            )
         expr = mapnik.Expression("[prop] = null")
         eq_(expr.evaluate(f), eq[1])
         expr = mapnik.Expression("[prop] is null")
@@ -301,8 +314,11 @@ def test_expressions_with_null_equality2():
         if eq[0] is None:
             eq_(f["prop"] is None, True)
         else:
-            eq_(isinstance(f['prop'], eq[2]), True,
-                '%s is not an instance of %s' % (f['prop'], eq[2]))
+            eq_(
+                isinstance(f["prop"], eq[2]),
+                True,
+                "%s is not an instance of %s" % (f["prop"], eq[2]),
+            )
         # TODO - support `is not` syntax:
         # https://github.com/mapnik/mapnik/issues/796
         expr = mapnik.Expression("not [prop] is null")
@@ -311,21 +327,22 @@ def test_expressions_with_null_equality2():
         expr = mapnik.Expression("[prop] != null")
         eq_(expr.evaluate(f), not eq[1])
 
+
 truthyness = [
-    [u'hello', True, unicode],
-    [u'', False, unicode],
-    [0, False, long],
-    [123, True, long],
+    ["hello", True, str],
+    ["", False, str],
+    [0, False, int],
+    [123, True, int],
     [0.0, False, float],
     [123.123, True, float],
-    [.1, True, float],
+    [0.1, True, float],
     # TODO - should become bool: https://github.com/mapnik/mapnik/issues/1873
-    [False, False, long],
+    [False, False, int],
     # TODO - should become bool: https://github.com/mapnik/mapnik/issues/1873
-    [True, True, long],
+    [True, True, int],
     [None, False, None],
-    [2147483648, True, long],
-    [922337203685477580, True, long]
+    [2147483648, True, int],
+    [922337203685477580, True, int],
 ]
 
 
@@ -338,8 +355,11 @@ def test_expressions_for_thruthyness():
         if eq[0] is None:
             eq_(f["prop"] is None, True)
         else:
-            eq_(isinstance(f['prop'], eq[2]), True,
-                '%s is not an instance of %s' % (f['prop'], eq[2]))
+            eq_(
+                isinstance(f["prop"], eq[2]),
+                True,
+                "%s is not an instance of %s" % (f["prop"], eq[2]),
+            )
         expr = mapnik.Expression("[prop]")
         eq_(expr.to_bool(f), eq[1])
         expr = mapnik.Expression("not [prop]")
@@ -355,13 +375,14 @@ def test_expressions_for_thruthyness():
     eq_(expr.evaluate(f2), None)
     eq_(expr.to_bool(f2), False)
 
+
 # https://github.com/mapnik/mapnik/issues/1859
 
 
 def test_if_null_and_empty_string_are_equal():
     context = mapnik.Context()
     f = mapnik.Feature(context, 0)
-    f["empty"] = u""
+    f["empty"] = ""
     f["null"] = None
     # ensure base assumptions are good
     eq_(mapnik.Expression("[empty] = ''").to_bool(f), True)
@@ -379,24 +400,23 @@ def test_if_null_and_empty_string_are_equal():
 def test_filtering_nulls_and_empty_strings():
     context = mapnik.Context()
     f = mapnik.Feature(context, 0)
-    f["prop"] = u"hello"
-    eq_(f["prop"], u"hello")
+    f["prop"] = "hello"
+    eq_(f["prop"], "hello")
     eq_(mapnik.Expression("[prop]").to_bool(f), True)
     eq_(mapnik.Expression("! [prop]").to_bool(f), False)
     eq_(mapnik.Expression("[prop] != null").to_bool(f), True)
     eq_(mapnik.Expression("[prop] != ''").to_bool(f), True)
     eq_(mapnik.Expression("[prop] != null and [prop] != ''").to_bool(f), True)
     eq_(mapnik.Expression("[prop] != null or [prop] != ''").to_bool(f), True)
-    f["prop2"] = u""
-    eq_(f["prop2"], u"")
+    f["prop2"] = ""
+    eq_(f["prop2"], "")
     eq_(mapnik.Expression("[prop2]").to_bool(f), False)
     eq_(mapnik.Expression("! [prop2]").to_bool(f), True)
     eq_(mapnik.Expression("[prop2] != null").to_bool(f), True)
     eq_(mapnik.Expression("[prop2] != ''").to_bool(f), False)
     eq_(mapnik.Expression("[prop2] = ''").to_bool(f), True)
     eq_(mapnik.Expression("[prop2] != null or [prop2] != ''").to_bool(f), True)
-    eq_(mapnik.Expression(
-        "[prop2] != null and [prop2] != ''").to_bool(f), False)
+    eq_(mapnik.Expression("[prop2] != null and [prop2] != ''").to_bool(f), False)
     f["prop3"] = None
     eq_(f["prop3"], None)
     eq_(mapnik.Expression("[prop3]").to_bool(f), False)
@@ -405,18 +425,16 @@ def test_filtering_nulls_and_empty_strings():
     eq_(mapnik.Expression("[prop3] = null").to_bool(f), True)
 
     # https://github.com/mapnik/mapnik/issues/1859
-    #eq_(mapnik.Expression("[prop3] != ''").to_bool(f),True)
+    # eq_(mapnik.Expression("[prop3] != ''").to_bool(f),True)
     eq_(mapnik.Expression("[prop3] != ''").to_bool(f), False)
 
     eq_(mapnik.Expression("[prop3] = ''").to_bool(f), False)
 
     # https://github.com/mapnik/mapnik/issues/1859
-    #eq_(mapnik.Expression("[prop3] != null or [prop3] != ''").to_bool(f),True)
-    eq_(mapnik.Expression(
-        "[prop3] != null or [prop3] != ''").to_bool(f), False)
+    # eq_(mapnik.Expression("[prop3] != null or [prop3] != ''").to_bool(f),True)
+    eq_(mapnik.Expression("[prop3] != null or [prop3] != ''").to_bool(f), False)
 
-    eq_(mapnik.Expression(
-        "[prop3] != null and [prop3] != ''").to_bool(f), False)
+    eq_(mapnik.Expression("[prop3] != null and [prop3] != ''").to_bool(f), False)
     # attr not existing should behave the same as prop3
     eq_(mapnik.Expression("[prop4]").to_bool(f), False)
     eq_(mapnik.Expression("! [prop4]").to_bool(f), True)
@@ -431,11 +449,9 @@ def test_filtering_nulls_and_empty_strings():
 
     # https://github.com/mapnik/mapnik/issues/1859
     ##eq_(mapnik.Expression("[prop4] != null or [prop4] != ''").to_bool(f),True)
-    eq_(mapnik.Expression(
-        "[prop4] != null or [prop4] != ''").to_bool(f), False)
+    eq_(mapnik.Expression("[prop4] != null or [prop4] != ''").to_bool(f), False)
 
-    eq_(mapnik.Expression(
-        "[prop4] != null and [prop4] != ''").to_bool(f), False)
+    eq_(mapnik.Expression("[prop4] != null and [prop4] != ''").to_bool(f), False)
     f["prop5"] = False
     eq_(f["prop5"], False)
     eq_(mapnik.Expression("[prop5]").to_bool(f), False)
@@ -445,12 +461,11 @@ def test_filtering_nulls_and_empty_strings():
     eq_(mapnik.Expression("[prop5] != ''").to_bool(f), True)
     eq_(mapnik.Expression("[prop5] = ''").to_bool(f), False)
     eq_(mapnik.Expression("[prop5] != null or [prop5] != ''").to_bool(f), True)
-    eq_(mapnik.Expression(
-        "[prop5] != null and [prop5] != ''").to_bool(f), True)
+    eq_(mapnik.Expression("[prop5] != null and [prop5] != ''").to_bool(f), True)
     # note, we need to do [prop5] != 0 here instead of false due to this bug:
     # https://github.com/mapnik/mapnik/issues/1873
-    eq_(mapnik.Expression(
-        "[prop5] != null and [prop5] != '' and [prop5] != 0").to_bool(f), False)
+    eq_(mapnik.Expression("[prop5] != null and [prop5] != '' and [prop5] != 0").to_bool(f), False)
+
 
 # https://github.com/mapnik/mapnik/issues/1872
 
@@ -465,6 +480,7 @@ def test_falseyness_comparision():
     eq_(mapnik.Expression("not [prop] = true").to_bool(f), True)
     eq_(mapnik.Expression("[prop] = true").to_bool(f), False)
     eq_(mapnik.Expression("[prop] != true").to_bool(f), True)
+
 
 # https://github.com/mapnik/mapnik/issues/1806, fixed by
 # https://github.com/mapnik/mapnik/issues/1872
@@ -483,19 +499,19 @@ def test_truthyness_comparision():
 
 
 def test_division_by_zero():
-    expr = mapnik.Expression('[a]/[b]')
+    expr = mapnik.Expression("[a]/[b]")
     c = mapnik.Context()
-    c.push('a')
-    c.push('b')
+    c.push("a")
+    c.push("b")
     f = mapnik.Feature(c, 0)
-    f['a'] = 1
-    f['b'] = 0
+    f["a"] = 1
+    f["b"] = 0
     eq_(expr.evaluate(f), None)
 
 
 @raises(RuntimeError)
 def test_invalid_syntax1():
-    mapnik.Expression('abs()')
+    mapnik.Expression("abs()")
 
 
 if __name__ == "__main__":

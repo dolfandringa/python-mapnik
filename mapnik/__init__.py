@@ -42,6 +42,7 @@ Several things happen when you do:
 import itertools
 import os
 import warnings
+
 try:
     import json
 except ImportError:
@@ -61,13 +62,14 @@ def bootstrap_env():
 
         env = {'ICU_DATA':'/usr/local/share/icu/'}
     """
-    if os.path.exists(os.path.join(
-            os.path.dirname(__file__), 'mapnik_settings.py')):
+    if os.path.exists(os.path.join(os.path.dirname(__file__), "mapnik_settings.py")):
         from .mapnik_settings import env
-        process_keys = os.environ.keys()
-        for key, value in env.items():
+
+        process_keys = list(os.environ.keys())
+        for key, value in list(env.items()):
             if key not in process_keys:
                 os.environ[key] = value
+
 
 bootstrap_env()
 
@@ -78,33 +80,38 @@ BoostPythonMetaclass = Coord.__class__
 
 
 class _MapnikMetaclass(BoostPythonMetaclass):
-
     def __init__(self, name, bases, dict):
         for b in bases:
             if type(b) not in (self, type):
                 for k, v in list(dict.items()):
                     if hasattr(b, k):
-                        setattr(b, '_c_' + k, getattr(b, k))
+                        setattr(b, "_c_" + k, getattr(b, k))
                     setattr(b, k, v)
         return type.__init__(self, name, bases, dict)
 
+
 # metaclass injector compatible with both python 2 and 3
 # http://mikewatkins.ca/2008/11/29/python-2-and-3-metaclasses/
-def _injector() :
-    return _MapnikMetaclass('_injector', (object, ), {})
+def _injector():
+    return _MapnikMetaclass("_injector", (object,), {})
 
 
 def Filter(*args, **kwargs):
-    warnings.warn("'Filter' is deprecated and will be removed in Mapnik 3.x, use 'Expression' instead",
-                  DeprecationWarning, 2)
+    warnings.warn(
+        "'Filter' is deprecated and will be removed in Mapnik 3.x, use 'Expression' instead",
+        DeprecationWarning,
+        2,
+    )
     return Expression(*args, **kwargs)
 
 
 class Envelope(Box2d):
-
     def __init__(self, *args, **kwargs):
-        warnings.warn("'Envelope' is deprecated and will be removed in Mapnik 3.x, use 'Box2d' instead",
-                      DeprecationWarning, 2)
+        warnings.warn(
+            "'Envelope' is deprecated and will be removed in Mapnik 3.x, use 'Box2d' instead",
+            DeprecationWarning,
+            2,
+        )
         Box2d.__init__(self, *args, **kwargs)
 
 
@@ -141,7 +148,7 @@ class _Coord(Coord, _injector()):
     """
 
     def __repr__(self):
-        return 'Coord(%s,%s)' % (self.x, self.y)
+        return "Coord(%s,%s)" % (self.x, self.y)
 
     def forward(self, projection):
         """
@@ -212,8 +219,7 @@ class _Box2d(Box2d, _injector()):
     """
 
     def __repr__(self):
-        return 'Box2d(%s,%s,%s,%s)' % \
-            (self.minx, self.miny, self.maxx, self.maxy)
+        return "Box2d(%s,%s,%s,%s)" % (self.minx, self.miny, self.maxx, self.maxy)
 
     def forward(self, projection):
         """
@@ -239,7 +245,6 @@ class _Box2d(Box2d, _injector()):
 
 
 class _Projection(Projection, _injector()):
-
     def __repr__(self):
         return "Projection('%s')" % self.params()
 
@@ -275,8 +280,7 @@ class _Geometry(Geometry, _injector()):
 
 
 class _Datasource(Datasource, _injector()):
-
-    def featureset(self, fields = None, variables = {}):
+    def featureset(self, fields=None, variables={}):
         query = Query(self.envelope())
         query.set_variables(variables)
         attributes = fields or self.fields()
@@ -284,15 +288,15 @@ class _Datasource(Datasource, _injector()):
             query.add_property_name(fld)
         return self.features(query)
 
-    def __iter__(self, fields = None, variables = {}):
+    def __iter__(self, fields=None, variables={}):
         return self.featureset(fields, variables)
+
     # backward caps helper
     def all_features(self, fields=None, variables={}):
         return self.__iter__(fields, variables)
 
 
 class _Color(Color, _injector()):
-
     def __repr__(self):
         return "Color(R=%d,G=%d,B=%d,A=%d)" % (self.r, self.g, self.b, self.a)
 
@@ -302,28 +306,29 @@ class _SymbolizerBase(SymbolizerBase, _injector()):
 
     @property
     def filename(self):
-        return self['file']
+        return self["file"]
 
     @filename.setter
     def filename(self, val):
-        self['file'] = val
+        self["file"] = val
 
 
 def _add_symbol_method_to_symbolizers(vars=globals()):
-
     def symbol_for_subcls(self):
         return self
 
     def symbol_for_cls(self):
         return getattr(self, self.type())()
 
-    for name, obj in vars.items():
-        if name.endswith('Symbolizer') and not name.startswith('_'):
-            if name == 'Symbolizer':
+    for name, obj in list(vars.items()):
+        if name.endswith("Symbolizer") and not name.startswith("_"):
+            if name == "Symbolizer":
                 symbol = symbol_for_cls
             else:
                 symbol = symbol_for_subcls
-            type('dummy', (obj, _injector()), {'symbol': symbol})
+            type("dummy", (obj, _injector()), {"symbol": symbol})
+
+
 _add_symbol_method_to_symbolizers()
 
 
@@ -342,6 +347,7 @@ def Datasource(**keywords):
     """
 
     return CreateDatasource(keywords)
+
 
 # convenience factory methods
 
@@ -362,7 +368,7 @@ def Shapefile(**keywords):
     >>> lyr.datasource = shp
 
     """
-    keywords['type'] = 'shape'
+    keywords["type"] = "shape"
     return CreateDatasource(keywords)
 
 
@@ -393,7 +399,7 @@ def CSV(**keywords):
     For more information see https://github.com/mapnik/mapnik/wiki/CSV-Plugin
 
     """
-    keywords['type'] = 'csv'
+    keywords["type"] = "csv"
     return CreateDatasource(keywords)
 
 
@@ -411,7 +417,7 @@ def GeoJSON(**keywords):
     >>> geojson = GeoJSON(file='test.json')
 
     """
-    keywords['type'] = 'geojson'
+    keywords["type"] = "geojson"
     return CreateDatasource(keywords)
 
 
@@ -454,7 +460,7 @@ def PostGIS(**keywords):
     >>> lyr.datasource = postgis
 
     """
-    keywords['type'] = 'postgis'
+    keywords["type"] = "postgis"
     return CreateDatasource(keywords)
 
 
@@ -501,7 +507,7 @@ def PgRaster(**keywords):
     >>> lyr.datasource = pgraster
 
     """
-    keywords['type'] = 'pgraster'
+    keywords["type"] = "pgraster"
     return CreateDatasource(keywords)
 
 
@@ -533,7 +539,7 @@ def Raster(**keywords):
     >>> lyr.datasource = raster
 
     """
-    keywords['type'] = 'raster'
+    keywords["type"] = "raster"
     return CreateDatasource(keywords)
 
 
@@ -554,11 +560,10 @@ def Gdal(**keywords):
     >>> lyr.datasource = dataset
 
     """
-    keywords['type'] = 'gdal'
-    if 'bbox' in keywords:
-        if isinstance(keywords['bbox'], (tuple, list)):
-            keywords['bbox'] = ','.join([str(item)
-                                         for item in keywords['bbox']])
+    keywords["type"] = "gdal"
+    if "bbox" in keywords:
+        if isinstance(keywords["bbox"], (tuple, list)):
+            keywords["bbox"] = ",".join([str(item) for item in keywords["bbox"]])
     return CreateDatasource(keywords)
 
 
@@ -588,7 +593,7 @@ def Occi(**keywords):
     >>> lyr = Layer('Oracle Spatial Layer')
     >>> lyr.datasource = oracle
     """
-    keywords['type'] = 'occi'
+    keywords["type"] = "occi"
     return CreateDatasource(keywords)
 
 
@@ -611,7 +616,7 @@ def Ogr(**keywords):
     >>> lyr.datasource = datasource
 
     """
-    keywords['type'] = 'ogr'
+    keywords["type"] = "ogr"
     return CreateDatasource(keywords)
 
 
@@ -640,7 +645,7 @@ def SQLite(**keywords):
     >>> lyr.datasource = sqlite
 
     """
-    keywords['type'] = 'sqlite'
+    keywords["type"] = "sqlite"
     return CreateDatasource(keywords)
 
 
@@ -661,7 +666,7 @@ def Rasterlite(**keywords):
     >>> lyr.datasource = rasterlite
 
     """
-    keywords['type'] = 'rasterlite'
+    keywords["type"] = "rasterlite"
     return CreateDatasource(keywords)
 
 
@@ -684,7 +689,7 @@ def Osm(**keywords):
     """
     # note: parser only supports libxml2 so not exposing option
     # parser -- xml parser to use (default libxml2)
-    keywords['type'] = 'osm'
+    keywords["type"] = "osm"
     return CreateDatasource(keywords)
 
 
@@ -696,7 +701,7 @@ def Python(**keywords):
     >>> lyr = Layer('Python datasource')
     >>> lyr.datasource = datasource
     """
-    keywords['type'] = 'python'
+    keywords["type"] = "python"
     return CreateDatasource(keywords)
 
 
@@ -707,7 +712,7 @@ def MemoryDatasource(**keywords):
         (TODO)
     """
     params = Parameters()
-    params.append(Parameter('type', 'memory'))
+    params.append(Parameter("type", "memory"))
     return MemoryDatasourceBase(params)
 
 
@@ -764,11 +769,11 @@ class PythonDatasource(object):
             f = Feature(ctx, idx)
             geom, attrs = feat
             f.add_geometries_from_wkb(geom)
-            for k, v in attrs.iteritems():
+            for k, v in attrs.items():
                 f[k] = v
             return f
 
-        return itertools.imap(make_it, features, itertools.count(1))
+        return map(make_it, features, itertools.count(1))
 
     @classmethod
     def wkt_features(cls, keys, features):
@@ -797,15 +802,14 @@ class PythonDatasource(object):
             f = Feature(ctx, idx)
             geom, attrs = feat
             f.add_geometries_from_wkt(geom)
-            for k, v in attrs.iteritems():
+            for k, v in attrs.items():
                 f[k] = v
             return f
 
-        return itertools.imap(make_it, features, itertools.count(1))
+        return map(make_it, features, itertools.count(1))
 
 
 class _TextSymbolizer(TextSymbolizer, _injector()):
-
     @property
     def name(self):
         if isinstance(self.properties.format_tree, FormattingText):
@@ -813,7 +817,8 @@ class _TextSymbolizer(TextSymbolizer, _injector()):
         else:
             # There is no single expression which could be returned as name
             raise RuntimeError(
-                "TextSymbolizer uses complex formatting features, but old compatibility interface is used to access it. Use self.properties.format_tree instead.")
+                "TextSymbolizer uses complex formatting features, but old compatibility interface is used to access it. Use self.properties.format_tree instead."
+            )
 
     @name.setter
     def name(self, name):
@@ -1038,34 +1043,38 @@ class _TextSymbolizer(TextSymbolizer, _injector()):
 
 def mapnik_version_from_string(version_string):
     """Return the Mapnik version from a string."""
-    n = version_string.split('.')
+    n = version_string.split(".")
     return (int(n[0]) * 100000) + (int(n[1]) * 100) + (int(n[2]))
 
 
 def register_plugins(path=None):
     """Register plugins located by specified path"""
     if not path:
-        if 'MAPNIK_INPUT_PLUGINS_DIRECTORY' in os.environ:
-            path = os.environ.get('MAPNIK_INPUT_PLUGINS_DIRECTORY')
+        if "MAPNIK_INPUT_PLUGINS_DIRECTORY" in os.environ:
+            path = os.environ.get("MAPNIK_INPUT_PLUGINS_DIRECTORY")
         else:
             from .paths import inputpluginspath
+
             path = inputpluginspath
     DatasourceCache.register_datasources(path)
 
 
-def register_fonts(path=None, valid_extensions=[
-                   '.ttf', '.otf', '.ttc', '.pfa', '.pfb', '.ttc', '.dfont', '.woff']):
+def register_fonts(
+    path=None, valid_extensions=[".ttf", ".otf", ".ttc", ".pfa", ".pfb", ".ttc", ".dfont", ".woff"]
+):
     """Recursively register fonts using path argument as base directory"""
     if not path:
-        if 'MAPNIK_FONT_DIRECTORY' in os.environ:
-            path = os.environ.get('MAPNIK_FONT_DIRECTORY')
+        if "MAPNIK_FONT_DIRECTORY" in os.environ:
+            path = os.environ.get("MAPNIK_FONT_DIRECTORY")
         else:
             from .paths import fontscollectionpath
+
             path = fontscollectionpath
     for dirpath, _, filenames in os.walk(path):
         for filename in filenames:
             if os.path.splitext(filename.lower())[1] in valid_extensions:
                 FontEngine.register_font(os.path.join(dirpath, filename))
+
 
 # auto-register known plugins and fonts
 register_plugins()

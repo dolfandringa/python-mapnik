@@ -17,5 +17,6 @@ def test_logger_init():
     mapnik.logger.set_severity(default)
     eq_(mapnik.logger.get_severity(), default)
 
+
 if __name__ == "__main__":
     exit(run_all(eval(x) for x in dir() if x.startswith("test_")))

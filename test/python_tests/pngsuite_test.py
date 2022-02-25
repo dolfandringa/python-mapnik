@@ -8,13 +8,13 @@ import mapnik
 
 from .utilities import execution_path, run_all
 
-datadir = '../data/pngsuite'
+datadir = "../data/pngsuite"
 
 
 def setup():
     # All of the paths used are relative, if we run the tests
     # from another directory we need to chdir()
-    os.chdir(execution_path('.'))
+    os.chdir(execution_path("."))
 
 
 def assert_broken_file(fname):
@@ -26,9 +26,8 @@ def assert_good_file(fname):
 
 
 def get_pngs(good):
-    files = [x for x in os.listdir(datadir) if x.endswith('.png')]
-    return [os.path.join(datadir, x)
-            for x in files if good != x.startswith('x')]
+    files = [x for x in os.listdir(datadir) if x.endswith(".png")]
+    return [os.path.join(datadir, x) for x in files if good != x.startswith("x")]
 
 
 def test_good_pngs():
@@ -39,6 +38,7 @@ def test_good_pngs():
 def test_broken_pngs():
     for x in get_pngs(False):
         yield assert_broken_file, x
+
 
 if __name__ == "__main__":
     setup()

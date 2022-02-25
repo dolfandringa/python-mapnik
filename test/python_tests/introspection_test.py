@@ -12,7 +12,7 @@ from .utilities import execution_path, run_all
 def setup():
     # All of the paths used are relative, if we run the tests
     # from another directory we need to chdir()
-    os.chdir(execution_path('.'))
+    os.chdir(execution_path("."))
 
 
 def test_introspect_symbolizers():
@@ -24,13 +24,13 @@ def test_introspect_symbolizers():
 
     eq_(p.allow_overlap, True)
     eq_(p.opacity, 0.5)
-    eq_(p.filename, '../data/images/dummy.png')
+    eq_(p.filename, "../data/images/dummy.png")
 
     # make sure the defaults
     # are what we think they are
     eq_(p.allow_overlap, True)
     eq_(p.opacity, 0.5)
-    eq_(p.filename, '../data/images/dummy.png')
+    eq_(p.filename, "../data/images/dummy.png")
 
     # contruct objects to hold it
     r = mapnik.Rule()
@@ -38,13 +38,13 @@ def test_introspect_symbolizers():
     s = mapnik.Style()
     s.rules.append(r)
     m = mapnik.Map(0, 0)
-    m.append_style('s', s)
+    m.append_style("s", s)
 
     # try to figure out what is
     # in the map and make sure
     # style is there and the same
 
-    s2 = m.find_style('s')
+    s2 = m.find_style("s")
     rules = s2.rules
     eq_(len(rules), 1)
     r2 = rules[0]
@@ -58,7 +58,8 @@ def test_introspect_symbolizers():
 
     eq_(p2.allow_overlap, True)
     eq_(p2.opacity, 0.5)
-    eq_(p2.filename, '../data/images/dummy.png')
+    eq_(p2.filename, "../data/images/dummy.png")
+
 
 if __name__ == "__main__":
     setup()
