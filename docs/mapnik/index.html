@@ -1,0 +1,4415 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.10.0" />
+<title>mapnik API documentation</title>
+<meta name="description" content="Mapnik Python module …" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Package <code>mapnik</code></h1>
+</header>
+<section id="section-intro">
+<p>Mapnik Python module.</p>
+<p>Boost Python bindings to the Mapnik C++ shared library.</p>
+<p>Several things happen when you do:</p>
+<pre><code>&gt;&gt;&gt; import mapnik
+</code></pre>
+<p>1) Mapnik C++ objects are imported via the '<strong>init</strong>.py' from the '_mapnik.so' shared object
+(_mapnik.pyd on win) which references libmapnik.so (linux), libmapnik.dylib (mac), or
+mapnik.dll (win32).</p>
+<p>2) The paths to the input plugins and font directories are imported from the 'paths.py'
+file which was constructed and installed during SCons installation.</p>
+<p>3) All available input plugins and TrueType fonts are automatically registered.</p>
+<p>4) Boost Python metaclass injectors are used in the '<strong>init</strong>.py' to extend several
+objects adding extra convenience when accessed via Python.</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">#
+# This file is part of Mapnik (c++ mapping toolkit)
+# Copyright (C) 2015 Artem Pavlenko
+#
+# This library is free software; you can redistribute it and/or
+# modify it under the terms of the GNU Lesser General Public
+# License as published by the Free Software Foundation; either
+# version 2.1 of the License, or (at your option) any later version.
+#
+# This library is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# Lesser General Public License for more details.
+#
+# You should have received a copy of the GNU Lesser General Public
+# License along with this library; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+#
+
+&#34;&#34;&#34;Mapnik Python module.
+
+Boost Python bindings to the Mapnik C++ shared library.
+
+Several things happen when you do:
+
+    &gt;&gt;&gt; import mapnik
+
+ 1) Mapnik C++ objects are imported via the &#39;__init__.py&#39; from the &#39;_mapnik.so&#39; shared object
+    (_mapnik.pyd on win) which references libmapnik.so (linux), libmapnik.dylib (mac), or
+    mapnik.dll (win32).
+
+ 2) The paths to the input plugins and font directories are imported from the &#39;paths.py&#39;
+    file which was constructed and installed during SCons installation.
+
+ 3) All available input plugins and TrueType fonts are automatically registered.
+
+ 4) Boost Python metaclass injectors are used in the &#39;__init__.py&#39; to extend several
+    objects adding extra convenience when accessed via Python.
+
+&#34;&#34;&#34;
+
+import itertools
+import os
+import warnings
+
+# @TODO: Disabling paths module for now. See https://github.com/pdoc3/pdoc/issues/299
+__pdoc__ = {}
+__pdoc__[&#34;paths&#34;] = False
+
+try:
+    import json
+except ImportError:
+    import simplejson as json
+
+
+def bootstrap_env():
+    &#34;&#34;&#34;
+    If an optional settings file exists, inherit its
+    environment settings before loading the mapnik library.
+
+    This feature is intended for customized packages of mapnik.
+
+    The settings file should be a python file with an &#39;env&#39; variable
+    that declares a dictionary of key:value pairs to push into the
+    global process environment, if not already set, like:
+
+        env = {&#39;ICU_DATA&#39;:&#39;/usr/local/share/icu/&#39;}
+    &#34;&#34;&#34;
+    if os.path.exists(os.path.join(os.path.dirname(__file__), &#34;mapnik_settings.py&#34;)):
+        from .mapnik_settings import env
+
+        process_keys = list(os.environ.keys())
+        for key, value in list(env.items()):
+            if key not in process_keys:
+                os.environ[key] = value
+
+
+bootstrap_env()
+
+from ._mapnik import *
+
+# The base Boost.Python class
+BoostPythonMetaclass = Coord.__class__
+
+
+class _MapnikMetaclass(BoostPythonMetaclass):
+    def __init__(self, name, bases, dict):
+        for b in bases:
+            if type(b) not in (self, type):
+                for k, v in list(dict.items()):
+                    if hasattr(b, k):
+                        setattr(b, &#34;_c_&#34; + k, getattr(b, k))
+                    setattr(b, k, v)
+        return type.__init__(self, name, bases, dict)
+
+
+# metaclass injector compatible with both python 2 and 3
+# http://mikewatkins.ca/2008/11/29/python-2-and-3-metaclasses/
+def _injector():
+    return _MapnikMetaclass(&#34;_injector&#34;, (object,), {})
+
+
+def Filter(*args, **kwargs):
+    warnings.warn(
+        &#34;&#39;Filter&#39; is deprecated and will be removed in Mapnik 3.x, use &#39;Expression&#39; instead&#34;,
+        DeprecationWarning,
+        2,
+    )
+    return Expression(*args, **kwargs)
+
+
+class Envelope(Box2d):
+    def __init__(self, *args, **kwargs):
+        warnings.warn(
+            &#34;&#39;Envelope&#39; is deprecated and will be removed in Mapnik 3.x, use &#39;Box2d&#39; instead&#34;,
+            DeprecationWarning,
+            2,
+        )
+        Box2d.__init__(self, *args, **kwargs)
+
+
+class _Coord(Coord, _injector()):
+    &#34;&#34;&#34;
+    Represents a point with two coordinates (either lon/lat or x/y).
+
+    Following operators are defined for Coord:
+
+    Addition and subtraction of Coord objects:
+
+    &gt;&gt;&gt; Coord(10, 10) + Coord(20, 20)
+    Coord(30.0, 30.0)
+    &gt;&gt;&gt; Coord(10, 10) - Coord(20, 20)
+    Coord(-10.0, -10.0)
+
+    Addition, subtraction, multiplication and division between
+    a Coord and a float:
+
+    &gt;&gt;&gt; Coord(10, 10) + 1
+    Coord(11.0, 11.0)
+    &gt;&gt;&gt; Coord(10, 10) - 1
+    Coord(-9.0, -9.0)
+    &gt;&gt;&gt; Coord(10, 10) * 2
+    Coord(20.0, 20.0)
+    &gt;&gt;&gt; Coord(10, 10) / 2
+    Coord(5.0, 5.0)
+
+    Equality of coords (as pairwise equality of components):
+    &gt;&gt;&gt; Coord(10, 10) is Coord(10, 10)
+    False
+    &gt;&gt;&gt; Coord(10, 10) == Coord(10, 10)
+    True
+    &#34;&#34;&#34;
+
+    def __repr__(self):
+        return &#34;Coord(%s,%s)&#34; % (self.x, self.y)
+
+    def forward(self, projection):
+        &#34;&#34;&#34;
+        Projects the point from the geographic coordinate
+        space  into the cartesian space. The x component is
+        considered to be longitude, the y component the
+        latitude.
+
+        Returns the easting (x) and northing (y) as a
+        coordinate pair.
+
+        Example: Project the geographic coordinates of the
+                 city center of Stuttgart into the local
+                 map projection (GK Zone 3/DHDN, EPSG 31467)
+        &gt;&gt;&gt; p = Projection(&#39;+init=epsg:31467&#39;)
+        &gt;&gt;&gt; Coord(9.1, 48.7).forward(p)
+        Coord(3507360.12813,5395719.2749)
+        &#34;&#34;&#34;
+        return forward_(self, projection)
+
+    def inverse(self, projection):
+        &#34;&#34;&#34;
+        Projects the point from the cartesian space
+        into the geographic space. The x component is
+        considered to be the easting, the y component
+        to be the northing.
+
+        Returns the longitude (x) and latitude (y) as a
+        coordinate pair.
+
+        Example: Project the cartesian coordinates of the
+                 city center of Stuttgart in the local
+                 map projection (GK Zone 3/DHDN, EPSG 31467)
+                 into geographic coordinates:
+        &gt;&gt;&gt; p = Projection(&#39;+init=epsg:31467&#39;)
+        &gt;&gt;&gt; Coord(3507360.12813,5395719.2749).inverse(p)
+        Coord(9.1, 48.7)
+        &#34;&#34;&#34;
+        return inverse_(self, projection)
+
+
+class _Box2d(Box2d, _injector()):
+    &#34;&#34;&#34;
+    Represents a spatial envelope (i.e. bounding box).
+
+
+    Following operators are defined for Box2d:
+
+    Addition:
+    e1 + e2 is equivalent to e1.expand_to_include(e2) but yields
+    a new envelope instead of modifying e1
+
+    Subtraction:
+    Currently e1 - e2 returns e1.
+
+    Multiplication and division with floats:
+    Multiplication and division change the width and height of the envelope
+    by the given factor without modifying its center..
+
+    That is, e1 * x is equivalent to:
+           e1.width(x * e1.width())
+           e1.height(x * e1.height()),
+    except that a new envelope is created instead of modifying e1.
+
+    e1 / x is equivalent to e1 * (1.0/x).
+
+    Equality: two envelopes are equal if their corner points are equal.
+    &#34;&#34;&#34;
+
+    def __repr__(self):
+        return &#34;Box2d(%s,%s,%s,%s)&#34; % (self.minx, self.miny, self.maxx, self.maxy)
+
+    def forward(self, projection):
+        &#34;&#34;&#34;
+        Projects the envelope from the geographic space
+        into the cartesian space by projecting its corner
+        points.
+
+        See also:
+           Coord.forward(self, projection)
+        &#34;&#34;&#34;
+        return forward_(self, projection)
+
+    def inverse(self, projection):
+        &#34;&#34;&#34;
+        Projects the envelope from the cartesian space
+        into the geographic space by projecting its corner
+        points.
+
+        See also:
+          Coord.inverse(self, projection).
+        &#34;&#34;&#34;
+        return inverse_(self, projection)
+
+
+class _Projection(Projection, _injector()):
+    def __repr__(self):
+        return &#34;Projection(&#39;%s&#39;)&#34; % self.params()
+
+    def forward(self, obj):
+        &#34;&#34;&#34;
+        Projects the given object (Box2d or Coord)
+        from the geographic space into the cartesian space.
+
+        See also:
+          Box2d.forward(self, projection),
+          Coord.forward(self, projection).
+        &#34;&#34;&#34;
+        return forward_(obj, self)
+
+    def inverse(self, obj):
+        &#34;&#34;&#34;
+        Projects the given object (Box2d or Coord)
+        from the cartesian space into the geographic space.
+
+        See also:
+          Box2d.inverse(self, projection),
+          Coord.inverse(self, projection).
+        &#34;&#34;&#34;
+        return inverse_(obj, self)
+
+
+class _Feature(Feature, _injector()):
+    __geo_interface__ = property(lambda self: json.loads(self.to_geojson()))
+
+
+class _Geometry(Geometry, _injector()):
+    __geo_interface__ = property(lambda self: json.loads(self.to_geojson()))
+
+
+class _Datasource(Datasource, _injector()):
+    def featureset(self, fields=None, variables={}):
+        query = Query(self.envelope())
+        query.set_variables(variables)
+        attributes = fields or self.fields()
+        for fld in attributes:
+            query.add_property_name(fld)
+        return self.features(query)
+
+    def __iter__(self, fields=None, variables={}):
+        return self.featureset(fields, variables)
+
+    # backward caps helper
+    def all_features(self, fields=None, variables={}):
+        return self.__iter__(fields, variables)
+
+
+class _Color(Color, _injector()):
+    def __repr__(self):
+        return &#34;Color(R=%d,G=%d,B=%d,A=%d)&#34; % (self.r, self.g, self.b, self.a)
+
+
+class _SymbolizerBase(SymbolizerBase, _injector()):
+    # back compatibility
+
+    @property
+    def filename(self):
+        return self[&#34;file&#34;]
+
+    @filename.setter
+    def filename(self, val):
+        self[&#34;file&#34;] = val
+
+
+def _add_symbol_method_to_symbolizers(vars=globals()):
+    def symbol_for_subcls(self):
+        return self
+
+    def symbol_for_cls(self):
+        return getattr(self, self.type())()
+
+    for name, obj in list(vars.items()):
+        if name.endswith(&#34;Symbolizer&#34;) and not name.startswith(&#34;_&#34;):
+            if name == &#34;Symbolizer&#34;:
+                symbol = symbol_for_cls
+            else:
+                symbol = symbol_for_subcls
+            type(&#34;dummy&#34;, (obj, _injector()), {&#34;symbol&#34;: symbol})
+
+
+_add_symbol_method_to_symbolizers()
+
+
+def Datasource(**keywords):
+    &#34;&#34;&#34;Wrapper around CreateDatasource.
+
+    Create a Mapnik Datasource using a dictionary of parameters.
+
+    Keywords must include:
+
+      type=&#39;plugin_name&#39; # e.g. type=&#39;gdal&#39;
+
+    See the convenience factory methods of each input plugin for
+    details on additional required keyword arguments.
+
+    &#34;&#34;&#34;
+
+    return CreateDatasource(keywords)
+
+
+# convenience factory methods
+
+
+def Shapefile(**keywords):
+    &#34;&#34;&#34;Create a Shapefile Datasource.
+
+    Required keyword arguments:
+      file -- path to shapefile without extension
+
+    Optional keyword arguments:
+      base -- path prefix (default None)
+      encoding -- file encoding (default &#39;utf-8&#39;)
+
+    &gt;&gt;&gt; from mapnik import Shapefile, Layer
+    &gt;&gt;&gt; shp = Shapefile(base=&#39;/home/mapnik/data&#39;,file=&#39;world_borders&#39;)
+    &gt;&gt;&gt; lyr = Layer(&#39;Shapefile Layer&#39;)
+    &gt;&gt;&gt; lyr.datasource = shp
+
+    &#34;&#34;&#34;
+    keywords[&#34;type&#34;] = &#34;shape&#34;
+    return CreateDatasource(keywords)
+
+
+def CSV(**keywords):
+    &#34;&#34;&#34;Create a CSV Datasource.
+
+    Required keyword arguments:
+      file -- path to csv
+
+    Optional keyword arguments:
+      inline -- inline CSV string (if provided &#39;file&#39; argument will be ignored and non-needed)
+      base -- path prefix (default None)
+      encoding -- file encoding (default &#39;utf-8&#39;)
+      row_limit -- integer limit of rows to return (default: 0)
+      strict -- throw an error if an invalid row is encountered
+      escape -- The escape character to use for parsing data
+      quote -- The quote character to use for parsing data
+      separator -- The separator character to use for parsing data
+      headers -- A comma separated list of header names that can be set to add headers to data that lacks them
+      filesize_max -- The maximum filesize in MB that will be accepted
+
+    &gt;&gt;&gt; from mapnik import CSV
+    &gt;&gt;&gt; csv = CSV(file=&#39;test.csv&#39;)
+
+    &gt;&gt;&gt; from mapnik import CSV
+    &gt;&gt;&gt; csv = CSV(inline=&#39;&#39;&#39;wkt,Name\n&#34;POINT (120.15 48.47)&#34;,&#34;Winthrop, WA&#34;&#39;&#39;&#39;)
+
+    For more information see https://github.com/mapnik/mapnik/wiki/CSV-Plugin
+
+    &#34;&#34;&#34;
+    keywords[&#34;type&#34;] = &#34;csv&#34;
+    return CreateDatasource(keywords)
+
+
+def GeoJSON(**keywords):
+    &#34;&#34;&#34;Create a GeoJSON Datasource.
+
+    Required keyword arguments:
+      file -- path to json
+
+    Optional keyword arguments:
+      encoding -- file encoding (default &#39;utf-8&#39;)
+      base -- path prefix (default None)
+
+    &gt;&gt;&gt; from mapnik import GeoJSON
+    &gt;&gt;&gt; geojson = GeoJSON(file=&#39;test.json&#39;)
+
+    &#34;&#34;&#34;
+    keywords[&#34;type&#34;] = &#34;geojson&#34;
+    return CreateDatasource(keywords)
+
+
+def PostGIS(**keywords):
+    &#34;&#34;&#34;Create a PostGIS Datasource.
+
+    Required keyword arguments:
+      dbname -- database name to connect to
+      table -- table name or subselect query
+
+      *Note: if using subselects for the &#39;table&#39; value consider also
+       passing the &#39;geometry_field&#39; and &#39;srid&#39; and &#39;extent_from_subquery&#39;
+       options and/or specifying the &#39;geometry_table&#39; option.
+
+    Optional db connection keyword arguments:
+      user -- database user to connect as (default: see postgres docs)
+      password -- password for database user (default: see postgres docs)
+      host -- postgres hostname (default: see postgres docs)
+      port -- postgres port (default: see postgres docs)
+      initial_size -- integer size of connection pool (default: 1)
+      max_size -- integer max of connection pool (default: 10)
+      persist_connection -- keep connection open (default: True)
+
+    Optional table-level keyword arguments:
+      extent -- manually specified data extent (comma delimited string, default: None)
+      estimate_extent -- boolean, direct PostGIS to use the faster, less accurate `estimate_extent` over `extent` (default: False)
+      extent_from_subquery -- boolean, direct Mapnik to query Postgis for the extent of the raw &#39;table&#39; value (default: uses &#39;geometry_table&#39;)
+      geometry_table -- specify geometry table to use to look up metadata (default: automatically parsed from &#39;table&#39; value)
+      geometry_field -- specify geometry field to use (default: first entry in geometry_columns)
+      srid -- specify srid to use (default: auto-detected from geometry_field)
+      row_limit -- integer limit of rows to return (default: 0)
+      cursor_size -- integer size of binary cursor to use (default: 0, no binary cursor is used)
+
+    &gt;&gt;&gt; from mapnik import PostGIS, Layer
+    &gt;&gt;&gt; params = dict(dbname=env[&#39;MAPNIK_NAME&#39;],table=&#39;osm&#39;,user=&#39;postgres&#39;,password=&#39;gis&#39;)
+    &gt;&gt;&gt; params[&#39;estimate_extent&#39;] = False
+    &gt;&gt;&gt; params[&#39;extent&#39;] = &#39;-20037508,-19929239,20037508,19929239&#39;
+    &gt;&gt;&gt; postgis = PostGIS(**params)
+    &gt;&gt;&gt; lyr = Layer(&#39;PostGIS Layer&#39;)
+    &gt;&gt;&gt; lyr.datasource = postgis
+
+    &#34;&#34;&#34;
+    keywords[&#34;type&#34;] = &#34;postgis&#34;
+    return CreateDatasource(keywords)
+
+
+def PgRaster(**keywords):
+    &#34;&#34;&#34;Create a PgRaster Datasource.
+
+    Required keyword arguments:
+      dbname -- database name to connect to
+      table -- table name or subselect query
+
+      *Note: if using subselects for the &#39;table&#39; value consider also
+       passing the &#39;raster_field&#39; and &#39;srid&#39; and &#39;extent_from_subquery&#39;
+       options and/or specifying the &#39;raster_table&#39; option.
+
+    Optional db connection keyword arguments:
+      user -- database user to connect as (default: see postgres docs)
+      password -- password for database user (default: see postgres docs)
+      host -- postgres hostname (default: see postgres docs)
+      port -- postgres port (default: see postgres docs)
+      initial_size -- integer size of connection pool (default: 1)
+      max_size -- integer max of connection pool (default: 10)
+      persist_connection -- keep connection open (default: True)
+
+    Optional table-level keyword arguments:
+      extent -- manually specified data extent (comma delimited string, default: None)
+      estimate_extent -- boolean, direct PostGIS to use the faster, less accurate `estimate_extent` over `extent` (default: False)
+      extent_from_subquery -- boolean, direct Mapnik to query Postgis for the extent of the raw &#39;table&#39; value (default: uses &#39;geometry_table&#39;)
+      raster_table -- specify geometry table to use to look up metadata (default: automatically parsed from &#39;table&#39; value)
+      raster_field -- specify geometry field to use (default: first entry in raster_columns)
+      srid -- specify srid to use (default: auto-detected from geometry_field)
+      row_limit -- integer limit of rows to return (default: 0)
+      cursor_size -- integer size of binary cursor to use (default: 0, no binary cursor is used)
+      use_overviews -- boolean, use overviews when available (default: false)
+      prescale_rasters -- boolean, scale rasters on the db side (default: false)
+      clip_rasters -- boolean, clip rasters on the db side (default: false)
+      band -- integer, if non-zero interprets the given band (1-based offset) as a data raster (default: 0)
+
+    &gt;&gt;&gt; from mapnik import PgRaster, Layer
+    &gt;&gt;&gt; params = dict(dbname=&#39;mapnik&#39;,table=&#39;osm&#39;,user=&#39;postgres&#39;,password=&#39;gis&#39;)
+    &gt;&gt;&gt; params[&#39;estimate_extent&#39;] = False
+    &gt;&gt;&gt; params[&#39;extent&#39;] = &#39;-20037508,-19929239,20037508,19929239&#39;
+    &gt;&gt;&gt; pgraster = PgRaster(**params)
+    &gt;&gt;&gt; lyr = Layer(&#39;PgRaster Layer&#39;)
+    &gt;&gt;&gt; lyr.datasource = pgraster
+
+    &#34;&#34;&#34;
+    keywords[&#34;type&#34;] = &#34;pgraster&#34;
+    return CreateDatasource(keywords)
+
+
+def Raster(**keywords):
+    &#34;&#34;&#34;Create a Raster (Tiff) Datasource.
+
+    Required keyword arguments:
+      file -- path to stripped or tiled tiff
+      lox -- lowest (min) x/longitude of tiff extent
+      loy -- lowest (min) y/latitude of tiff extent
+      hix -- highest (max) x/longitude of tiff extent
+      hiy -- highest (max) y/latitude of tiff extent
+
+    Hint: lox,loy,hix,hiy make a Mapnik Box2d
+
+    Optional keyword arguments:
+      base -- path prefix (default None)
+      multi -- whether the image is in tiles on disk (default False)
+
+    Multi-tiled keyword arguments:
+      x_width -- virtual image number of tiles in X direction (required)
+      y_width -- virtual image number of tiles in Y direction (required)
+      tile_size -- if an image is in tiles, how large are the tiles (default 256)
+      tile_stride -- if an image is in tiles, what&#39;s the increment between rows/cols (default 1)
+
+    &gt;&gt;&gt; from mapnik import Raster, Layer
+    &gt;&gt;&gt; raster = Raster(base=&#39;/home/mapnik/data&#39;,file=&#39;elevation.tif&#39;,lox=-122.8,loy=48.5,hix=-122.7,hiy=48.6)
+    &gt;&gt;&gt; lyr = Layer(&#39;Tiff Layer&#39;)
+    &gt;&gt;&gt; lyr.datasource = raster
+
+    &#34;&#34;&#34;
+    keywords[&#34;type&#34;] = &#34;raster&#34;
+    return CreateDatasource(keywords)
+
+
+def Gdal(**keywords):
+    &#34;&#34;&#34;Create a GDAL Raster Datasource.
+
+    Required keyword arguments:
+      file -- path to GDAL supported dataset
+
+    Optional keyword arguments:
+      base -- path prefix (default None)
+      shared -- boolean, open GdalDataset in shared mode (default: False)
+      bbox -- tuple (minx, miny, maxx, maxy). If specified, overrides the bbox detected by GDAL.
+
+    &gt;&gt;&gt; from mapnik import Gdal, Layer
+    &gt;&gt;&gt; dataset = Gdal(base=&#39;/home/mapnik/data&#39;,file=&#39;elevation.tif&#39;)
+    &gt;&gt;&gt; lyr = Layer(&#39;GDAL Layer from TIFF file&#39;)
+    &gt;&gt;&gt; lyr.datasource = dataset
+
+    &#34;&#34;&#34;
+    keywords[&#34;type&#34;] = &#34;gdal&#34;
+    if &#34;bbox&#34; in keywords:
+        if isinstance(keywords[&#34;bbox&#34;], (tuple, list)):
+            keywords[&#34;bbox&#34;] = &#34;,&#34;.join([str(item) for item in keywords[&#34;bbox&#34;]])
+    return CreateDatasource(keywords)
+
+
+def Occi(**keywords):
+    &#34;&#34;&#34;Create a Oracle Spatial (10g) Vector Datasource.
+
+    Required keyword arguments:
+      user -- database user to connect as
+      password -- password for database user
+      host -- oracle host to connect to (does not refer to SID in tsnames.ora)
+      table -- table name or subselect query
+
+    Optional keyword arguments:
+      initial_size -- integer size of connection pool (default 1)
+      max_size -- integer max of connection pool (default 10)
+      extent -- manually specified data extent (comma delimited string, default None)
+      estimate_extent -- boolean, direct Oracle to use the faster, less accurate estimate_extent() over extent() (default False)
+      encoding -- file encoding (default &#39;utf-8&#39;)
+      geometry_field -- specify geometry field (default &#39;GEOLOC&#39;)
+      use_spatial_index -- boolean, force the use of the spatial index (default True)
+
+    &gt;&gt;&gt; from mapnik import Occi, Layer
+    &gt;&gt;&gt; params = dict(host=&#39;myoracle&#39;,user=&#39;scott&#39;,password=&#39;tiger&#39;,table=&#39;test&#39;)
+    &gt;&gt;&gt; params[&#39;estimate_extent&#39;] = False
+    &gt;&gt;&gt; params[&#39;extent&#39;] = &#39;-20037508,-19929239,20037508,19929239&#39;
+    &gt;&gt;&gt; oracle = Occi(**params)
+    &gt;&gt;&gt; lyr = Layer(&#39;Oracle Spatial Layer&#39;)
+    &gt;&gt;&gt; lyr.datasource = oracle
+    &#34;&#34;&#34;
+    keywords[&#34;type&#34;] = &#34;occi&#34;
+    return CreateDatasource(keywords)
+
+
+def Ogr(**keywords):
+    &#34;&#34;&#34;Create a OGR Vector Datasource.
+
+    Required keyword arguments:
+      file -- path to OGR supported dataset
+      layer -- name of layer to use within datasource (optional if layer_by_index or layer_by_sql is used)
+
+    Optional keyword arguments:
+      layer_by_index -- choose layer by index number instead of by layer name or sql.
+      layer_by_sql -- choose layer by sql query number instead of by layer name or index.
+      base -- path prefix (default None)
+      encoding -- file encoding (default &#39;utf-8&#39;)
+
+    &gt;&gt;&gt; from mapnik import Ogr, Layer
+    &gt;&gt;&gt; datasource = Ogr(base=&#39;/home/mapnik/data&#39;,file=&#39;rivers.geojson&#39;,layer=&#39;OGRGeoJSON&#39;)
+    &gt;&gt;&gt; lyr = Layer(&#39;OGR Layer from GeoJSON file&#39;)
+    &gt;&gt;&gt; lyr.datasource = datasource
+
+    &#34;&#34;&#34;
+    keywords[&#34;type&#34;] = &#34;ogr&#34;
+    return CreateDatasource(keywords)
+
+
+def SQLite(**keywords):
+    &#34;&#34;&#34;Create a SQLite Datasource.
+
+    Required keyword arguments:
+      file -- path to SQLite database file
+      table -- table name or subselect query
+
+    Optional keyword arguments:
+      base -- path prefix (default None)
+      encoding -- file encoding (default &#39;utf-8&#39;)
+      extent -- manually specified data extent (comma delimited string, default None)
+      metadata -- name of auxiliary table containing record for table with xmin, ymin, xmax, ymax, and f_table_name
+      geometry_field -- name of geometry field (default &#39;the_geom&#39;)
+      key_field -- name of primary key field (default &#39;OGC_FID&#39;)
+      row_offset -- specify a custom integer row offset (default 0)
+      row_limit -- specify a custom integer row limit (default 0)
+      wkb_format -- specify a wkb type of &#39;spatialite&#39; (default None)
+      use_spatial_index -- boolean, instruct sqlite plugin to use Rtree spatial index (default True)
+
+    &gt;&gt;&gt; from mapnik import SQLite, Layer
+    &gt;&gt;&gt; sqlite = SQLite(base=&#39;/home/mapnik/data&#39;,file=&#39;osm.db&#39;,table=&#39;osm&#39;,extent=&#39;-20037508,-19929239,20037508,19929239&#39;)
+    &gt;&gt;&gt; lyr = Layer(&#39;SQLite Layer&#39;)
+    &gt;&gt;&gt; lyr.datasource = sqlite
+
+    &#34;&#34;&#34;
+    keywords[&#34;type&#34;] = &#34;sqlite&#34;
+    return CreateDatasource(keywords)
+
+
+def Rasterlite(**keywords):
+    &#34;&#34;&#34;Create a Rasterlite Datasource.
+
+    Required keyword arguments:
+      file -- path to Rasterlite database file
+      table -- table name or subselect query
+
+    Optional keyword arguments:
+      base -- path prefix (default None)
+      extent -- manually specified data extent (comma delimited string, default None)
+
+    &gt;&gt;&gt; from mapnik import Rasterlite, Layer
+    &gt;&gt;&gt; rasterlite = Rasterlite(base=&#39;/home/mapnik/data&#39;,file=&#39;osm.db&#39;,table=&#39;osm&#39;,extent=&#39;-20037508,-19929239,20037508,19929239&#39;)
+    &gt;&gt;&gt; lyr = Layer(&#39;Rasterlite Layer&#39;)
+    &gt;&gt;&gt; lyr.datasource = rasterlite
+
+    &#34;&#34;&#34;
+    keywords[&#34;type&#34;] = &#34;rasterlite&#34;
+    return CreateDatasource(keywords)
+
+
+def Osm(**keywords):
+    &#34;&#34;&#34;Create a Osm Datasource.
+
+    Required keyword arguments:
+      file -- path to OSM file
+
+    Optional keyword arguments:
+      encoding -- file encoding (default &#39;utf-8&#39;)
+      url -- url to fetch data (default None)
+      bbox -- data bounding box for fetching data (default None)
+
+    &gt;&gt;&gt; from mapnik import Osm, Layer
+    &gt;&gt;&gt; datasource = Osm(file=&#39;test.osm&#39;)
+    &gt;&gt;&gt; lyr = Layer(&#39;Osm Layer&#39;)
+    &gt;&gt;&gt; lyr.datasource = datasource
+
+    &#34;&#34;&#34;
+    # note: parser only supports libxml2 so not exposing option
+    # parser -- xml parser to use (default libxml2)
+    keywords[&#34;type&#34;] = &#34;osm&#34;
+    return CreateDatasource(keywords)
+
+
+def Python(**keywords):
+    &#34;&#34;&#34;Create a Python Datasource.
+
+    &gt;&gt;&gt; from mapnik import Python, PythonDatasource
+    &gt;&gt;&gt; datasource = Python(&#39;PythonDataSource&#39;)
+    &gt;&gt;&gt; lyr = Layer(&#39;Python datasource&#39;)
+    &gt;&gt;&gt; lyr.datasource = datasource
+    &#34;&#34;&#34;
+    keywords[&#34;type&#34;] = &#34;python&#34;
+    return CreateDatasource(keywords)
+
+
+def MemoryDatasource(**keywords):
+    &#34;&#34;&#34;Create a Memory Datasource.
+
+    Optional keyword arguments:
+        (TODO)
+    &#34;&#34;&#34;
+    params = Parameters()
+    params.append(Parameter(&#34;type&#34;, &#34;memory&#34;))
+    return MemoryDatasourceBase(params)
+
+
+class PythonDatasource(object):
+    &#34;&#34;&#34;A base class for a Python data source.
+
+    Optional arguments:
+      envelope -- a mapnik.Box2d (minx, miny, maxx, maxy) envelope of the data source, default (-180,-90,180,90)
+      geometry_type -- one of the DataGeometryType enumeration values, default Point
+      data_type -- one of the DataType enumerations, default Vector
+    &#34;&#34;&#34;
+
+    def __init__(self, envelope=None, geometry_type=None, data_type=None):
+        self.envelope = envelope or Box2d(-180, -90, 180, 90)
+        self.geometry_type = geometry_type or DataGeometryType.Point
+        self.data_type = data_type or DataType.Vector
+
+    def features(self, query):
+        &#34;&#34;&#34;Return an iterable which yields instances of Feature for features within the passed query.
+
+        Required arguments:
+          query -- a Query instance specifying the region for which features should be returned
+        &#34;&#34;&#34;
+        return None
+
+    def features_at_point(self, point):
+        &#34;&#34;&#34;Rarely used. Return an iterable which yields instances of Feature for the specified point.&#34;&#34;&#34;
+        return None
+
+    @classmethod
+    def wkb_features(cls, keys, features):
+        &#34;&#34;&#34;A convenience function to wrap an iterator yielding pairs of WKB format geometry and dictionaries of
+        key-value pairs into mapnik features. Return this from PythonDatasource.features() passing it a sequence of keys
+        to appear in the output and an iterator yielding features.
+
+        For example. One might have a features() method in a derived class like the following:
+
+        def features(self, query):
+            # ... create WKB features feat1 and feat2
+
+            return mapnik.PythonDatasource.wkb_features(
+                keys = ( &#39;name&#39;, &#39;author&#39; ),
+                features = [
+                    (feat1, { &#39;name&#39;: &#39;feat1&#39;, &#39;author&#39;: &#39;alice&#39; }),
+                    (feat2, { &#39;name&#39;: &#39;feat2&#39;, &#39;author&#39;: &#39;bob&#39; }),
+                ]
+            )
+
+        &#34;&#34;&#34;
+        ctx = Context()
+        [ctx.push(x) for x in keys]
+
+        def make_it(feat, idx):
+            f = Feature(ctx, idx)
+            geom, attrs = feat
+            f.add_geometries_from_wkb(geom)
+            for k, v in attrs.items():
+                f[k] = v
+            return f
+
+        return map(make_it, features, itertools.count(1))
+
+    @classmethod
+    def wkt_features(cls, keys, features):
+        &#34;&#34;&#34;A convenience function to wrap an iterator yielding pairs of WKT format geometry and dictionaries of
+        key-value pairs into mapnik features. Return this from PythonDatasource.features() passing it a sequence of keys
+        to appear in the output and an iterator yielding features.
+
+        For example. One might have a features() method in a derived class like the following:
+
+        def features(self, query):
+            # ... create WKT features feat1 and feat2
+
+            return mapnik.PythonDatasource.wkt_features(
+                keys = ( &#39;name&#39;, &#39;author&#39; ),
+                features = [
+                    (feat1, { &#39;name&#39;: &#39;feat1&#39;, &#39;author&#39;: &#39;alice&#39; }),
+                    (feat2, { &#39;name&#39;: &#39;feat2&#39;, &#39;author&#39;: &#39;bob&#39; }),
+                ]
+            )
+
+        &#34;&#34;&#34;
+        ctx = Context()
+        [ctx.push(x) for x in keys]
+
+        def make_it(feat, idx):
+            f = Feature(ctx, idx)
+            geom, attrs = feat
+            f.add_geometries_from_wkt(geom)
+            for k, v in attrs.items():
+                f[k] = v
+            return f
+
+        return map(make_it, features, itertools.count(1))
+
+
+class _TextSymbolizer(TextSymbolizer, _injector()):
+    @property
+    def name(self):
+        if isinstance(self.properties.format_tree, FormattingText):
+            return self.properties.format_tree.text
+        else:
+            # There is no single expression which could be returned as name
+            raise RuntimeError(
+                &#34;TextSymbolizer uses complex formatting features, but old compatibility interface is used to access it. Use self.properties.format_tree instead.&#34;
+            )
+
+    @name.setter
+    def name(self, name):
+        self.properties.format_tree = FormattingText(name)
+
+    @property
+    def text_size(self):
+        return self.format.text_size
+
+    @text_size.setter
+    def text_size(self, text_size):
+        self.format.text_size = text_size
+
+    @property
+    def face_name(self):
+        return self.format.face_name
+
+    @face_name.setter
+    def face_name(self, face_name):
+        self.format.face_name = face_name
+
+    @property
+    def fontset(self):
+        return self.format.fontset
+
+    @fontset.setter
+    def fontset(self, fontset):
+        self.format.fontset = fontset
+
+    @property
+    def character_spacing(self):
+        return self.format.character_spacing
+
+    @character_spacing.setter
+    def character_spacing(self, character_spacing):
+        self.format.character_spacing = character_spacing
+
+    @property
+    def line_spacing(self):
+        return self.format.line_spacing
+
+    @line_spacing.setter
+    def line_spacing(self, line_spacing):
+        self.format.line_spacing = line_spacing
+
+    @property
+    def text_opacity(self):
+        return self.format.text_opacity
+
+    @text_opacity.setter
+    def text_opacity(self, text_opacity):
+        self.format.text_opacity = text_opacity
+
+    @property
+    def wrap_before(self):
+        return self.format.wrap_before
+
+    @wrap_before.setter
+    def wrap_before(self, wrap_before):
+        self.format.wrap_before = wrap_before
+
+    @property
+    def text_transform(self):
+        return self.format.text_transform
+
+    @text_transform.setter
+    def text_transform(self, text_transform):
+        self.format.text_transform = text_transform
+
+    @property
+    def fill(self):
+        return self.format.fill
+
+    @fill.setter
+    def fill(self, fill):
+        self.format.fill = fill
+
+    @property
+    def halo_fill(self):
+        return self.format.halo_fill
+
+    @halo_fill.setter
+    def halo_fill(self, halo_fill):
+        self.format.halo_fill = halo_fill
+
+    @property
+    def halo_radius(self):
+        return self.format.halo_radius
+
+    @halo_radius.setter
+    def halo_radius(self, halo_radius):
+        self.format.halo_radius = halo_radius
+
+    @property
+    def label_placement(self):
+        return self.properties.label_placement
+
+    @label_placement.setter
+    def label_placement(self, label_placement):
+        self.properties.label_placement = label_placement
+
+    @property
+    def horizontal_alignment(self):
+        return self.properties.horizontal_alignment
+
+    @horizontal_alignment.setter
+    def horizontal_alignment(self, horizontal_alignment):
+        self.properties.horizontal_alignment = horizontal_alignment
+
+    @property
+    def justify_alignment(self):
+        return self.properties.justify_alignment
+
+    @justify_alignment.setter
+    def justify_alignment(self, justify_alignment):
+        self.properties.justify_alignment = justify_alignment
+
+    @property
+    def vertical_alignment(self):
+        return self.properties.vertical_alignment
+
+    @vertical_alignment.setter
+    def vertical_alignment(self, vertical_alignment):
+        self.properties.vertical_alignment = vertical_alignment
+
+    @property
+    def orientation(self):
+        return self.properties.orientation
+
+    @orientation.setter
+    def orientation(self, orientation):
+        self.properties.orientation = orientation
+
+    @property
+    def displacement(self):
+        return self.properties.displacement
+
+    @displacement.setter
+    def displacement(self, displacement):
+        self.properties.displacement = displacement
+
+    @property
+    def label_spacing(self):
+        return self.properties.label_spacing
+
+    @label_spacing.setter
+    def label_spacing(self, label_spacing):
+        self.properties.label_spacing = label_spacing
+
+    @property
+    def label_position_tolerance(self):
+        return self.properties.label_position_tolerance
+
+    @label_position_tolerance.setter
+    def label_position_tolerance(self, label_position_tolerance):
+        self.properties.label_position_tolerance = label_position_tolerance
+
+    @property
+    def avoid_edges(self):
+        return self.properties.avoid_edges
+
+    @avoid_edges.setter
+    def avoid_edges(self, avoid_edges):
+        self.properties.avoid_edges = avoid_edges
+
+    @property
+    def minimum_distance(self):
+        return self.properties.minimum_distance
+
+    @minimum_distance.setter
+    def minimum_distance(self, minimum_distance):
+        self.properties.minimum_distance = minimum_distance
+
+    @property
+    def minimum_padding(self):
+        return self.properties.minimum_padding
+
+    @minimum_padding.setter
+    def minimum_padding(self, minimum_padding):
+        self.properties.minimum_padding = minimum_padding
+
+    @property
+    def minimum_path_length(self):
+        return self.properties.minimum_path_length
+
+    @minimum_path_length.setter
+    def minimum_path_length(self, minimum_path_length):
+        self.properties.minimum_path_length = minimum_path_length
+
+    @property
+    def maximum_angle_char_delta(self):
+        return self.properties.maximum_angle_char_delta
+
+    @maximum_angle_char_delta.setter
+    def maximum_angle_char_delta(self, maximum_angle_char_delta):
+        self.properties.maximum_angle_char_delta = maximum_angle_char_delta
+
+    @property
+    def allow_overlap(self):
+        return self.properties.allow_overlap
+
+    @allow_overlap.setter
+    def allow_overlap(self, allow_overlap):
+        self.properties.allow_overlap = allow_overlap
+
+    @property
+    def text_ratio(self):
+        return self.properties.text_ratio
+
+    @text_ratio.setter
+    def text_ratio(self, text_ratio):
+        self.properties.text_ratio = text_ratio
+
+    @property
+    def wrap_width(self):
+        return self.properties.wrap_width
+
+    @wrap_width.setter
+    def wrap_width(self, wrap_width):
+        self.properties.wrap_width = wrap_width
+
+
+def mapnik_version_from_string(version_string):
+    &#34;&#34;&#34;Return the Mapnik version from a string.&#34;&#34;&#34;
+    n = version_string.split(&#34;.&#34;)
+    return (int(n[0]) * 100000) + (int(n[1]) * 100) + (int(n[2]))
+
+
+def register_plugins(path=None):
+    &#34;&#34;&#34;Register plugins located by specified path&#34;&#34;&#34;
+    if not path:
+        if &#34;MAPNIK_INPUT_PLUGINS_DIRECTORY&#34; in os.environ:
+            path = os.environ.get(&#34;MAPNIK_INPUT_PLUGINS_DIRECTORY&#34;)
+        else:
+            from .paths import inputpluginspath
+
+            path = inputpluginspath
+    DatasourceCache.register_datasources(path)
+
+
+def register_fonts(
+    path=None, valid_extensions=[&#34;.ttf&#34;, &#34;.otf&#34;, &#34;.ttc&#34;, &#34;.pfa&#34;, &#34;.pfb&#34;, &#34;.ttc&#34;, &#34;.dfont&#34;, &#34;.woff&#34;]
+):
+    &#34;&#34;&#34;Recursively register fonts using path argument as base directory&#34;&#34;&#34;
+    if not path:
+        if &#34;MAPNIK_FONT_DIRECTORY&#34; in os.environ:
+            path = os.environ.get(&#34;MAPNIK_FONT_DIRECTORY&#34;)
+        else:
+            from .paths import fontscollectionpath
+
+            path = fontscollectionpath
+    for dirpath, _, filenames in os.walk(path):
+        for filename in filenames:
+            if os.path.splitext(filename.lower())[1] in valid_extensions:
+                FontEngine.register_font(os.path.join(dirpath, filename))
+
+
+# auto-register known plugins and fonts
+register_plugins()
+register_fonts()</code></pre>
+</details>
+</section>
+<section>
+<h2 class="section-title" id="header-submodules">Sub-modules</h2>
+<dl>
+<dt><code class="name"><a title="mapnik.mapnik_settings" href="mapnik_settings.html">mapnik.mapnik_settings</a></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt><code class="name"><a title="mapnik.printing" href="printing/index.html">mapnik.printing</a></code></dt>
+<dd>
+<div class="desc"><p>Mapnik classes to assist in creating printable maps.</p></div>
+</dd>
+</dl>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="mapnik.CSV"><code class="name flex">
+<span>def <span class="ident">CSV</span></span>(<span>**keywords)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Create a CSV Datasource.</p>
+<pre><code>Required keyword arguments:
+  file -- path to csv
+
+Optional keyword arguments:
+  inline -- inline CSV string (if provided 'file' argument will be ignored and non-needed)
+  base -- path prefix (default None)
+  encoding -- file encoding (default 'utf-8')
+  row_limit -- integer limit of rows to return (default: 0)
+  strict -- throw an error if an invalid row is encountered
+  escape -- The escape character to use for parsing data
+  quote -- The quote character to use for parsing data
+  separator -- The separator character to use for parsing data
+  headers -- A comma separated list of header names that can be set to add headers to data that lacks them
+  filesize_max -- The maximum filesize in MB that will be accepted
+
+&gt;&gt;&gt; from mapnik import CSV
+&gt;&gt;&gt; csv = CSV(file='test.csv')
+
+&gt;&gt;&gt; from mapnik import CSV
+&gt;&gt;&gt; csv = CSV(inline='''wkt,Name
+</code></pre>
+<p>"POINT (120.15 48.47)","Winthrop, WA"''')</p>
+<pre><code>For more information see &lt;https://github.com/mapnik/mapnik/wiki/CSV-Plugin&gt;
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def CSV(**keywords):
+    &#34;&#34;&#34;Create a CSV Datasource.
+
+    Required keyword arguments:
+      file -- path to csv
+
+    Optional keyword arguments:
+      inline -- inline CSV string (if provided &#39;file&#39; argument will be ignored and non-needed)
+      base -- path prefix (default None)
+      encoding -- file encoding (default &#39;utf-8&#39;)
+      row_limit -- integer limit of rows to return (default: 0)
+      strict -- throw an error if an invalid row is encountered
+      escape -- The escape character to use for parsing data
+      quote -- The quote character to use for parsing data
+      separator -- The separator character to use for parsing data
+      headers -- A comma separated list of header names that can be set to add headers to data that lacks them
+      filesize_max -- The maximum filesize in MB that will be accepted
+
+    &gt;&gt;&gt; from mapnik import CSV
+    &gt;&gt;&gt; csv = CSV(file=&#39;test.csv&#39;)
+
+    &gt;&gt;&gt; from mapnik import CSV
+    &gt;&gt;&gt; csv = CSV(inline=&#39;&#39;&#39;wkt,Name\n&#34;POINT (120.15 48.47)&#34;,&#34;Winthrop, WA&#34;&#39;&#39;&#39;)
+
+    For more information see https://github.com/mapnik/mapnik/wiki/CSV-Plugin
+
+    &#34;&#34;&#34;
+    keywords[&#34;type&#34;] = &#34;csv&#34;
+    return CreateDatasource(keywords)</code></pre>
+</details>
+</dd>
+<dt id="mapnik.Datasource"><code class="name flex">
+<span>def <span class="ident">Datasource</span></span>(<span>**keywords)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Wrapper around CreateDatasource.</p>
+<p>Create a Mapnik Datasource using a dictionary of parameters.</p>
+<p>Keywords must include:</p>
+<p>type='plugin_name' # e.g. type='gdal'</p>
+<p>See the convenience factory methods of each input plugin for
+details on additional required keyword arguments.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def Datasource(**keywords):
+    &#34;&#34;&#34;Wrapper around CreateDatasource.
+
+    Create a Mapnik Datasource using a dictionary of parameters.
+
+    Keywords must include:
+
+      type=&#39;plugin_name&#39; # e.g. type=&#39;gdal&#39;
+
+    See the convenience factory methods of each input plugin for
+    details on additional required keyword arguments.
+
+    &#34;&#34;&#34;
+
+    return CreateDatasource(keywords)</code></pre>
+</details>
+</dd>
+<dt id="mapnik.Filter"><code class="name flex">
+<span>def <span class="ident">Filter</span></span>(<span>*args, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def Filter(*args, **kwargs):
+    warnings.warn(
+        &#34;&#39;Filter&#39; is deprecated and will be removed in Mapnik 3.x, use &#39;Expression&#39; instead&#34;,
+        DeprecationWarning,
+        2,
+    )
+    return Expression(*args, **kwargs)</code></pre>
+</details>
+</dd>
+<dt id="mapnik.Gdal"><code class="name flex">
+<span>def <span class="ident">Gdal</span></span>(<span>**keywords)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Create a GDAL Raster Datasource.</p>
+<p>Required keyword arguments:
+file &ndash; path to GDAL supported dataset</p>
+<p>Optional keyword arguments:
+base &ndash; path prefix (default None)
+shared &ndash; boolean, open GdalDataset in shared mode (default: False)
+bbox &ndash; tuple (minx, miny, maxx, maxy). If specified, overrides the bbox detected by GDAL.</p>
+<pre><code class="language-python-repl">&gt;&gt;&gt; from mapnik import Gdal, Layer
+&gt;&gt;&gt; dataset = Gdal(base='/home/mapnik/data',file='elevation.tif')
+&gt;&gt;&gt; lyr = Layer('GDAL Layer from TIFF file')
+&gt;&gt;&gt; lyr.datasource = dataset
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def Gdal(**keywords):
+    &#34;&#34;&#34;Create a GDAL Raster Datasource.
+
+    Required keyword arguments:
+      file -- path to GDAL supported dataset
+
+    Optional keyword arguments:
+      base -- path prefix (default None)
+      shared -- boolean, open GdalDataset in shared mode (default: False)
+      bbox -- tuple (minx, miny, maxx, maxy). If specified, overrides the bbox detected by GDAL.
+
+    &gt;&gt;&gt; from mapnik import Gdal, Layer
+    &gt;&gt;&gt; dataset = Gdal(base=&#39;/home/mapnik/data&#39;,file=&#39;elevation.tif&#39;)
+    &gt;&gt;&gt; lyr = Layer(&#39;GDAL Layer from TIFF file&#39;)
+    &gt;&gt;&gt; lyr.datasource = dataset
+
+    &#34;&#34;&#34;
+    keywords[&#34;type&#34;] = &#34;gdal&#34;
+    if &#34;bbox&#34; in keywords:
+        if isinstance(keywords[&#34;bbox&#34;], (tuple, list)):
+            keywords[&#34;bbox&#34;] = &#34;,&#34;.join([str(item) for item in keywords[&#34;bbox&#34;]])
+    return CreateDatasource(keywords)</code></pre>
+</details>
+</dd>
+<dt id="mapnik.GeoJSON"><code class="name flex">
+<span>def <span class="ident">GeoJSON</span></span>(<span>**keywords)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Create a GeoJSON Datasource.</p>
+<p>Required keyword arguments:
+file &ndash; path to json</p>
+<p>Optional keyword arguments:
+encoding &ndash; file encoding (default 'utf-8')
+base &ndash; path prefix (default None)</p>
+<pre><code class="language-python-repl">&gt;&gt;&gt; from mapnik import GeoJSON
+&gt;&gt;&gt; geojson = GeoJSON(file='test.json')
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def GeoJSON(**keywords):
+    &#34;&#34;&#34;Create a GeoJSON Datasource.
+
+    Required keyword arguments:
+      file -- path to json
+
+    Optional keyword arguments:
+      encoding -- file encoding (default &#39;utf-8&#39;)
+      base -- path prefix (default None)
+
+    &gt;&gt;&gt; from mapnik import GeoJSON
+    &gt;&gt;&gt; geojson = GeoJSON(file=&#39;test.json&#39;)
+
+    &#34;&#34;&#34;
+    keywords[&#34;type&#34;] = &#34;geojson&#34;
+    return CreateDatasource(keywords)</code></pre>
+</details>
+</dd>
+<dt id="mapnik.MemoryDatasource"><code class="name flex">
+<span>def <span class="ident">MemoryDatasource</span></span>(<span>**keywords)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Create a Memory Datasource.</p>
+<p>Optional keyword arguments:
+(TODO)</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def MemoryDatasource(**keywords):
+    &#34;&#34;&#34;Create a Memory Datasource.
+
+    Optional keyword arguments:
+        (TODO)
+    &#34;&#34;&#34;
+    params = Parameters()
+    params.append(Parameter(&#34;type&#34;, &#34;memory&#34;))
+    return MemoryDatasourceBase(params)</code></pre>
+</details>
+</dd>
+<dt id="mapnik.Occi"><code class="name flex">
+<span>def <span class="ident">Occi</span></span>(<span>**keywords)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Create a Oracle Spatial (10g) Vector Datasource.</p>
+<p>Required keyword arguments:
+user &ndash; database user to connect as
+password &ndash; password for database user
+host &ndash; oracle host to connect to (does not refer to SID in tsnames.ora)
+table &ndash; table name or subselect query</p>
+<p>Optional keyword arguments:
+initial_size &ndash; integer size of connection pool (default 1)
+max_size &ndash; integer max of connection pool (default 10)
+extent &ndash; manually specified data extent (comma delimited string, default None)
+estimate_extent &ndash; boolean, direct Oracle to use the faster, less accurate estimate_extent() over extent() (default False)
+encoding &ndash; file encoding (default 'utf-8')
+geometry_field &ndash; specify geometry field (default 'GEOLOC')
+use_spatial_index &ndash; boolean, force the use of the spatial index (default True)</p>
+<pre><code class="language-python-repl">&gt;&gt;&gt; from mapnik import Occi, Layer
+&gt;&gt;&gt; params = dict(host='myoracle',user='scott',password='tiger',table='test')
+&gt;&gt;&gt; params['estimate_extent'] = False
+&gt;&gt;&gt; params['extent'] = '-20037508,-19929239,20037508,19929239'
+&gt;&gt;&gt; oracle = Occi(**params)
+&gt;&gt;&gt; lyr = Layer('Oracle Spatial Layer')
+&gt;&gt;&gt; lyr.datasource = oracle
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def Occi(**keywords):
+    &#34;&#34;&#34;Create a Oracle Spatial (10g) Vector Datasource.
+
+    Required keyword arguments:
+      user -- database user to connect as
+      password -- password for database user
+      host -- oracle host to connect to (does not refer to SID in tsnames.ora)
+      table -- table name or subselect query
+
+    Optional keyword arguments:
+      initial_size -- integer size of connection pool (default 1)
+      max_size -- integer max of connection pool (default 10)
+      extent -- manually specified data extent (comma delimited string, default None)
+      estimate_extent -- boolean, direct Oracle to use the faster, less accurate estimate_extent() over extent() (default False)
+      encoding -- file encoding (default &#39;utf-8&#39;)
+      geometry_field -- specify geometry field (default &#39;GEOLOC&#39;)
+      use_spatial_index -- boolean, force the use of the spatial index (default True)
+
+    &gt;&gt;&gt; from mapnik import Occi, Layer
+    &gt;&gt;&gt; params = dict(host=&#39;myoracle&#39;,user=&#39;scott&#39;,password=&#39;tiger&#39;,table=&#39;test&#39;)
+    &gt;&gt;&gt; params[&#39;estimate_extent&#39;] = False
+    &gt;&gt;&gt; params[&#39;extent&#39;] = &#39;-20037508,-19929239,20037508,19929239&#39;
+    &gt;&gt;&gt; oracle = Occi(**params)
+    &gt;&gt;&gt; lyr = Layer(&#39;Oracle Spatial Layer&#39;)
+    &gt;&gt;&gt; lyr.datasource = oracle
+    &#34;&#34;&#34;
+    keywords[&#34;type&#34;] = &#34;occi&#34;
+    return CreateDatasource(keywords)</code></pre>
+</details>
+</dd>
+<dt id="mapnik.Ogr"><code class="name flex">
+<span>def <span class="ident">Ogr</span></span>(<span>**keywords)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Create a OGR Vector Datasource.</p>
+<p>Required keyword arguments:
+file &ndash; path to OGR supported dataset
+layer &ndash; name of layer to use within datasource (optional if layer_by_index or layer_by_sql is used)</p>
+<p>Optional keyword arguments:
+layer_by_index &ndash; choose layer by index number instead of by layer name or sql.
+layer_by_sql &ndash; choose layer by sql query number instead of by layer name or index.
+base &ndash; path prefix (default None)
+encoding &ndash; file encoding (default 'utf-8')</p>
+<pre><code class="language-python-repl">&gt;&gt;&gt; from mapnik import Ogr, Layer
+&gt;&gt;&gt; datasource = Ogr(base='/home/mapnik/data',file='rivers.geojson',layer='OGRGeoJSON')
+&gt;&gt;&gt; lyr = Layer('OGR Layer from GeoJSON file')
+&gt;&gt;&gt; lyr.datasource = datasource
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def Ogr(**keywords):
+    &#34;&#34;&#34;Create a OGR Vector Datasource.
+
+    Required keyword arguments:
+      file -- path to OGR supported dataset
+      layer -- name of layer to use within datasource (optional if layer_by_index or layer_by_sql is used)
+
+    Optional keyword arguments:
+      layer_by_index -- choose layer by index number instead of by layer name or sql.
+      layer_by_sql -- choose layer by sql query number instead of by layer name or index.
+      base -- path prefix (default None)
+      encoding -- file encoding (default &#39;utf-8&#39;)
+
+    &gt;&gt;&gt; from mapnik import Ogr, Layer
+    &gt;&gt;&gt; datasource = Ogr(base=&#39;/home/mapnik/data&#39;,file=&#39;rivers.geojson&#39;,layer=&#39;OGRGeoJSON&#39;)
+    &gt;&gt;&gt; lyr = Layer(&#39;OGR Layer from GeoJSON file&#39;)
+    &gt;&gt;&gt; lyr.datasource = datasource
+
+    &#34;&#34;&#34;
+    keywords[&#34;type&#34;] = &#34;ogr&#34;
+    return CreateDatasource(keywords)</code></pre>
+</details>
+</dd>
+<dt id="mapnik.Osm"><code class="name flex">
+<span>def <span class="ident">Osm</span></span>(<span>**keywords)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Create a Osm Datasource.</p>
+<p>Required keyword arguments:
+file &ndash; path to OSM file</p>
+<p>Optional keyword arguments:
+encoding &ndash; file encoding (default 'utf-8')
+url &ndash; url to fetch data (default None)
+bbox &ndash; data bounding box for fetching data (default None)</p>
+<pre><code class="language-python-repl">&gt;&gt;&gt; from mapnik import Osm, Layer
+&gt;&gt;&gt; datasource = Osm(file='test.osm')
+&gt;&gt;&gt; lyr = Layer('Osm Layer')
+&gt;&gt;&gt; lyr.datasource = datasource
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def Osm(**keywords):
+    &#34;&#34;&#34;Create a Osm Datasource.
+
+    Required keyword arguments:
+      file -- path to OSM file
+
+    Optional keyword arguments:
+      encoding -- file encoding (default &#39;utf-8&#39;)
+      url -- url to fetch data (default None)
+      bbox -- data bounding box for fetching data (default None)
+
+    &gt;&gt;&gt; from mapnik import Osm, Layer
+    &gt;&gt;&gt; datasource = Osm(file=&#39;test.osm&#39;)
+    &gt;&gt;&gt; lyr = Layer(&#39;Osm Layer&#39;)
+    &gt;&gt;&gt; lyr.datasource = datasource
+
+    &#34;&#34;&#34;
+    # note: parser only supports libxml2 so not exposing option
+    # parser -- xml parser to use (default libxml2)
+    keywords[&#34;type&#34;] = &#34;osm&#34;
+    return CreateDatasource(keywords)</code></pre>
+</details>
+</dd>
+<dt id="mapnik.PgRaster"><code class="name flex">
+<span>def <span class="ident">PgRaster</span></span>(<span>**keywords)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Create a PgRaster Datasource.</p>
+<p>Required keyword arguments:
+dbname &ndash; database name to connect to
+table &ndash; table name or subselect query</p>
+<p>*Note: if using subselects for the 'table' value consider also
+passing the 'raster_field' and 'srid' and 'extent_from_subquery'
+options and/or specifying the 'raster_table' option.</p>
+<p>Optional db connection keyword arguments:
+user &ndash; database user to connect as (default: see postgres docs)
+password &ndash; password for database user (default: see postgres docs)
+host &ndash; postgres hostname (default: see postgres docs)
+port &ndash; postgres port (default: see postgres docs)
+initial_size &ndash; integer size of connection pool (default: 1)
+max_size &ndash; integer max of connection pool (default: 10)
+persist_connection &ndash; keep connection open (default: True)</p>
+<p>Optional table-level keyword arguments:
+extent &ndash; manually specified data extent (comma delimited string, default: None)
+estimate_extent &ndash; boolean, direct PostGIS to use the faster, less accurate <code>estimate_extent</code> over <code>extent</code> (default: False)
+extent_from_subquery &ndash; boolean, direct Mapnik to query Postgis for the extent of the raw 'table' value (default: uses 'geometry_table')
+raster_table &ndash; specify geometry table to use to look up metadata (default: automatically parsed from 'table' value)
+raster_field &ndash; specify geometry field to use (default: first entry in raster_columns)
+srid &ndash; specify srid to use (default: auto-detected from geometry_field)
+row_limit &ndash; integer limit of rows to return (default: 0)
+cursor_size &ndash; integer size of binary cursor to use (default: 0, no binary cursor is used)
+use_overviews &ndash; boolean, use overviews when available (default: false)
+prescale_rasters &ndash; boolean, scale rasters on the db side (default: false)
+clip_rasters &ndash; boolean, clip rasters on the db side (default: false)
+band &ndash; integer, if non-zero interprets the given band (1-based offset) as a data raster (default: 0)</p>
+<pre><code class="language-python-repl">&gt;&gt;&gt; from mapnik import PgRaster, Layer
+&gt;&gt;&gt; params = dict(dbname='mapnik',table='osm',user='postgres',password='gis')
+&gt;&gt;&gt; params['estimate_extent'] = False
+&gt;&gt;&gt; params['extent'] = '-20037508,-19929239,20037508,19929239'
+&gt;&gt;&gt; pgraster = PgRaster(**params)
+&gt;&gt;&gt; lyr = Layer('PgRaster Layer')
+&gt;&gt;&gt; lyr.datasource = pgraster
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def PgRaster(**keywords):
+    &#34;&#34;&#34;Create a PgRaster Datasource.
+
+    Required keyword arguments:
+      dbname -- database name to connect to
+      table -- table name or subselect query
+
+      *Note: if using subselects for the &#39;table&#39; value consider also
+       passing the &#39;raster_field&#39; and &#39;srid&#39; and &#39;extent_from_subquery&#39;
+       options and/or specifying the &#39;raster_table&#39; option.
+
+    Optional db connection keyword arguments:
+      user -- database user to connect as (default: see postgres docs)
+      password -- password for database user (default: see postgres docs)
+      host -- postgres hostname (default: see postgres docs)
+      port -- postgres port (default: see postgres docs)
+      initial_size -- integer size of connection pool (default: 1)
+      max_size -- integer max of connection pool (default: 10)
+      persist_connection -- keep connection open (default: True)
+
+    Optional table-level keyword arguments:
+      extent -- manually specified data extent (comma delimited string, default: None)
+      estimate_extent -- boolean, direct PostGIS to use the faster, less accurate `estimate_extent` over `extent` (default: False)
+      extent_from_subquery -- boolean, direct Mapnik to query Postgis for the extent of the raw &#39;table&#39; value (default: uses &#39;geometry_table&#39;)
+      raster_table -- specify geometry table to use to look up metadata (default: automatically parsed from &#39;table&#39; value)
+      raster_field -- specify geometry field to use (default: first entry in raster_columns)
+      srid -- specify srid to use (default: auto-detected from geometry_field)
+      row_limit -- integer limit of rows to return (default: 0)
+      cursor_size -- integer size of binary cursor to use (default: 0, no binary cursor is used)
+      use_overviews -- boolean, use overviews when available (default: false)
+      prescale_rasters -- boolean, scale rasters on the db side (default: false)
+      clip_rasters -- boolean, clip rasters on the db side (default: false)
+      band -- integer, if non-zero interprets the given band (1-based offset) as a data raster (default: 0)
+
+    &gt;&gt;&gt; from mapnik import PgRaster, Layer
+    &gt;&gt;&gt; params = dict(dbname=&#39;mapnik&#39;,table=&#39;osm&#39;,user=&#39;postgres&#39;,password=&#39;gis&#39;)
+    &gt;&gt;&gt; params[&#39;estimate_extent&#39;] = False
+    &gt;&gt;&gt; params[&#39;extent&#39;] = &#39;-20037508,-19929239,20037508,19929239&#39;
+    &gt;&gt;&gt; pgraster = PgRaster(**params)
+    &gt;&gt;&gt; lyr = Layer(&#39;PgRaster Layer&#39;)
+    &gt;&gt;&gt; lyr.datasource = pgraster
+
+    &#34;&#34;&#34;
+    keywords[&#34;type&#34;] = &#34;pgraster&#34;
+    return CreateDatasource(keywords)</code></pre>
+</details>
+</dd>
+<dt id="mapnik.PostGIS"><code class="name flex">
+<span>def <span class="ident">PostGIS</span></span>(<span>**keywords)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Create a PostGIS Datasource.</p>
+<p>Required keyword arguments:
+dbname &ndash; database name to connect to
+table &ndash; table name or subselect query</p>
+<p>*Note: if using subselects for the 'table' value consider also
+passing the 'geometry_field' and 'srid' and 'extent_from_subquery'
+options and/or specifying the 'geometry_table' option.</p>
+<p>Optional db connection keyword arguments:
+user &ndash; database user to connect as (default: see postgres docs)
+password &ndash; password for database user (default: see postgres docs)
+host &ndash; postgres hostname (default: see postgres docs)
+port &ndash; postgres port (default: see postgres docs)
+initial_size &ndash; integer size of connection pool (default: 1)
+max_size &ndash; integer max of connection pool (default: 10)
+persist_connection &ndash; keep connection open (default: True)</p>
+<p>Optional table-level keyword arguments:
+extent &ndash; manually specified data extent (comma delimited string, default: None)
+estimate_extent &ndash; boolean, direct PostGIS to use the faster, less accurate <code>estimate_extent</code> over <code>extent</code> (default: False)
+extent_from_subquery &ndash; boolean, direct Mapnik to query Postgis for the extent of the raw 'table' value (default: uses 'geometry_table')
+geometry_table &ndash; specify geometry table to use to look up metadata (default: automatically parsed from 'table' value)
+geometry_field &ndash; specify geometry field to use (default: first entry in geometry_columns)
+srid &ndash; specify srid to use (default: auto-detected from geometry_field)
+row_limit &ndash; integer limit of rows to return (default: 0)
+cursor_size &ndash; integer size of binary cursor to use (default: 0, no binary cursor is used)</p>
+<pre><code class="language-python-repl">&gt;&gt;&gt; from mapnik import PostGIS, Layer
+&gt;&gt;&gt; params = dict(dbname=env['MAPNIK_NAME'],table='osm',user='postgres',password='gis')
+&gt;&gt;&gt; params['estimate_extent'] = False
+&gt;&gt;&gt; params['extent'] = '-20037508,-19929239,20037508,19929239'
+&gt;&gt;&gt; postgis = PostGIS(**params)
+&gt;&gt;&gt; lyr = Layer('PostGIS Layer')
+&gt;&gt;&gt; lyr.datasource = postgis
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def PostGIS(**keywords):
+    &#34;&#34;&#34;Create a PostGIS Datasource.
+
+    Required keyword arguments:
+      dbname -- database name to connect to
+      table -- table name or subselect query
+
+      *Note: if using subselects for the &#39;table&#39; value consider also
+       passing the &#39;geometry_field&#39; and &#39;srid&#39; and &#39;extent_from_subquery&#39;
+       options and/or specifying the &#39;geometry_table&#39; option.
+
+    Optional db connection keyword arguments:
+      user -- database user to connect as (default: see postgres docs)
+      password -- password for database user (default: see postgres docs)
+      host -- postgres hostname (default: see postgres docs)
+      port -- postgres port (default: see postgres docs)
+      initial_size -- integer size of connection pool (default: 1)
+      max_size -- integer max of connection pool (default: 10)
+      persist_connection -- keep connection open (default: True)
+
+    Optional table-level keyword arguments:
+      extent -- manually specified data extent (comma delimited string, default: None)
+      estimate_extent -- boolean, direct PostGIS to use the faster, less accurate `estimate_extent` over `extent` (default: False)
+      extent_from_subquery -- boolean, direct Mapnik to query Postgis for the extent of the raw &#39;table&#39; value (default: uses &#39;geometry_table&#39;)
+      geometry_table -- specify geometry table to use to look up metadata (default: automatically parsed from &#39;table&#39; value)
+      geometry_field -- specify geometry field to use (default: first entry in geometry_columns)
+      srid -- specify srid to use (default: auto-detected from geometry_field)
+      row_limit -- integer limit of rows to return (default: 0)
+      cursor_size -- integer size of binary cursor to use (default: 0, no binary cursor is used)
+
+    &gt;&gt;&gt; from mapnik import PostGIS, Layer
+    &gt;&gt;&gt; params = dict(dbname=env[&#39;MAPNIK_NAME&#39;],table=&#39;osm&#39;,user=&#39;postgres&#39;,password=&#39;gis&#39;)
+    &gt;&gt;&gt; params[&#39;estimate_extent&#39;] = False
+    &gt;&gt;&gt; params[&#39;extent&#39;] = &#39;-20037508,-19929239,20037508,19929239&#39;
+    &gt;&gt;&gt; postgis = PostGIS(**params)
+    &gt;&gt;&gt; lyr = Layer(&#39;PostGIS Layer&#39;)
+    &gt;&gt;&gt; lyr.datasource = postgis
+
+    &#34;&#34;&#34;
+    keywords[&#34;type&#34;] = &#34;postgis&#34;
+    return CreateDatasource(keywords)</code></pre>
+</details>
+</dd>
+<dt id="mapnik.Python"><code class="name flex">
+<span>def <span class="ident">Python</span></span>(<span>**keywords)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Create a Python Datasource.</p>
+<pre><code class="language-python-repl">&gt;&gt;&gt; from mapnik import Python, PythonDatasource
+&gt;&gt;&gt; datasource = Python('PythonDataSource')
+&gt;&gt;&gt; lyr = Layer('Python datasource')
+&gt;&gt;&gt; lyr.datasource = datasource
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def Python(**keywords):
+    &#34;&#34;&#34;Create a Python Datasource.
+
+    &gt;&gt;&gt; from mapnik import Python, PythonDatasource
+    &gt;&gt;&gt; datasource = Python(&#39;PythonDataSource&#39;)
+    &gt;&gt;&gt; lyr = Layer(&#39;Python datasource&#39;)
+    &gt;&gt;&gt; lyr.datasource = datasource
+    &#34;&#34;&#34;
+    keywords[&#34;type&#34;] = &#34;python&#34;
+    return CreateDatasource(keywords)</code></pre>
+</details>
+</dd>
+<dt id="mapnik.Raster"><code class="name flex">
+<span>def <span class="ident">Raster</span></span>(<span>**keywords)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Create a Raster (Tiff) Datasource.</p>
+<p>Required keyword arguments:
+file &ndash; path to stripped or tiled tiff
+lox &ndash; lowest (min) x/longitude of tiff extent
+loy &ndash; lowest (min) y/latitude of tiff extent
+hix &ndash; highest (max) x/longitude of tiff extent
+hiy &ndash; highest (max) y/latitude of tiff extent</p>
+<p>Hint: lox,loy,hix,hiy make a Mapnik Box2d</p>
+<p>Optional keyword arguments:
+base &ndash; path prefix (default None)
+multi &ndash; whether the image is in tiles on disk (default False)</p>
+<p>Multi-tiled keyword arguments:
+x_width &ndash; virtual image number of tiles in X direction (required)
+y_width &ndash; virtual image number of tiles in Y direction (required)
+tile_size &ndash; if an image is in tiles, how large are the tiles (default 256)
+tile_stride &ndash; if an image is in tiles, what's the increment between rows/cols (default 1)</p>
+<pre><code class="language-python-repl">&gt;&gt;&gt; from mapnik import Raster, Layer
+&gt;&gt;&gt; raster = Raster(base='/home/mapnik/data',file='elevation.tif',lox=-122.8,loy=48.5,hix=-122.7,hiy=48.6)
+&gt;&gt;&gt; lyr = Layer('Tiff Layer')
+&gt;&gt;&gt; lyr.datasource = raster
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def Raster(**keywords):
+    &#34;&#34;&#34;Create a Raster (Tiff) Datasource.
+
+    Required keyword arguments:
+      file -- path to stripped or tiled tiff
+      lox -- lowest (min) x/longitude of tiff extent
+      loy -- lowest (min) y/latitude of tiff extent
+      hix -- highest (max) x/longitude of tiff extent
+      hiy -- highest (max) y/latitude of tiff extent
+
+    Hint: lox,loy,hix,hiy make a Mapnik Box2d
+
+    Optional keyword arguments:
+      base -- path prefix (default None)
+      multi -- whether the image is in tiles on disk (default False)
+
+    Multi-tiled keyword arguments:
+      x_width -- virtual image number of tiles in X direction (required)
+      y_width -- virtual image number of tiles in Y direction (required)
+      tile_size -- if an image is in tiles, how large are the tiles (default 256)
+      tile_stride -- if an image is in tiles, what&#39;s the increment between rows/cols (default 1)
+
+    &gt;&gt;&gt; from mapnik import Raster, Layer
+    &gt;&gt;&gt; raster = Raster(base=&#39;/home/mapnik/data&#39;,file=&#39;elevation.tif&#39;,lox=-122.8,loy=48.5,hix=-122.7,hiy=48.6)
+    &gt;&gt;&gt; lyr = Layer(&#39;Tiff Layer&#39;)
+    &gt;&gt;&gt; lyr.datasource = raster
+
+    &#34;&#34;&#34;
+    keywords[&#34;type&#34;] = &#34;raster&#34;
+    return CreateDatasource(keywords)</code></pre>
+</details>
+</dd>
+<dt id="mapnik.Rasterlite"><code class="name flex">
+<span>def <span class="ident">Rasterlite</span></span>(<span>**keywords)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Create a Rasterlite Datasource.</p>
+<p>Required keyword arguments:
+file &ndash; path to Rasterlite database file
+table &ndash; table name or subselect query</p>
+<p>Optional keyword arguments:
+base &ndash; path prefix (default None)
+extent &ndash; manually specified data extent (comma delimited string, default None)</p>
+<pre><code class="language-python-repl">&gt;&gt;&gt; from mapnik import Rasterlite, Layer
+&gt;&gt;&gt; rasterlite = Rasterlite(base='/home/mapnik/data',file='osm.db',table='osm',extent='-20037508,-19929239,20037508,19929239')
+&gt;&gt;&gt; lyr = Layer('Rasterlite Layer')
+&gt;&gt;&gt; lyr.datasource = rasterlite
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def Rasterlite(**keywords):
+    &#34;&#34;&#34;Create a Rasterlite Datasource.
+
+    Required keyword arguments:
+      file -- path to Rasterlite database file
+      table -- table name or subselect query
+
+    Optional keyword arguments:
+      base -- path prefix (default None)
+      extent -- manually specified data extent (comma delimited string, default None)
+
+    &gt;&gt;&gt; from mapnik import Rasterlite, Layer
+    &gt;&gt;&gt; rasterlite = Rasterlite(base=&#39;/home/mapnik/data&#39;,file=&#39;osm.db&#39;,table=&#39;osm&#39;,extent=&#39;-20037508,-19929239,20037508,19929239&#39;)
+    &gt;&gt;&gt; lyr = Layer(&#39;Rasterlite Layer&#39;)
+    &gt;&gt;&gt; lyr.datasource = rasterlite
+
+    &#34;&#34;&#34;
+    keywords[&#34;type&#34;] = &#34;rasterlite&#34;
+    return CreateDatasource(keywords)</code></pre>
+</details>
+</dd>
+<dt id="mapnik.SQLite"><code class="name flex">
+<span>def <span class="ident">SQLite</span></span>(<span>**keywords)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Create a SQLite Datasource.</p>
+<p>Required keyword arguments:
+file &ndash; path to SQLite database file
+table &ndash; table name or subselect query</p>
+<p>Optional keyword arguments:
+base &ndash; path prefix (default None)
+encoding &ndash; file encoding (default 'utf-8')
+extent &ndash; manually specified data extent (comma delimited string, default None)
+metadata &ndash; name of auxiliary table containing record for table with xmin, ymin, xmax, ymax, and f_table_name
+geometry_field &ndash; name of geometry field (default 'the_geom')
+key_field &ndash; name of primary key field (default 'OGC_FID')
+row_offset &ndash; specify a custom integer row offset (default 0)
+row_limit &ndash; specify a custom integer row limit (default 0)
+wkb_format &ndash; specify a wkb type of 'spatialite' (default None)
+use_spatial_index &ndash; boolean, instruct sqlite plugin to use Rtree spatial index (default True)</p>
+<pre><code class="language-python-repl">&gt;&gt;&gt; from mapnik import SQLite, Layer
+&gt;&gt;&gt; sqlite = SQLite(base='/home/mapnik/data',file='osm.db',table='osm',extent='-20037508,-19929239,20037508,19929239')
+&gt;&gt;&gt; lyr = Layer('SQLite Layer')
+&gt;&gt;&gt; lyr.datasource = sqlite
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def SQLite(**keywords):
+    &#34;&#34;&#34;Create a SQLite Datasource.
+
+    Required keyword arguments:
+      file -- path to SQLite database file
+      table -- table name or subselect query
+
+    Optional keyword arguments:
+      base -- path prefix (default None)
+      encoding -- file encoding (default &#39;utf-8&#39;)
+      extent -- manually specified data extent (comma delimited string, default None)
+      metadata -- name of auxiliary table containing record for table with xmin, ymin, xmax, ymax, and f_table_name
+      geometry_field -- name of geometry field (default &#39;the_geom&#39;)
+      key_field -- name of primary key field (default &#39;OGC_FID&#39;)
+      row_offset -- specify a custom integer row offset (default 0)
+      row_limit -- specify a custom integer row limit (default 0)
+      wkb_format -- specify a wkb type of &#39;spatialite&#39; (default None)
+      use_spatial_index -- boolean, instruct sqlite plugin to use Rtree spatial index (default True)
+
+    &gt;&gt;&gt; from mapnik import SQLite, Layer
+    &gt;&gt;&gt; sqlite = SQLite(base=&#39;/home/mapnik/data&#39;,file=&#39;osm.db&#39;,table=&#39;osm&#39;,extent=&#39;-20037508,-19929239,20037508,19929239&#39;)
+    &gt;&gt;&gt; lyr = Layer(&#39;SQLite Layer&#39;)
+    &gt;&gt;&gt; lyr.datasource = sqlite
+
+    &#34;&#34;&#34;
+    keywords[&#34;type&#34;] = &#34;sqlite&#34;
+    return CreateDatasource(keywords)</code></pre>
+</details>
+</dd>
+<dt id="mapnik.Shapefile"><code class="name flex">
+<span>def <span class="ident">Shapefile</span></span>(<span>**keywords)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Create a Shapefile Datasource.</p>
+<p>Required keyword arguments:
+file &ndash; path to shapefile without extension</p>
+<p>Optional keyword arguments:
+base &ndash; path prefix (default None)
+encoding &ndash; file encoding (default 'utf-8')</p>
+<pre><code class="language-python-repl">&gt;&gt;&gt; from mapnik import Shapefile, Layer
+&gt;&gt;&gt; shp = Shapefile(base='/home/mapnik/data',file='world_borders')
+&gt;&gt;&gt; lyr = Layer('Shapefile Layer')
+&gt;&gt;&gt; lyr.datasource = shp
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def Shapefile(**keywords):
+    &#34;&#34;&#34;Create a Shapefile Datasource.
+
+    Required keyword arguments:
+      file -- path to shapefile without extension
+
+    Optional keyword arguments:
+      base -- path prefix (default None)
+      encoding -- file encoding (default &#39;utf-8&#39;)
+
+    &gt;&gt;&gt; from mapnik import Shapefile, Layer
+    &gt;&gt;&gt; shp = Shapefile(base=&#39;/home/mapnik/data&#39;,file=&#39;world_borders&#39;)
+    &gt;&gt;&gt; lyr = Layer(&#39;Shapefile Layer&#39;)
+    &gt;&gt;&gt; lyr.datasource = shp
+
+    &#34;&#34;&#34;
+    keywords[&#34;type&#34;] = &#34;shape&#34;
+    return CreateDatasource(keywords)</code></pre>
+</details>
+</dd>
+<dt id="mapnik.bootstrap_env"><code class="name flex">
+<span>def <span class="ident">bootstrap_env</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>If an optional settings file exists, inherit its
+environment settings before loading the mapnik library.</p>
+<p>This feature is intended for customized packages of mapnik.</p>
+<p>The settings file should be a python file with an 'env' variable
+that declares a dictionary of key:value pairs to push into the
+global process environment, if not already set, like:</p>
+<pre><code>env = {'ICU_DATA':'/usr/local/share/icu/'}
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def bootstrap_env():
+    &#34;&#34;&#34;
+    If an optional settings file exists, inherit its
+    environment settings before loading the mapnik library.
+
+    This feature is intended for customized packages of mapnik.
+
+    The settings file should be a python file with an &#39;env&#39; variable
+    that declares a dictionary of key:value pairs to push into the
+    global process environment, if not already set, like:
+
+        env = {&#39;ICU_DATA&#39;:&#39;/usr/local/share/icu/&#39;}
+    &#34;&#34;&#34;
+    if os.path.exists(os.path.join(os.path.dirname(__file__), &#34;mapnik_settings.py&#34;)):
+        from .mapnik_settings import env
+
+        process_keys = list(os.environ.keys())
+        for key, value in list(env.items()):
+            if key not in process_keys:
+                os.environ[key] = value</code></pre>
+</details>
+</dd>
+<dt id="mapnik.mapnik_version_from_string"><code class="name flex">
+<span>def <span class="ident">mapnik_version_from_string</span></span>(<span>version_string)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Return the Mapnik version from a string.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def mapnik_version_from_string(version_string):
+    &#34;&#34;&#34;Return the Mapnik version from a string.&#34;&#34;&#34;
+    n = version_string.split(&#34;.&#34;)
+    return (int(n[0]) * 100000) + (int(n[1]) * 100) + (int(n[2]))</code></pre>
+</details>
+</dd>
+<dt id="mapnik.register_fonts"><code class="name flex">
+<span>def <span class="ident">register_fonts</span></span>(<span>path=None, valid_extensions=['.ttf', '.otf', '.ttc', '.pfa', '.pfb', '.ttc', '.dfont', '.woff'])</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Recursively register fonts using path argument as base directory</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def register_fonts(
+    path=None, valid_extensions=[&#34;.ttf&#34;, &#34;.otf&#34;, &#34;.ttc&#34;, &#34;.pfa&#34;, &#34;.pfb&#34;, &#34;.ttc&#34;, &#34;.dfont&#34;, &#34;.woff&#34;]
+):
+    &#34;&#34;&#34;Recursively register fonts using path argument as base directory&#34;&#34;&#34;
+    if not path:
+        if &#34;MAPNIK_FONT_DIRECTORY&#34; in os.environ:
+            path = os.environ.get(&#34;MAPNIK_FONT_DIRECTORY&#34;)
+        else:
+            from .paths import fontscollectionpath
+
+            path = fontscollectionpath
+    for dirpath, _, filenames in os.walk(path):
+        for filename in filenames:
+            if os.path.splitext(filename.lower())[1] in valid_extensions:
+                FontEngine.register_font(os.path.join(dirpath, filename))</code></pre>
+</details>
+</dd>
+<dt id="mapnik.register_plugins"><code class="name flex">
+<span>def <span class="ident">register_plugins</span></span>(<span>path=None)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Register plugins located by specified path</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def register_plugins(path=None):
+    &#34;&#34;&#34;Register plugins located by specified path&#34;&#34;&#34;
+    if not path:
+        if &#34;MAPNIK_INPUT_PLUGINS_DIRECTORY&#34; in os.environ:
+            path = os.environ.get(&#34;MAPNIK_INPUT_PLUGINS_DIRECTORY&#34;)
+        else:
+            from .paths import inputpluginspath
+
+            path = inputpluginspath
+    DatasourceCache.register_datasources(path)</code></pre>
+</details>
+</dd>
+</dl>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="mapnik.Envelope"><code class="flex name class">
+<span>class <span class="ident">Envelope</span></span>
+<span>(</span><span>*args, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Represents a spatial envelope (i.e. bounding box).</p>
+<p>Following operators are defined for Box2d:</p>
+<p>Addition:
+e1 + e2 is equivalent to e1.expand_to_include(e2) but yields
+a new envelope instead of modifying e1</p>
+<p>Subtraction:
+Currently e1 - e2 returns e1.</p>
+<p>Multiplication and division with floats:
+Multiplication and division change the width and height of the envelope
+by the given factor without modifying its center..</p>
+<p>That is, e1 * x is equivalent to:
+e1.width(x * e1.width())
+e1.height(x * e1.height()),
+except that a new envelope is created instead of modifying e1.</p>
+<p>e1 / x is equivalent to e1 * (1.0/x).</p>
+<p>Equality: two envelopes are equal if their corner points are equal.</p>
+<p><strong>init</strong>( (object)arg1, (float)minx, (float)miny, (float)maxx, (float)maxy) -&gt; None :
+Constructs a new envelope from the coordinates
+of its lower left and upper right corner points.</p>
+<pre><code>C++ signature :
+    void __init__(_object*,double,double,double,double)
+</code></pre>
+<p><strong>init</strong>( (object)arg1) -&gt; None :
+Equivalent to Box2d(0, 0, -1, -1).</p>
+<pre><code>C++ signature :
+    void __init__(_object*)
+</code></pre>
+<p><strong>init</strong>( (object)arg1, (Coord)ll, (Coord)ur) -&gt; None :
+Equivalent to Box2d(ll.x, ll.y, ur.x, ur.y).</p>
+<pre><code>C++ signature :
+    void __init__(_object*,mapnik::coord&lt;double, 2&gt;,mapnik::coord&lt;double, 2&gt;)
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class Envelope(Box2d):
+    def __init__(self, *args, **kwargs):
+        warnings.warn(
+            &#34;&#39;Envelope&#39; is deprecated and will be removed in Mapnik 3.x, use &#39;Box2d&#39; instead&#34;,
+            DeprecationWarning,
+            2,
+        )
+        Box2d.__init__(self, *args, **kwargs)</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="mapnik._Box2d" href="#mapnik._Box2d">_Box2d</a></li>
+<li>Boost.Python.instance</li>
+</ul>
+<h3>Inherited members</h3>
+<ul class="hlist">
+<li><code><b><a title="mapnik._Box2d" href="#mapnik._Box2d">_Box2d</a></b></code>:
+<ul class="hlist">
+<li><code><a title="mapnik._Box2d.center" href="#mapnik._Box2d.center">center</a></code></li>
+<li><code><a title="mapnik._Box2d.clip" href="#mapnik._Box2d.clip">clip</a></code></li>
+<li><code><a title="mapnik._Box2d.contains" href="#mapnik._Box2d.contains">contains</a></code></li>
+<li><code><a title="mapnik._Box2d.expand_to_include" href="#mapnik._Box2d.expand_to_include">expand_to_include</a></code></li>
+<li><code><a title="mapnik._Box2d.forward" href="#mapnik._Box2d.forward">forward</a></code></li>
+<li><code><a title="mapnik._Box2d.from_string" href="#mapnik._Box2d.from_string">from_string</a></code></li>
+<li><code><a title="mapnik._Box2d.height" href="#mapnik._Box2d.height">height</a></code></li>
+<li><code><a title="mapnik._Box2d.intersect" href="#mapnik._Box2d.intersect">intersect</a></code></li>
+<li><code><a title="mapnik._Box2d.intersects" href="#mapnik._Box2d.intersects">intersects</a></code></li>
+<li><code><a title="mapnik._Box2d.inverse" href="#mapnik._Box2d.inverse">inverse</a></code></li>
+<li><code><a title="mapnik._Box2d.maxx" href="#mapnik._Box2d.maxx">maxx</a></code></li>
+<li><code><a title="mapnik._Box2d.maxy" href="#mapnik._Box2d.maxy">maxy</a></code></li>
+<li><code><a title="mapnik._Box2d.minx" href="#mapnik._Box2d.minx">minx</a></code></li>
+<li><code><a title="mapnik._Box2d.miny" href="#mapnik._Box2d.miny">miny</a></code></li>
+<li><code><a title="mapnik._Box2d.pad" href="#mapnik._Box2d.pad">pad</a></code></li>
+<li><code><a title="mapnik._Box2d.valid" href="#mapnik._Box2d.valid">valid</a></code></li>
+<li><code><a title="mapnik._Box2d.width" href="#mapnik._Box2d.width">width</a></code></li>
+</ul>
+</li>
+</ul>
+</dd>
+<dt id="mapnik.PythonDatasource"><code class="flex name class">
+<span>class <span class="ident">PythonDatasource</span></span>
+<span>(</span><span>envelope=None, geometry_type=None, data_type=None)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>A base class for a Python data source.</p>
+<p>Optional arguments:
+envelope &ndash; a mapnik.Box2d (minx, miny, maxx, maxy) envelope of the data source, default (-180,-90,180,90)
+geometry_type &ndash; one of the DataGeometryType enumeration values, default Point
+data_type &ndash; one of the DataType enumerations, default Vector</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class PythonDatasource(object):
+    &#34;&#34;&#34;A base class for a Python data source.
+
+    Optional arguments:
+      envelope -- a mapnik.Box2d (minx, miny, maxx, maxy) envelope of the data source, default (-180,-90,180,90)
+      geometry_type -- one of the DataGeometryType enumeration values, default Point
+      data_type -- one of the DataType enumerations, default Vector
+    &#34;&#34;&#34;
+
+    def __init__(self, envelope=None, geometry_type=None, data_type=None):
+        self.envelope = envelope or Box2d(-180, -90, 180, 90)
+        self.geometry_type = geometry_type or DataGeometryType.Point
+        self.data_type = data_type or DataType.Vector
+
+    def features(self, query):
+        &#34;&#34;&#34;Return an iterable which yields instances of Feature for features within the passed query.
+
+        Required arguments:
+          query -- a Query instance specifying the region for which features should be returned
+        &#34;&#34;&#34;
+        return None
+
+    def features_at_point(self, point):
+        &#34;&#34;&#34;Rarely used. Return an iterable which yields instances of Feature for the specified point.&#34;&#34;&#34;
+        return None
+
+    @classmethod
+    def wkb_features(cls, keys, features):
+        &#34;&#34;&#34;A convenience function to wrap an iterator yielding pairs of WKB format geometry and dictionaries of
+        key-value pairs into mapnik features. Return this from PythonDatasource.features() passing it a sequence of keys
+        to appear in the output and an iterator yielding features.
+
+        For example. One might have a features() method in a derived class like the following:
+
+        def features(self, query):
+            # ... create WKB features feat1 and feat2
+
+            return mapnik.PythonDatasource.wkb_features(
+                keys = ( &#39;name&#39;, &#39;author&#39; ),
+                features = [
+                    (feat1, { &#39;name&#39;: &#39;feat1&#39;, &#39;author&#39;: &#39;alice&#39; }),
+                    (feat2, { &#39;name&#39;: &#39;feat2&#39;, &#39;author&#39;: &#39;bob&#39; }),
+                ]
+            )
+
+        &#34;&#34;&#34;
+        ctx = Context()
+        [ctx.push(x) for x in keys]
+
+        def make_it(feat, idx):
+            f = Feature(ctx, idx)
+            geom, attrs = feat
+            f.add_geometries_from_wkb(geom)
+            for k, v in attrs.items():
+                f[k] = v
+            return f
+
+        return map(make_it, features, itertools.count(1))
+
+    @classmethod
+    def wkt_features(cls, keys, features):
+        &#34;&#34;&#34;A convenience function to wrap an iterator yielding pairs of WKT format geometry and dictionaries of
+        key-value pairs into mapnik features. Return this from PythonDatasource.features() passing it a sequence of keys
+        to appear in the output and an iterator yielding features.
+
+        For example. One might have a features() method in a derived class like the following:
+
+        def features(self, query):
+            # ... create WKT features feat1 and feat2
+
+            return mapnik.PythonDatasource.wkt_features(
+                keys = ( &#39;name&#39;, &#39;author&#39; ),
+                features = [
+                    (feat1, { &#39;name&#39;: &#39;feat1&#39;, &#39;author&#39;: &#39;alice&#39; }),
+                    (feat2, { &#39;name&#39;: &#39;feat2&#39;, &#39;author&#39;: &#39;bob&#39; }),
+                ]
+            )
+
+        &#34;&#34;&#34;
+        ctx = Context()
+        [ctx.push(x) for x in keys]
+
+        def make_it(feat, idx):
+            f = Feature(ctx, idx)
+            geom, attrs = feat
+            f.add_geometries_from_wkt(geom)
+            for k, v in attrs.items():
+                f[k] = v
+            return f
+
+        return map(make_it, features, itertools.count(1))</code></pre>
+</details>
+<h3>Static methods</h3>
+<dl>
+<dt id="mapnik.PythonDatasource.wkb_features"><code class="name flex">
+<span>def <span class="ident">wkb_features</span></span>(<span>keys, features)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>A convenience function to wrap an iterator yielding pairs of WKB format geometry and dictionaries of
+key-value pairs into mapnik features. Return this from PythonDatasource.features() passing it a sequence of keys
+to appear in the output and an iterator yielding features.</p>
+<p>For example. One might have a features() method in a derived class like the following:</p>
+<p>def features(self, query):
+# &hellip; create WKB features feat1 and feat2</p>
+<pre><code>return mapnik.PythonDatasource.wkb_features(
+    keys = ( 'name', 'author' ),
+    features = [
+        (feat1, { 'name': 'feat1', 'author': 'alice' }),
+        (feat2, { 'name': 'feat2', 'author': 'bob' }),
+    ]
+)
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@classmethod
+def wkb_features(cls, keys, features):
+    &#34;&#34;&#34;A convenience function to wrap an iterator yielding pairs of WKB format geometry and dictionaries of
+    key-value pairs into mapnik features. Return this from PythonDatasource.features() passing it a sequence of keys
+    to appear in the output and an iterator yielding features.
+
+    For example. One might have a features() method in a derived class like the following:
+
+    def features(self, query):
+        # ... create WKB features feat1 and feat2
+
+        return mapnik.PythonDatasource.wkb_features(
+            keys = ( &#39;name&#39;, &#39;author&#39; ),
+            features = [
+                (feat1, { &#39;name&#39;: &#39;feat1&#39;, &#39;author&#39;: &#39;alice&#39; }),
+                (feat2, { &#39;name&#39;: &#39;feat2&#39;, &#39;author&#39;: &#39;bob&#39; }),
+            ]
+        )
+
+    &#34;&#34;&#34;
+    ctx = Context()
+    [ctx.push(x) for x in keys]
+
+    def make_it(feat, idx):
+        f = Feature(ctx, idx)
+        geom, attrs = feat
+        f.add_geometries_from_wkb(geom)
+        for k, v in attrs.items():
+            f[k] = v
+        return f
+
+    return map(make_it, features, itertools.count(1))</code></pre>
+</details>
+</dd>
+<dt id="mapnik.PythonDatasource.wkt_features"><code class="name flex">
+<span>def <span class="ident">wkt_features</span></span>(<span>keys, features)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>A convenience function to wrap an iterator yielding pairs of WKT format geometry and dictionaries of
+key-value pairs into mapnik features. Return this from PythonDatasource.features() passing it a sequence of keys
+to appear in the output and an iterator yielding features.</p>
+<p>For example. One might have a features() method in a derived class like the following:</p>
+<p>def features(self, query):
+# &hellip; create WKT features feat1 and feat2</p>
+<pre><code>return mapnik.PythonDatasource.wkt_features(
+    keys = ( 'name', 'author' ),
+    features = [
+        (feat1, { 'name': 'feat1', 'author': 'alice' }),
+        (feat2, { 'name': 'feat2', 'author': 'bob' }),
+    ]
+)
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@classmethod
+def wkt_features(cls, keys, features):
+    &#34;&#34;&#34;A convenience function to wrap an iterator yielding pairs of WKT format geometry and dictionaries of
+    key-value pairs into mapnik features. Return this from PythonDatasource.features() passing it a sequence of keys
+    to appear in the output and an iterator yielding features.
+
+    For example. One might have a features() method in a derived class like the following:
+
+    def features(self, query):
+        # ... create WKT features feat1 and feat2
+
+        return mapnik.PythonDatasource.wkt_features(
+            keys = ( &#39;name&#39;, &#39;author&#39; ),
+            features = [
+                (feat1, { &#39;name&#39;: &#39;feat1&#39;, &#39;author&#39;: &#39;alice&#39; }),
+                (feat2, { &#39;name&#39;: &#39;feat2&#39;, &#39;author&#39;: &#39;bob&#39; }),
+            ]
+        )
+
+    &#34;&#34;&#34;
+    ctx = Context()
+    [ctx.push(x) for x in keys]
+
+    def make_it(feat, idx):
+        f = Feature(ctx, idx)
+        geom, attrs = feat
+        f.add_geometries_from_wkt(geom)
+        for k, v in attrs.items():
+            f[k] = v
+        return f
+
+    return map(make_it, features, itertools.count(1))</code></pre>
+</details>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="mapnik.PythonDatasource.features"><code class="name flex">
+<span>def <span class="ident">features</span></span>(<span>self, query)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Return an iterable which yields instances of Feature for features within the passed query.</p>
+<p>Required arguments:
+query &ndash; a Query instance specifying the region for which features should be returned</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def features(self, query):
+    &#34;&#34;&#34;Return an iterable which yields instances of Feature for features within the passed query.
+
+    Required arguments:
+      query -- a Query instance specifying the region for which features should be returned
+    &#34;&#34;&#34;
+    return None</code></pre>
+</details>
+</dd>
+<dt id="mapnik.PythonDatasource.features_at_point"><code class="name flex">
+<span>def <span class="ident">features_at_point</span></span>(<span>self, point)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Rarely used. Return an iterable which yields instances of Feature for the specified point.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def features_at_point(self, point):
+    &#34;&#34;&#34;Rarely used. Return an iterable which yields instances of Feature for the specified point.&#34;&#34;&#34;
+    return None</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="mapnik._Box2d"><code class="flex name class">
+<span>class <span class="ident">Box2d</span></span>
+<span>(</span><span>...)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Represents a spatial envelope (i.e. bounding box).</p>
+<p>Following operators are defined for Box2d:</p>
+<p>Addition:
+e1 + e2 is equivalent to e1.expand_to_include(e2) but yields
+a new envelope instead of modifying e1</p>
+<p>Subtraction:
+Currently e1 - e2 returns e1.</p>
+<p>Multiplication and division with floats:
+Multiplication and division change the width and height of the envelope
+by the given factor without modifying its center..</p>
+<p>That is, e1 * x is equivalent to:
+e1.width(x * e1.width())
+e1.height(x * e1.height()),
+except that a new envelope is created instead of modifying e1.</p>
+<p>e1 / x is equivalent to e1 * (1.0/x).</p>
+<p>Equality: two envelopes are equal if their corner points are equal.</p>
+<p><strong>init</strong>( (object)arg1, (float)minx, (float)miny, (float)maxx, (float)maxy) -&gt; None :
+Constructs a new envelope from the coordinates
+of its lower left and upper right corner points.</p>
+<pre><code>C++ signature :
+    void __init__(_object*,double,double,double,double)
+</code></pre>
+<p><strong>init</strong>( (object)arg1) -&gt; None :
+Equivalent to Box2d(0, 0, -1, -1).</p>
+<pre><code>C++ signature :
+    void __init__(_object*)
+</code></pre>
+<p><strong>init</strong>( (object)arg1, (Coord)ll, (Coord)ur) -&gt; None :
+Equivalent to Box2d(ll.x, ll.y, ur.x, ur.y).</p>
+<pre><code>C++ signature :
+    void __init__(_object*,mapnik::coord&lt;double, 2&gt;,mapnik::coord&lt;double, 2&gt;)
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class _Box2d(Box2d, _injector()):
+    &#34;&#34;&#34;
+    Represents a spatial envelope (i.e. bounding box).
+
+
+    Following operators are defined for Box2d:
+
+    Addition:
+    e1 + e2 is equivalent to e1.expand_to_include(e2) but yields
+    a new envelope instead of modifying e1
+
+    Subtraction:
+    Currently e1 - e2 returns e1.
+
+    Multiplication and division with floats:
+    Multiplication and division change the width and height of the envelope
+    by the given factor without modifying its center..
+
+    That is, e1 * x is equivalent to:
+           e1.width(x * e1.width())
+           e1.height(x * e1.height()),
+    except that a new envelope is created instead of modifying e1.
+
+    e1 / x is equivalent to e1 * (1.0/x).
+
+    Equality: two envelopes are equal if their corner points are equal.
+    &#34;&#34;&#34;
+
+    def __repr__(self):
+        return &#34;Box2d(%s,%s,%s,%s)&#34; % (self.minx, self.miny, self.maxx, self.maxy)
+
+    def forward(self, projection):
+        &#34;&#34;&#34;
+        Projects the envelope from the geographic space
+        into the cartesian space by projecting its corner
+        points.
+
+        See also:
+           Coord.forward(self, projection)
+        &#34;&#34;&#34;
+        return forward_(self, projection)
+
+    def inverse(self, projection):
+        &#34;&#34;&#34;
+        Projects the envelope from the cartesian space
+        into the geographic space by projecting its corner
+        points.
+
+        See also:
+          Coord.inverse(self, projection).
+        &#34;&#34;&#34;
+        return inverse_(self, projection)</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>Boost.Python.instance</li>
+</ul>
+<h3>Subclasses</h3>
+<ul class="hlist">
+<li><a title="mapnik.Envelope" href="#mapnik.Envelope">Envelope</a></li>
+<li><a title="mapnik._Box2d" href="#mapnik._Box2d">_Box2d</a></li>
+</ul>
+<h3>Static methods</h3>
+<dl>
+<dt id="mapnik._Box2d.from_string"><code class="name flex">
+<span>def <span class="ident">from_string</span></span>(<span>...)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>from_string( (str)arg1) -&gt; Box2d :</p>
+<pre><code>C++ signature :
+    mapnik::box2d&lt;double&gt; from_string(std::__cxx11::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt;)
+</code></pre></div>
+</dd>
+</dl>
+<h3>Instance variables</h3>
+<dl>
+<dt id="mapnik._Box2d.maxx"><code class="name">var <span class="ident">maxx</span></code></dt>
+<dd>
+<div class="desc"><p>X coordinate for the upper right corner</p></div>
+</dd>
+<dt id="mapnik._Box2d.maxy"><code class="name">var <span class="ident">maxy</span></code></dt>
+<dd>
+<div class="desc"><p>Y coordinate for the upper right corner</p></div>
+</dd>
+<dt id="mapnik._Box2d.minx"><code class="name">var <span class="ident">minx</span></code></dt>
+<dd>
+<div class="desc"><p>X coordinate for the lower left corner</p></div>
+</dd>
+<dt id="mapnik._Box2d.miny"><code class="name">var <span class="ident">miny</span></code></dt>
+<dd>
+<div class="desc"><p>Y coordinate for the lower left corner</p></div>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="mapnik._Box2d.center"><code class="name flex">
+<span>def <span class="ident">center</span></span>(<span>...)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>center( (Box2d)arg1) -&gt; Coord :
+Returns the coordinates of the center of the bounding box.</p>
+<pre><code>Example:
+&gt;&gt;&gt; e = Box2d(0, 0, 100, 100)
+&gt;&gt;&gt; e.center()
+Coord(50, 50)
+
+
+C++ signature :
+    mapnik::coord&lt;double, 2&gt; center(mapnik::box2d&lt;double&gt; {lvalue})
+</code></pre>
+<p>center( (Box2d)arg1, (float)x, (float)y) -&gt; None :
+Moves the envelope so that the given coordinates become its new center.
+The width and the height are preserved.</p>
+<pre><code> Example:
+&gt;&gt;&gt; e = Box2d(0, 0, 100, 100)
+&gt;&gt;&gt; e.center(60, 60)
+&gt;&gt;&gt; e.center()
+Coord(60.0,60.0)
+&gt;&gt;&gt; (e.width(), e.height())
+(100.0, 100.0)
+&gt;&gt;&gt; e
+Box2d(10.0, 10.0, 110.0, 110.0)
+
+
+C++ signature :
+    void center(mapnik::box2d&lt;double&gt; {lvalue},double,double)
+</code></pre>
+<p>center( (Box2d)arg1, (Coord)Coord) -&gt; None :
+Moves the envelope so that the given coordinates become its new center.
+The width and the height are preserved.</p>
+<pre><code> Example:
+&gt;&gt;&gt; e = Box2d(0, 0, 100, 100)
+&gt;&gt;&gt; e.center(Coord60, 60)
+&gt;&gt;&gt; e.center()
+Coord(60.0,60.0)
+&gt;&gt;&gt; (e.width(), e.height())
+(100.0, 100.0)
+&gt;&gt;&gt; e
+Box2d(10.0, 10.0, 110.0, 110.0)
+
+
+C++ signature :
+    void center(mapnik::box2d&lt;double&gt; {lvalue},mapnik::coord&lt;double, 2&gt;)
+</code></pre></div>
+</dd>
+<dt id="mapnik._Box2d.clip"><code class="name flex">
+<span>def <span class="ident">clip</span></span>(<span>...)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>clip( (Box2d)arg1, (Box2d)other) -&gt; None :
+Clip the envelope based on the bounds of another envelope.</p>
+<pre><code> Example:
+&gt;&gt;&gt; e = Box2d(0, 0, 100, 100)
+&gt;&gt;&gt; c = Box2d(-50, -50, 50, 50)
+&gt;&gt;&gt; e.clip(c)
+&gt;&gt;&gt; e
+Box2d(0.0,0.0,50.0,50.0
+
+
+C++ signature :
+    void clip(mapnik::box2d&lt;double&gt; {lvalue},mapnik::box2d&lt;double&gt;)
+</code></pre></div>
+</dd>
+<dt id="mapnik._Box2d.contains"><code class="name flex">
+<span>def <span class="ident">contains</span></span>(<span>...)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>contains( (Box2d)arg1, (float)x, (float)y) -&gt; bool :
+Returns True iff this envelope contains the point
+given by x and y.</p>
+<pre><code>C++ signature :
+    bool contains(mapnik::box2d&lt;double&gt; {lvalue},double,double)
+</code></pre>
+<p>contains( (Box2d)arg1, (Coord)p) -&gt; bool :
+Equivalent to contains(p.x, p.y)</p>
+<pre><code>C++ signature :
+    bool contains(mapnik::box2d&lt;double&gt; {lvalue},mapnik::coord&lt;double, 2&gt;)
+</code></pre>
+<p>contains( (Box2d)arg1, (Box2d)other) -&gt; bool :
+Equivalent to:
+contains(other.minx, other.miny) and contains(other.maxx, other.maxy)</p>
+<pre><code>C++ signature :
+    bool contains(mapnik::box2d&lt;double&gt; {lvalue},mapnik::box2d&lt;double&gt;)
+</code></pre></div>
+</dd>
+<dt id="mapnik._Box2d.expand_to_include"><code class="name flex">
+<span>def <span class="ident">expand_to_include</span></span>(<span>...)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>expand_to_include( (Box2d)arg1, (float)x, (float)y) -&gt; None :
+Expands this envelope to include the point given by x and y.</p>
+<pre><code>Example:
+
+
+C++ signature :
+    void expand_to_include(mapnik::box2d&lt;double&gt; {lvalue},double,double)
+</code></pre>
+<p>expand_to_include( (Box2d)arg1, (Coord)p) -&gt; None :
+Equivalent to expand_to_include(p.x, p.y)</p>
+<pre><code>C++ signature :
+    void expand_to_include(mapnik::box2d&lt;double&gt; {lvalue},mapnik::coord&lt;double, 2&gt;)
+</code></pre>
+<p>expand_to_include( (Box2d)arg1, (Box2d)other) -&gt; None :
+Equivalent to:
+expand_to_include(other.minx, other.miny)
+expand_to_include(other.maxx, other.maxy)</p>
+<pre><code>C++ signature :
+    void expand_to_include(mapnik::box2d&lt;double&gt; {lvalue},mapnik::box2d&lt;double&gt;)
+</code></pre></div>
+</dd>
+<dt id="mapnik._Box2d.forward"><code class="name flex">
+<span>def <span class="ident">forward</span></span>(<span>self, projection)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Projects the envelope from the geographic space
+into the cartesian space by projecting its corner
+points.</p>
+<p>See also:
+Coord.forward(self, projection)</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def forward(self, projection):
+    &#34;&#34;&#34;
+    Projects the envelope from the geographic space
+    into the cartesian space by projecting its corner
+    points.
+
+    See also:
+       Coord.forward(self, projection)
+    &#34;&#34;&#34;
+    return forward_(self, projection)</code></pre>
+</details>
+</dd>
+<dt id="mapnik._Box2d.height"><code class="name flex">
+<span>def <span class="ident">height</span></span>(<span>...)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>height( (Box2d)arg1, (float)new_height) -&gt; None :
+Sets the height to new_height of the envelope preserving its center.</p>
+<pre><code> Example:
+&gt;&gt;&gt; e = Box2d(0, 0, 100, 100)
+&gt;&gt;&gt; e.height(120)
+&gt;&gt;&gt; e.center()
+Coord(50.0,50.0)
+&gt;&gt;&gt; e
+Box2d(0.0, -10.0, 100.0, 110.0)
+
+
+C++ signature :
+    void height(mapnik::box2d&lt;double&gt; {lvalue},double)
+</code></pre>
+<p>height( (Box2d)arg1) -&gt; float :
+Returns the height of this envelope.</p>
+<pre><code>C++ signature :
+    double height(mapnik::box2d&lt;double&gt; {lvalue})
+</code></pre></div>
+</dd>
+<dt id="mapnik._Box2d.intersect"><code class="name flex">
+<span>def <span class="ident">intersect</span></span>(<span>...)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>intersect( (Box2d)arg1, (Box2d)other) -&gt; Box2d :
+Returns the overlap of this envelope and the other envelope
+as a new envelope.</p>
+<pre><code>Example:
+&gt;&gt;&gt; e1 = Box2d(0, 0, 100, 100)
+&gt;&gt;&gt; e2 = Box2d(50, 50, 150, 150)
+&gt;&gt;&gt; e1.intersect(e2)
+Box2d(50.0, 50.0, 100.0, 100.0)
+
+
+C++ signature :
+    mapnik::box2d&lt;double&gt; intersect(mapnik::box2d&lt;double&gt; {lvalue},mapnik::box2d&lt;double&gt;)
+</code></pre></div>
+</dd>
+<dt id="mapnik._Box2d.intersects"><code class="name flex">
+<span>def <span class="ident">intersects</span></span>(<span>...)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>intersects( (Box2d)arg1, (float)x, (float)y) -&gt; bool :
+Returns True iff this envelope intersects the point
+given by x and y.</p>
+<pre><code>Note: For points, intersection is equivalent
+to containment, i.e. the following holds:
+   e.contains(x, y) == e.intersects(x, y)
+
+
+C++ signature :
+    bool intersects(mapnik::box2d&lt;double&gt; {lvalue},double,double)
+</code></pre>
+<p>intersects( (Box2d)arg1, (Coord)p) -&gt; bool :
+Equivalent to contains(p.x, p.y)</p>
+<pre><code>C++ signature :
+    bool intersects(mapnik::box2d&lt;double&gt; {lvalue},mapnik::coord&lt;double, 2&gt;)
+</code></pre>
+<p>intersects( (Box2d)arg1, (Box2d)other) -&gt; bool :
+Returns True iff this envelope intersects the other envelope,
+This relationship is symmetric.
+Example:
+&gt;&gt;&gt; e1 = Box2d(0, 0, 100, 100)
+&gt;&gt;&gt; e2 = Box2d(50, 50, 150, 150)
+&gt;&gt;&gt; e1.intersects(e2)
+True
+&gt;&gt;&gt; e1.contains(e2)
+False</p>
+<pre><code>C++ signature :
+    bool intersects(mapnik::box2d&lt;double&gt; {lvalue},mapnik::box2d&lt;double&gt;)
+</code></pre></div>
+</dd>
+<dt id="mapnik._Box2d.inverse"><code class="name flex">
+<span>def <span class="ident">inverse</span></span>(<span>self, projection)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Projects the envelope from the cartesian space
+into the geographic space by projecting its corner
+points.</p>
+<p>See also:
+Coord.inverse(self, projection).</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def inverse(self, projection):
+    &#34;&#34;&#34;
+    Projects the envelope from the cartesian space
+    into the geographic space by projecting its corner
+    points.
+
+    See also:
+      Coord.inverse(self, projection).
+    &#34;&#34;&#34;
+    return inverse_(self, projection)</code></pre>
+</details>
+</dd>
+<dt id="mapnik._Box2d.pad"><code class="name flex">
+<span>def <span class="ident">pad</span></span>(<span>...)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>pad( (Box2d)arg1, (float)padding) -&gt; None :
+Pad the envelope based on a padding value.</p>
+<pre><code> Example:
+&gt;&gt;&gt; e = Box2d(0, 0, 100, 100)
+&gt;&gt;&gt; e.pad(10)
+&gt;&gt;&gt; e
+Box2d(-10.0,-10.0,110.0,110.0
+
+
+C++ signature :
+    void pad(mapnik::box2d&lt;double&gt; {lvalue},double)
+</code></pre></div>
+</dd>
+<dt id="mapnik._Box2d.valid"><code class="name flex">
+<span>def <span class="ident">valid</span></span>(<span>...)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>valid( (Box2d)arg1) -&gt; bool :</p>
+<pre><code>C++ signature :
+    bool valid(mapnik::box2d&lt;double&gt; {lvalue})
+</code></pre></div>
+</dd>
+<dt id="mapnik._Box2d.width"><code class="name flex">
+<span>def <span class="ident">width</span></span>(<span>...)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>width( (Box2d)arg1, (float)new_width) -&gt; None :
+Sets the width to new_width of the envelope preserving its center.</p>
+<pre><code> Example:
+&gt;&gt;&gt; e = Box2d(0, 0, 100, 100)
+&gt;&gt;&gt; e.width(120)
+&gt;&gt;&gt; e.center()
+Coord(50.0,50.0)
+&gt;&gt;&gt; e
+Box2d(-10.0, 0.0, 110.0, 100.0)
+
+
+C++ signature :
+    void width(mapnik::box2d&lt;double&gt; {lvalue},double)
+</code></pre>
+<p>width( (Box2d)arg1) -&gt; float :
+Returns the width of this envelope.</p>
+<pre><code>C++ signature :
+    double width(mapnik::box2d&lt;double&gt; {lvalue})
+</code></pre></div>
+</dd>
+</dl>
+</dd>
+<dt id="mapnik._Color"><code class="flex name class">
+<span>class <span class="ident">Color</span></span>
+<span>(</span><span>...)</span>
+</code></dt>
+<dd>
+<div class="desc"><p><strong>init</strong>( (object)arg1, (int)r, (int)g, (int)b, (int)a) -&gt; None :
+Creates a new color from its RGB components
+and an alpha value.
+All values between 0 and 255.</p>
+<pre><code>C++ signature :
+    void __init__(_object*,int,int,int,int)
+</code></pre>
+<p><strong>init</strong>( (object)arg1, (int)r, (int)g, (int)b, (int)a, (bool)premultiplied) -&gt; None :
+Creates a new color from its RGB components
+and an alpha value.
+All values between 0 and 255.</p>
+<pre><code>C++ signature :
+    void __init__(_object*,int,int,int,int,bool)
+</code></pre>
+<p><strong>init</strong>( (object)arg1, (int)r, (int)g, (int)b) -&gt; None :
+Creates a new color from its RGB components.
+All values between 0 and 255.</p>
+<pre><code>C++ signature :
+    void __init__(_object*,int,int,int)
+</code></pre>
+<p><strong>init</strong>( (object)arg1, (int)val) -&gt; None :
+Creates a new color from an unsigned integer.
+All values between 0 and 2^32-1</p>
+<pre><code>C++ signature :
+    void __init__(_object*,unsigned int)
+</code></pre>
+<p><strong>init</strong>( (object)arg1, (int)val, (bool)premultiplied) -&gt; None :
+Creates a new color from an unsigned integer.
+All values between 0 and 2^32-1</p>
+<pre><code>C++ signature :
+    void __init__(_object*,unsigned int,bool)
+</code></pre>
+<p><strong>init</strong>( (object)arg1, (str)color_string) -&gt; None :
+Creates a new color from its CSS string representation.
+The string may be a CSS color name (e.g. 'blue')
+or a hex color string (e.g. '#0000ff').</p>
+<pre><code>C++ signature :
+    void __init__(_object*,std::__cxx11::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt;)
+</code></pre>
+<p><strong>init</strong>( (object)arg1, (str)color_string, (bool)premultiplied) -&gt; None :
+Creates a new color from its CSS string representation.
+The string may be a CSS color name (e.g. 'blue')
+or a hex color string (e.g. '#0000ff').</p>
+<pre><code>C++ signature :
+    void __init__(_object*,std::__cxx11::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt;,bool)
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class _Color(Color, _injector()):
+    def __repr__(self):
+        return &#34;Color(R=%d,G=%d,B=%d,A=%d)&#34; % (self.r, self.g, self.b, self.a)</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>Boost.Python.instance</li>
+</ul>
+<h3>Subclasses</h3>
+<ul class="hlist">
+<li><a title="mapnik._Color" href="#mapnik._Color">_Color</a></li>
+</ul>
+<h3>Instance variables</h3>
+<dl>
+<dt id="mapnik._Color.a"><code class="name">var <span class="ident">a</span></code></dt>
+<dd>
+<div class="desc"><p>Gets or sets the alpha component.
+The value is between 0 and 255.</p></div>
+</dd>
+<dt id="mapnik._Color.b"><code class="name">var <span class="ident">b</span></code></dt>
+<dd>
+<div class="desc"><p>Gets or sets the blue component.
+The value is between 0 and 255.</p></div>
+</dd>
+<dt id="mapnik._Color.g"><code class="name">var <span class="ident">g</span></code></dt>
+<dd>
+<div class="desc"><p>Gets or sets the green component.
+The value is between 0 and 255.</p></div>
+</dd>
+<dt id="mapnik._Color.r"><code class="name">var <span class="ident">r</span></code></dt>
+<dd>
+<div class="desc"><p>Gets or sets the red component.
+The value is between 0 and 255.</p></div>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="mapnik._Color.demultiply"><code class="name flex">
+<span>def <span class="ident">demultiply</span></span>(<span>...)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>demultiply( (Color)arg1) -&gt; bool :</p>
+<pre><code>C++ signature :
+    bool demultiply(mapnik::color {lvalue})
+</code></pre></div>
+</dd>
+<dt id="mapnik._Color.get_premultiplied"><code class="name flex">
+<span>def <span class="ident">get_premultiplied</span></span>(<span>...)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>get_premultiplied( (Color)arg1) -&gt; bool :</p>
+<pre><code>C++ signature :
+    bool get_premultiplied(mapnik::color {lvalue})
+</code></pre></div>
+</dd>
+<dt id="mapnik._Color.packed"><code class="name flex">
+<span>def <span class="ident">packed</span></span>(<span>...)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>packed( (Color)arg1) -&gt; int :</p>
+<pre><code>C++ signature :
+    unsigned int packed(mapnik::color {lvalue})
+</code></pre></div>
+</dd>
+<dt id="mapnik._Color.premultiply"><code class="name flex">
+<span>def <span class="ident">premultiply</span></span>(<span>...)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>premultiply( (Color)arg1) -&gt; bool :</p>
+<pre><code>C++ signature :
+    bool premultiply(mapnik::color {lvalue})
+</code></pre></div>
+</dd>
+<dt id="mapnik._Color.set_premultiplied"><code class="name flex">
+<span>def <span class="ident">set_premultiplied</span></span>(<span>...)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>set_premultiplied( (Color)arg1, (bool)arg2) -&gt; None :</p>
+<pre><code>C++ signature :
+    void set_premultiplied(mapnik::color {lvalue},bool)
+</code></pre></div>
+</dd>
+<dt id="mapnik._Color.to_hex_string"><code class="name flex">
+<span>def <span class="ident">to_hex_string</span></span>(<span>...)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>to_hex_string( (Color)arg1) -&gt; str :
+Returns the hexadecimal representation of this color.</p>
+<pre><code>Example:
+&gt;&gt;&gt; c = Color('blue')
+&gt;&gt;&gt; c.to_hex_string()
+'#0000ff'
+
+
+C++ signature :
+    std::__cxx11::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt; to_hex_string(mapnik::color {lvalue})
+</code></pre></div>
+</dd>
+</dl>
+</dd>
+<dt id="mapnik._Coord"><code class="flex name class">
+<span>class <span class="ident">Coord</span></span>
+<span>(</span><span>...)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Represents a point with two coordinates (either lon/lat or x/y).</p>
+<p>Following operators are defined for Coord:</p>
+<p>Addition and subtraction of Coord objects:</p>
+<pre><code class="language-python-repl">&gt;&gt;&gt; Coord(10, 10) + Coord(20, 20)
+Coord(30.0, 30.0)
+&gt;&gt;&gt; Coord(10, 10) - Coord(20, 20)
+Coord(-10.0, -10.0)
+</code></pre>
+<p>Addition, subtraction, multiplication and division between
+a Coord and a float:</p>
+<pre><code class="language-python-repl">&gt;&gt;&gt; Coord(10, 10) + 1
+Coord(11.0, 11.0)
+&gt;&gt;&gt; Coord(10, 10) - 1
+Coord(-9.0, -9.0)
+&gt;&gt;&gt; Coord(10, 10) * 2
+Coord(20.0, 20.0)
+&gt;&gt;&gt; Coord(10, 10) / 2
+Coord(5.0, 5.0)
+</code></pre>
+<p>Equality of coords (as pairwise equality of components):</p>
+<pre><code class="language-python-repl">&gt;&gt;&gt; Coord(10, 10) is Coord(10, 10)
+False
+&gt;&gt;&gt; Coord(10, 10) == Coord(10, 10)
+True
+</code></pre>
+<p><strong>init</strong>( (object)arg1, (float)x, (float)y) -&gt; None :
+Constructs a new point with the given coordinates.</p>
+<pre><code>C++ signature :
+    void __init__(_object*,double,double)
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class _Coord(Coord, _injector()):
+    &#34;&#34;&#34;
+    Represents a point with two coordinates (either lon/lat or x/y).
+
+    Following operators are defined for Coord:
+
+    Addition and subtraction of Coord objects:
+
+    &gt;&gt;&gt; Coord(10, 10) + Coord(20, 20)
+    Coord(30.0, 30.0)
+    &gt;&gt;&gt; Coord(10, 10) - Coord(20, 20)
+    Coord(-10.0, -10.0)
+
+    Addition, subtraction, multiplication and division between
+    a Coord and a float:
+
+    &gt;&gt;&gt; Coord(10, 10) + 1
+    Coord(11.0, 11.0)
+    &gt;&gt;&gt; Coord(10, 10) - 1
+    Coord(-9.0, -9.0)
+    &gt;&gt;&gt; Coord(10, 10) * 2
+    Coord(20.0, 20.0)
+    &gt;&gt;&gt; Coord(10, 10) / 2
+    Coord(5.0, 5.0)
+
+    Equality of coords (as pairwise equality of components):
+    &gt;&gt;&gt; Coord(10, 10) is Coord(10, 10)
+    False
+    &gt;&gt;&gt; Coord(10, 10) == Coord(10, 10)
+    True
+    &#34;&#34;&#34;
+
+    def __repr__(self):
+        return &#34;Coord(%s,%s)&#34; % (self.x, self.y)
+
+    def forward(self, projection):
+        &#34;&#34;&#34;
+        Projects the point from the geographic coordinate
+        space  into the cartesian space. The x component is
+        considered to be longitude, the y component the
+        latitude.
+
+        Returns the easting (x) and northing (y) as a
+        coordinate pair.
+
+        Example: Project the geographic coordinates of the
+                 city center of Stuttgart into the local
+                 map projection (GK Zone 3/DHDN, EPSG 31467)
+        &gt;&gt;&gt; p = Projection(&#39;+init=epsg:31467&#39;)
+        &gt;&gt;&gt; Coord(9.1, 48.7).forward(p)
+        Coord(3507360.12813,5395719.2749)
+        &#34;&#34;&#34;
+        return forward_(self, projection)
+
+    def inverse(self, projection):
+        &#34;&#34;&#34;
+        Projects the point from the cartesian space
+        into the geographic space. The x component is
+        considered to be the easting, the y component
+        to be the northing.
+
+        Returns the longitude (x) and latitude (y) as a
+        coordinate pair.
+
+        Example: Project the cartesian coordinates of the
+                 city center of Stuttgart in the local
+                 map projection (GK Zone 3/DHDN, EPSG 31467)
+                 into geographic coordinates:
+        &gt;&gt;&gt; p = Projection(&#39;+init=epsg:31467&#39;)
+        &gt;&gt;&gt; Coord(3507360.12813,5395719.2749).inverse(p)
+        Coord(9.1, 48.7)
+        &#34;&#34;&#34;
+        return inverse_(self, projection)</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>Boost.Python.instance</li>
+</ul>
+<h3>Subclasses</h3>
+<ul class="hlist">
+<li><a title="mapnik._Coord" href="#mapnik._Coord">_Coord</a></li>
+</ul>
+<h3>Instance variables</h3>
+<dl>
+<dt id="mapnik._Coord.x"><code class="name">var <span class="ident">x</span></code></dt>
+<dd>
+<div class="desc"><p>Gets or sets the x/lon coordinate of the point.</p></div>
+</dd>
+<dt id="mapnik._Coord.y"><code class="name">var <span class="ident">y</span></code></dt>
+<dd>
+<div class="desc"><p>Gets or sets the y/lat coordinate of the point.</p></div>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="mapnik._Coord.forward"><code class="name flex">
+<span>def <span class="ident">forward</span></span>(<span>self, projection)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Projects the point from the geographic coordinate
+space
+into the cartesian space. The x component is
+considered to be longitude, the y component the
+latitude.</p>
+<p>Returns the easting (x) and northing (y) as a
+coordinate pair.</p>
+<p>Example: Project the geographic coordinates of the
+city center of Stuttgart into the local
+map projection (GK Zone 3/DHDN, EPSG 31467)</p>
+<pre><code class="language-python-repl">&gt;&gt;&gt; p = Projection('+init=epsg:31467')
+&gt;&gt;&gt; Coord(9.1, 48.7).forward(p)
+Coord(3507360.12813,5395719.2749)
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def forward(self, projection):
+    &#34;&#34;&#34;
+    Projects the point from the geographic coordinate
+    space  into the cartesian space. The x component is
+    considered to be longitude, the y component the
+    latitude.
+
+    Returns the easting (x) and northing (y) as a
+    coordinate pair.
+
+    Example: Project the geographic coordinates of the
+             city center of Stuttgart into the local
+             map projection (GK Zone 3/DHDN, EPSG 31467)
+    &gt;&gt;&gt; p = Projection(&#39;+init=epsg:31467&#39;)
+    &gt;&gt;&gt; Coord(9.1, 48.7).forward(p)
+    Coord(3507360.12813,5395719.2749)
+    &#34;&#34;&#34;
+    return forward_(self, projection)</code></pre>
+</details>
+</dd>
+<dt id="mapnik._Coord.inverse"><code class="name flex">
+<span>def <span class="ident">inverse</span></span>(<span>self, projection)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Projects the point from the cartesian space
+into the geographic space. The x component is
+considered to be the easting, the y component
+to be the northing.</p>
+<p>Returns the longitude (x) and latitude (y) as a
+coordinate pair.</p>
+<p>Example: Project the cartesian coordinates of the
+city center of Stuttgart in the local
+map projection (GK Zone 3/DHDN, EPSG 31467)
+into geographic coordinates:</p>
+<pre><code class="language-python-repl">&gt;&gt;&gt; p = Projection('+init=epsg:31467')
+&gt;&gt;&gt; Coord(3507360.12813,5395719.2749).inverse(p)
+Coord(9.1, 48.7)
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def inverse(self, projection):
+    &#34;&#34;&#34;
+    Projects the point from the cartesian space
+    into the geographic space. The x component is
+    considered to be the easting, the y component
+    to be the northing.
+
+    Returns the longitude (x) and latitude (y) as a
+    coordinate pair.
+
+    Example: Project the cartesian coordinates of the
+             city center of Stuttgart in the local
+             map projection (GK Zone 3/DHDN, EPSG 31467)
+             into geographic coordinates:
+    &gt;&gt;&gt; p = Projection(&#39;+init=epsg:31467&#39;)
+    &gt;&gt;&gt; Coord(3507360.12813,5395719.2749).inverse(p)
+    Coord(9.1, 48.7)
+    &#34;&#34;&#34;
+    return inverse_(self, projection)</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="mapnik._Feature"><code class="flex name class">
+<span>class <span class="ident">Feature</span></span>
+<span>(</span><span>...)</span>
+</code></dt>
+<dd>
+<div class="desc"><p><strong>init</strong>( (object)arg1, (Context)arg2, (int)arg3) -&gt; None :
+Default ctor.</p>
+<pre><code>C++ signature :
+    void __init__(_object*,std::shared_ptr&lt;mapnik::context&lt;std::map&lt;std::__cxx11::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt;, unsigned long, std::less&lt;std::__cxx11::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt; &gt;, std::allocator&lt;std::pair&lt;std::__cxx11::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt; const, unsigned long&gt; &gt; &gt; &gt; &gt;,long)
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class _Feature(Feature, _injector()):
+    __geo_interface__ = property(lambda self: json.loads(self.to_geojson()))</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>Boost.Python.instance</li>
+</ul>
+<h3>Subclasses</h3>
+<ul class="hlist">
+<li><a title="mapnik._Feature" href="#mapnik._Feature">_Feature</a></li>
+</ul>
+<h3>Static methods</h3>
+<dl>
+<dt id="mapnik._Feature.from_geojson"><code class="name flex">
+<span>def <span class="ident">from_geojson</span></span>(<span>...)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>from_geojson( (str)arg1, (Context)arg2) -&gt; Feature :</p>
+<pre><code>C++ signature :
+    std::shared_ptr&lt;mapnik::feature_impl&gt; from_geojson(std::__cxx11::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt;,std::shared_ptr&lt;mapnik::context&lt;std::map&lt;std::__cxx11::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt;, unsigned long, std::less&lt;std::__cxx11::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt; &gt;, std::allocator&lt;std::pair&lt;std::__cxx11::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt; const, unsigned long&gt; &gt; &gt; &gt; &gt;)
+</code></pre></div>
+</dd>
+</dl>
+<h3>Instance variables</h3>
+<dl>
+<dt id="mapnik._Feature.attributes"><code class="name">var <span class="ident">attributes</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="mapnik._Feature.geometry"><code class="name">var <span class="ident">geometry</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="mapnik._Feature.context"><code class="name flex">
+<span>def <span class="ident">context</span></span>(<span>...)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>context( (Feature)arg1) -&gt; Context :</p>
+<pre><code>C++ signature :
+    std::shared_ptr&lt;mapnik::context&lt;std::map&lt;std::__cxx11::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt;, unsigned long, std::less&lt;std::__cxx11::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt; &gt;, std::allocator&lt;std::pair&lt;std::__cxx11::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt; const, unsigned long&gt; &gt; &gt; &gt; &gt; context(mapnik::feature_impl {lvalue})
+</code></pre></div>
+</dd>
+<dt id="mapnik._Feature.envelope"><code class="name flex">
+<span>def <span class="ident">envelope</span></span>(<span>...)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>envelope( (Feature)arg1) -&gt; Box2d :</p>
+<pre><code>C++ signature :
+    mapnik::box2d&lt;double&gt; envelope(mapnik::feature_impl {lvalue})
+</code></pre></div>
+</dd>
+<dt id="mapnik._Feature.has_key"><code class="name flex">
+<span>def <span class="ident">has_key</span></span>(<span>...)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>has_key( (Feature)arg1, (str)arg2) -&gt; bool :</p>
+<pre><code>C++ signature :
+    bool has_key(mapnik::feature_impl {lvalue},std::__cxx11::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt;)
+</code></pre></div>
+</dd>
+<dt id="mapnik._Feature.id"><code class="name flex">
+<span>def <span class="ident">id</span></span>(<span>...)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>id( (Feature)arg1) -&gt; int :</p>
+<pre><code>C++ signature :
+    long id(mapnik::feature_impl {lvalue})
+</code></pre></div>
+</dd>
+<dt id="mapnik._Feature.to_geojson"><code class="name flex">
+<span>def <span class="ident">to_geojson</span></span>(<span>...)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>to_geojson( (Feature)arg1) -&gt; str :</p>
+<pre><code>C++ signature :
+    std::__cxx11::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt; to_geojson(mapnik::feature_impl)
+</code></pre></div>
+</dd>
+</dl>
+</dd>
+<dt id="mapnik._Geometry"><code class="flex name class">
+<span>class <span class="ident">Geometry</span></span>
+<span>(</span><span>...)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Raises an exception
+This class cannot be instantiated from Python</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class _Geometry(Geometry, _injector()):
+    __geo_interface__ = property(lambda self: json.loads(self.to_geojson()))</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>Boost.Python.instance</li>
+</ul>
+<h3>Subclasses</h3>
+<ul class="hlist">
+<li><a title="mapnik._Geometry" href="#mapnik._Geometry">_Geometry</a></li>
+</ul>
+<h3>Static methods</h3>
+<dl>
+<dt id="mapnik._Geometry.from_geojson"><code class="name flex">
+<span>def <span class="ident">from_geojson</span></span>(<span>...)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>from_geojson( (str)arg1) -&gt; Geometry :</p>
+<pre><code>C++ signature :
+    std::shared_ptr&lt;mapnik::geometry::geometry&lt;double&gt; &gt; from_geojson(std::__cxx11::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt;)
+</code></pre></div>
+</dd>
+<dt id="mapnik._Geometry.from_wkb"><code class="name flex">
+<span>def <span class="ident">from_wkb</span></span>(<span>...)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>from_wkb( (str)arg1) -&gt; Geometry :</p>
+<pre><code>C++ signature :
+    std::shared_ptr&lt;mapnik::geometry::geometry&lt;double&gt; &gt; from_wkb(std::__cxx11::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt;)
+</code></pre></div>
+</dd>
+<dt id="mapnik._Geometry.from_wkt"><code class="name flex">
+<span>def <span class="ident">from_wkt</span></span>(<span>...)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>from_wkt( (str)arg1) -&gt; Geometry :</p>
+<pre><code>C++ signature :
+    std::shared_ptr&lt;mapnik::geometry::geometry&lt;double&gt; &gt; from_wkt(std::__cxx11::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt;)
+</code></pre></div>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="mapnik._Geometry.centroid"><code class="name flex">
+<span>def <span class="ident">centroid</span></span>(<span>...)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>centroid( (Geometry)arg1) -&gt; Point :</p>
+<pre><code>C++ signature :
+    mapnik::geometry::point&lt;double&gt; centroid(mapnik::geometry::geometry&lt;double&gt;)
+</code></pre></div>
+</dd>
+<dt id="mapnik._Geometry.correct"><code class="name flex">
+<span>def <span class="ident">correct</span></span>(<span>...)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>correct( (Geometry)arg1) -&gt; None :</p>
+<pre><code>C++ signature :
+    void correct(mapnik::geometry::geometry&lt;double&gt; {lvalue})
+</code></pre></div>
+</dd>
+<dt id="mapnik._Geometry.envelope"><code class="name flex">
+<span>def <span class="ident">envelope</span></span>(<span>...)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>envelope( (Geometry)arg1) -&gt; Box2d :</p>
+<pre><code>C++ signature :
+    mapnik::box2d&lt;double&gt; envelope(mapnik::geometry::geometry&lt;double&gt;)
+</code></pre></div>
+</dd>
+<dt id="mapnik._Geometry.is_empty"><code class="name flex">
+<span>def <span class="ident">is_empty</span></span>(<span>...)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>is_empty( (Geometry)arg1) -&gt; bool :</p>
+<pre><code>C++ signature :
+    bool is_empty(mapnik::geometry::geometry&lt;double&gt;)
+</code></pre></div>
+</dd>
+<dt id="mapnik._Geometry.is_simple"><code class="name flex">
+<span>def <span class="ident">is_simple</span></span>(<span>...)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>is_simple( (Geometry)arg1) -&gt; bool :</p>
+<pre><code>C++ signature :
+    bool is_simple(mapnik::geometry::geometry&lt;double&gt;)
+</code></pre></div>
+</dd>
+<dt id="mapnik._Geometry.is_valid"><code class="name flex">
+<span>def <span class="ident">is_valid</span></span>(<span>...)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>is_valid( (Geometry)arg1) -&gt; bool :</p>
+<pre><code>C++ signature :
+    bool is_valid(mapnik::geometry::geometry&lt;double&gt;)
+</code></pre></div>
+</dd>
+<dt id="mapnik._Geometry.to_geojson"><code class="name flex">
+<span>def <span class="ident">to_geojson</span></span>(<span>...)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>to_geojson( (Geometry)arg1) -&gt; str :</p>
+<pre><code>C++ signature :
+    std::__cxx11::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt; to_geojson(mapnik::geometry::geometry&lt;double&gt;)
+</code></pre></div>
+</dd>
+<dt id="mapnik._Geometry.to_wkb"><code class="name flex">
+<span>def <span class="ident">to_wkb</span></span>(<span>...)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>to_wkb( (Geometry)arg1, (wkbByteOrder)arg2) -&gt; object :</p>
+<pre><code>C++ signature :
+    _object* to_wkb(mapnik::geometry::geometry&lt;double&gt;,mapnik::wkbByteOrder)
+</code></pre></div>
+</dd>
+<dt id="mapnik._Geometry.to_wkt"><code class="name flex">
+<span>def <span class="ident">to_wkt</span></span>(<span>...)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>to_wkt( (Geometry)arg1) -&gt; str :</p>
+<pre><code>C++ signature :
+    std::__cxx11::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt; to_wkt(mapnik::geometry::geometry&lt;double&gt;)
+</code></pre></div>
+</dd>
+<dt id="mapnik._Geometry.type"><code class="name flex">
+<span>def <span class="ident">type</span></span>(<span>...)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>type( (Geometry)arg1) -&gt; GeometryType :</p>
+<pre><code>C++ signature :
+    mapnik::geometry::geometry_types type(mapnik::geometry::geometry&lt;double&gt;)
+</code></pre></div>
+</dd>
+</dl>
+</dd>
+<dt id="mapnik._Projection"><code class="flex name class">
+<span>class <span class="ident">Projection</span></span>
+<span>(</span><span>...)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Represents a map projection.</p>
+<p><strong>init</strong>( (object)arg1, (str)proj4_string) -&gt; None :
+Constructs a new projection from its PROJ.4 string representation.</p>
+<pre><code>The constructor will throw a RuntimeError in case the projection
+cannot be initialized.
+
+
+C++ signature :
+    void __init__(_object*,std::__cxx11::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt;)
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class _Projection(Projection, _injector()):
+    def __repr__(self):
+        return &#34;Projection(&#39;%s&#39;)&#34; % self.params()
+
+    def forward(self, obj):
+        &#34;&#34;&#34;
+        Projects the given object (Box2d or Coord)
+        from the geographic space into the cartesian space.
+
+        See also:
+          Box2d.forward(self, projection),
+          Coord.forward(self, projection).
+        &#34;&#34;&#34;
+        return forward_(obj, self)
+
+    def inverse(self, obj):
+        &#34;&#34;&#34;
+        Projects the given object (Box2d or Coord)
+        from the cartesian space into the geographic space.
+
+        See also:
+          Box2d.inverse(self, projection),
+          Coord.inverse(self, projection).
+        &#34;&#34;&#34;
+        return inverse_(obj, self)</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>Boost.Python.instance</li>
+</ul>
+<h3>Subclasses</h3>
+<ul class="hlist">
+<li><a title="mapnik._Projection" href="#mapnik._Projection">_Projection</a></li>
+</ul>
+<h3>Instance variables</h3>
+<dl>
+<dt id="mapnik._Projection.geographic"><code class="name">var <span class="ident">geographic</span></code></dt>
+<dd>
+<div class="desc"><p>This property is True if the projection is a geographic projection
+(i.e. it uses lon/lat coordinates)</p></div>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="mapnik._Projection.expanded"><code class="name flex">
+<span>def <span class="ident">expanded</span></span>(<span>...)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>expanded( (Projection)arg1) -&gt; str :
+normalize PROJ.4 definition by expanding +init= syntax</p>
+<pre><code>C++ signature :
+    std::__cxx11::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt; expanded(mapnik::projection {lvalue})
+</code></pre></div>
+</dd>
+<dt id="mapnik._Projection.forward"><code class="name flex">
+<span>def <span class="ident">forward</span></span>(<span>self, obj)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Projects the given object (Box2d or Coord)
+from the geographic space into the cartesian space.</p>
+<p>See also:
+Box2d.forward(self, projection),
+Coord.forward(self, projection).</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def forward(self, obj):
+    &#34;&#34;&#34;
+    Projects the given object (Box2d or Coord)
+    from the geographic space into the cartesian space.
+
+    See also:
+      Box2d.forward(self, projection),
+      Coord.forward(self, projection).
+    &#34;&#34;&#34;
+    return forward_(obj, self)</code></pre>
+</details>
+</dd>
+<dt id="mapnik._Projection.inverse"><code class="name flex">
+<span>def <span class="ident">inverse</span></span>(<span>self, obj)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Projects the given object (Box2d or Coord)
+from the cartesian space into the geographic space.</p>
+<p>See also:
+Box2d.inverse(self, projection),
+Coord.inverse(self, projection).</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def inverse(self, obj):
+    &#34;&#34;&#34;
+    Projects the given object (Box2d or Coord)
+    from the cartesian space into the geographic space.
+
+    See also:
+      Box2d.inverse(self, projection),
+      Coord.inverse(self, projection).
+    &#34;&#34;&#34;
+    return inverse_(obj, self)</code></pre>
+</details>
+</dd>
+<dt id="mapnik._Projection.params"><code class="name flex">
+<span>def <span class="ident">params</span></span>(<span>...)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>params( (Projection)arg1) -&gt; str :
+Returns the PROJ.4 string for this projection.</p>
+<pre><code>C++ signature :
+    std::__cxx11::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt; params(mapnik::projection {lvalue})
+</code></pre></div>
+</dd>
+</dl>
+</dd>
+<dt id="mapnik._SymbolizerBase"><code class="flex name class">
+<span>class <span class="ident">SymbolizerBase</span></span>
+<span>(</span><span>...)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Raises an exception
+This class cannot be instantiated from Python</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class _SymbolizerBase(SymbolizerBase, _injector()):
+    # back compatibility
+
+    @property
+    def filename(self):
+        return self[&#34;file&#34;]
+
+    @filename.setter
+    def filename(self, val):
+        self[&#34;file&#34;] = val</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>Boost.Python.instance</li>
+</ul>
+<h3>Subclasses</h3>
+<ul class="hlist">
+<li><a title="mapnik._SymbolizerBase" href="#mapnik._SymbolizerBase">_SymbolizerBase</a></li>
+<li><a title="mapnik._TextSymbolizer" href="#mapnik._TextSymbolizer">_TextSymbolizer</a></li>
+<li><a title="mapnik._mapnik.BuildingSymbolizer" href="_mapnik.html#mapnik._mapnik.BuildingSymbolizer">BuildingSymbolizer</a></li>
+<li><a title="mapnik._mapnik.DebugSymbolizer" href="_mapnik.html#mapnik._mapnik.DebugSymbolizer">DebugSymbolizer</a></li>
+<li><a title="mapnik._mapnik.GroupSymbolizer" href="_mapnik.html#mapnik._mapnik.GroupSymbolizer">GroupSymbolizer</a></li>
+<li><a title="mapnik._mapnik.LinePatternSymbolizer" href="_mapnik.html#mapnik._mapnik.LinePatternSymbolizer">LinePatternSymbolizer</a></li>
+<li><a title="mapnik._mapnik.LineSymbolizer" href="_mapnik.html#mapnik._mapnik.LineSymbolizer">LineSymbolizer</a></li>
+<li><a title="mapnik._mapnik.MarkersSymbolizer" href="_mapnik.html#mapnik._mapnik.MarkersSymbolizer">MarkersSymbolizer</a></li>
+<li><a title="mapnik._mapnik.PointSymbolizer" href="_mapnik.html#mapnik._mapnik.PointSymbolizer">PointSymbolizer</a></li>
+<li><a title="mapnik._mapnik.PolygonSymbolizer" href="_mapnik.html#mapnik._mapnik.PolygonSymbolizer">PolygonSymbolizer</a></li>
+<li><a title="mapnik._mapnik.RasterSymbolizer" href="_mapnik.html#mapnik._mapnik.RasterSymbolizer">RasterSymbolizer</a></li>
+</ul>
+<h3>Instance variables</h3>
+<dl>
+<dt id="mapnik._SymbolizerBase.filename"><code class="name">var <span class="ident">filename</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def filename(self):
+    return self[&#34;file&#34;]</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="mapnik._TextSymbolizer"><code class="flex name class">
+<span>class <span class="ident">TextSymbolizer</span></span>
+<span>(</span><span>...)</span>
+</code></dt>
+<dd>
+<div class="desc"><p><strong>init</strong>( (object)arg1) -&gt; None :
+Default ctor</p>
+<pre><code>C++ signature :
+    void __init__(_object*)
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class _TextSymbolizer(TextSymbolizer, _injector()):
+    @property
+    def name(self):
+        if isinstance(self.properties.format_tree, FormattingText):
+            return self.properties.format_tree.text
+        else:
+            # There is no single expression which could be returned as name
+            raise RuntimeError(
+                &#34;TextSymbolizer uses complex formatting features, but old compatibility interface is used to access it. Use self.properties.format_tree instead.&#34;
+            )
+
+    @name.setter
+    def name(self, name):
+        self.properties.format_tree = FormattingText(name)
+
+    @property
+    def text_size(self):
+        return self.format.text_size
+
+    @text_size.setter
+    def text_size(self, text_size):
+        self.format.text_size = text_size
+
+    @property
+    def face_name(self):
+        return self.format.face_name
+
+    @face_name.setter
+    def face_name(self, face_name):
+        self.format.face_name = face_name
+
+    @property
+    def fontset(self):
+        return self.format.fontset
+
+    @fontset.setter
+    def fontset(self, fontset):
+        self.format.fontset = fontset
+
+    @property
+    def character_spacing(self):
+        return self.format.character_spacing
+
+    @character_spacing.setter
+    def character_spacing(self, character_spacing):
+        self.format.character_spacing = character_spacing
+
+    @property
+    def line_spacing(self):
+        return self.format.line_spacing
+
+    @line_spacing.setter
+    def line_spacing(self, line_spacing):
+        self.format.line_spacing = line_spacing
+
+    @property
+    def text_opacity(self):
+        return self.format.text_opacity
+
+    @text_opacity.setter
+    def text_opacity(self, text_opacity):
+        self.format.text_opacity = text_opacity
+
+    @property
+    def wrap_before(self):
+        return self.format.wrap_before
+
+    @wrap_before.setter
+    def wrap_before(self, wrap_before):
+        self.format.wrap_before = wrap_before
+
+    @property
+    def text_transform(self):
+        return self.format.text_transform
+
+    @text_transform.setter
+    def text_transform(self, text_transform):
+        self.format.text_transform = text_transform
+
+    @property
+    def fill(self):
+        return self.format.fill
+
+    @fill.setter
+    def fill(self, fill):
+        self.format.fill = fill
+
+    @property
+    def halo_fill(self):
+        return self.format.halo_fill
+
+    @halo_fill.setter
+    def halo_fill(self, halo_fill):
+        self.format.halo_fill = halo_fill
+
+    @property
+    def halo_radius(self):
+        return self.format.halo_radius
+
+    @halo_radius.setter
+    def halo_radius(self, halo_radius):
+        self.format.halo_radius = halo_radius
+
+    @property
+    def label_placement(self):
+        return self.properties.label_placement
+
+    @label_placement.setter
+    def label_placement(self, label_placement):
+        self.properties.label_placement = label_placement
+
+    @property
+    def horizontal_alignment(self):
+        return self.properties.horizontal_alignment
+
+    @horizontal_alignment.setter
+    def horizontal_alignment(self, horizontal_alignment):
+        self.properties.horizontal_alignment = horizontal_alignment
+
+    @property
+    def justify_alignment(self):
+        return self.properties.justify_alignment
+
+    @justify_alignment.setter
+    def justify_alignment(self, justify_alignment):
+        self.properties.justify_alignment = justify_alignment
+
+    @property
+    def vertical_alignment(self):
+        return self.properties.vertical_alignment
+
+    @vertical_alignment.setter
+    def vertical_alignment(self, vertical_alignment):
+        self.properties.vertical_alignment = vertical_alignment
+
+    @property
+    def orientation(self):
+        return self.properties.orientation
+
+    @orientation.setter
+    def orientation(self, orientation):
+        self.properties.orientation = orientation
+
+    @property
+    def displacement(self):
+        return self.properties.displacement
+
+    @displacement.setter
+    def displacement(self, displacement):
+        self.properties.displacement = displacement
+
+    @property
+    def label_spacing(self):
+        return self.properties.label_spacing
+
+    @label_spacing.setter
+    def label_spacing(self, label_spacing):
+        self.properties.label_spacing = label_spacing
+
+    @property
+    def label_position_tolerance(self):
+        return self.properties.label_position_tolerance
+
+    @label_position_tolerance.setter
+    def label_position_tolerance(self, label_position_tolerance):
+        self.properties.label_position_tolerance = label_position_tolerance
+
+    @property
+    def avoid_edges(self):
+        return self.properties.avoid_edges
+
+    @avoid_edges.setter
+    def avoid_edges(self, avoid_edges):
+        self.properties.avoid_edges = avoid_edges
+
+    @property
+    def minimum_distance(self):
+        return self.properties.minimum_distance
+
+    @minimum_distance.setter
+    def minimum_distance(self, minimum_distance):
+        self.properties.minimum_distance = minimum_distance
+
+    @property
+    def minimum_padding(self):
+        return self.properties.minimum_padding
+
+    @minimum_padding.setter
+    def minimum_padding(self, minimum_padding):
+        self.properties.minimum_padding = minimum_padding
+
+    @property
+    def minimum_path_length(self):
+        return self.properties.minimum_path_length
+
+    @minimum_path_length.setter
+    def minimum_path_length(self, minimum_path_length):
+        self.properties.minimum_path_length = minimum_path_length
+
+    @property
+    def maximum_angle_char_delta(self):
+        return self.properties.maximum_angle_char_delta
+
+    @maximum_angle_char_delta.setter
+    def maximum_angle_char_delta(self, maximum_angle_char_delta):
+        self.properties.maximum_angle_char_delta = maximum_angle_char_delta
+
+    @property
+    def allow_overlap(self):
+        return self.properties.allow_overlap
+
+    @allow_overlap.setter
+    def allow_overlap(self, allow_overlap):
+        self.properties.allow_overlap = allow_overlap
+
+    @property
+    def text_ratio(self):
+        return self.properties.text_ratio
+
+    @text_ratio.setter
+    def text_ratio(self, text_ratio):
+        self.properties.text_ratio = text_ratio
+
+    @property
+    def wrap_width(self):
+        return self.properties.wrap_width
+
+    @wrap_width.setter
+    def wrap_width(self, wrap_width):
+        self.properties.wrap_width = wrap_width</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="mapnik._SymbolizerBase" href="#mapnik._SymbolizerBase">_SymbolizerBase</a></li>
+<li>Boost.Python.instance</li>
+</ul>
+<h3>Subclasses</h3>
+<ul class="hlist">
+<li><a title="mapnik._TextSymbolizer" href="#mapnik._TextSymbolizer">_TextSymbolizer</a></li>
+<li><a title="mapnik._mapnik.ShieldSymbolizer" href="_mapnik.html#mapnik._mapnik.ShieldSymbolizer">ShieldSymbolizer</a></li>
+</ul>
+<h3>Instance variables</h3>
+<dl>
+<dt id="mapnik._TextSymbolizer.allow_overlap"><code class="name">var <span class="ident">allow_overlap</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def allow_overlap(self):
+    return self.properties.allow_overlap</code></pre>
+</details>
+</dd>
+<dt id="mapnik._TextSymbolizer.avoid_edges"><code class="name">var <span class="ident">avoid_edges</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def avoid_edges(self):
+    return self.properties.avoid_edges</code></pre>
+</details>
+</dd>
+<dt id="mapnik._TextSymbolizer.character_spacing"><code class="name">var <span class="ident">character_spacing</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def character_spacing(self):
+    return self.format.character_spacing</code></pre>
+</details>
+</dd>
+<dt id="mapnik._TextSymbolizer.displacement"><code class="name">var <span class="ident">displacement</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def displacement(self):
+    return self.properties.displacement</code></pre>
+</details>
+</dd>
+<dt id="mapnik._TextSymbolizer.face_name"><code class="name">var <span class="ident">face_name</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def face_name(self):
+    return self.format.face_name</code></pre>
+</details>
+</dd>
+<dt id="mapnik._TextSymbolizer.fill"><code class="name">var <span class="ident">fill</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def fill(self):
+    return self.format.fill</code></pre>
+</details>
+</dd>
+<dt id="mapnik._TextSymbolizer.fontset"><code class="name">var <span class="ident">fontset</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def fontset(self):
+    return self.format.fontset</code></pre>
+</details>
+</dd>
+<dt id="mapnik._TextSymbolizer.halo_fill"><code class="name">var <span class="ident">halo_fill</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def halo_fill(self):
+    return self.format.halo_fill</code></pre>
+</details>
+</dd>
+<dt id="mapnik._TextSymbolizer.halo_radius"><code class="name">var <span class="ident">halo_radius</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def halo_radius(self):
+    return self.format.halo_radius</code></pre>
+</details>
+</dd>
+<dt id="mapnik._TextSymbolizer.horizontal_alignment"><code class="name">var <span class="ident">horizontal_alignment</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def horizontal_alignment(self):
+    return self.properties.horizontal_alignment</code></pre>
+</details>
+</dd>
+<dt id="mapnik._TextSymbolizer.justify_alignment"><code class="name">var <span class="ident">justify_alignment</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def justify_alignment(self):
+    return self.properties.justify_alignment</code></pre>
+</details>
+</dd>
+<dt id="mapnik._TextSymbolizer.label_placement"><code class="name">var <span class="ident">label_placement</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def label_placement(self):
+    return self.properties.label_placement</code></pre>
+</details>
+</dd>
+<dt id="mapnik._TextSymbolizer.label_position_tolerance"><code class="name">var <span class="ident">label_position_tolerance</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def label_position_tolerance(self):
+    return self.properties.label_position_tolerance</code></pre>
+</details>
+</dd>
+<dt id="mapnik._TextSymbolizer.label_spacing"><code class="name">var <span class="ident">label_spacing</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def label_spacing(self):
+    return self.properties.label_spacing</code></pre>
+</details>
+</dd>
+<dt id="mapnik._TextSymbolizer.line_spacing"><code class="name">var <span class="ident">line_spacing</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def line_spacing(self):
+    return self.format.line_spacing</code></pre>
+</details>
+</dd>
+<dt id="mapnik._TextSymbolizer.maximum_angle_char_delta"><code class="name">var <span class="ident">maximum_angle_char_delta</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def maximum_angle_char_delta(self):
+    return self.properties.maximum_angle_char_delta</code></pre>
+</details>
+</dd>
+<dt id="mapnik._TextSymbolizer.minimum_distance"><code class="name">var <span class="ident">minimum_distance</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def minimum_distance(self):
+    return self.properties.minimum_distance</code></pre>
+</details>
+</dd>
+<dt id="mapnik._TextSymbolizer.minimum_padding"><code class="name">var <span class="ident">minimum_padding</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def minimum_padding(self):
+    return self.properties.minimum_padding</code></pre>
+</details>
+</dd>
+<dt id="mapnik._TextSymbolizer.minimum_path_length"><code class="name">var <span class="ident">minimum_path_length</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def minimum_path_length(self):
+    return self.properties.minimum_path_length</code></pre>
+</details>
+</dd>
+<dt id="mapnik._TextSymbolizer.name"><code class="name">var <span class="ident">name</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def name(self):
+    if isinstance(self.properties.format_tree, FormattingText):
+        return self.properties.format_tree.text
+    else:
+        # There is no single expression which could be returned as name
+        raise RuntimeError(
+            &#34;TextSymbolizer uses complex formatting features, but old compatibility interface is used to access it. Use self.properties.format_tree instead.&#34;
+        )</code></pre>
+</details>
+</dd>
+<dt id="mapnik._TextSymbolizer.orientation"><code class="name">var <span class="ident">orientation</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def orientation(self):
+    return self.properties.orientation</code></pre>
+</details>
+</dd>
+<dt id="mapnik._TextSymbolizer.text_opacity"><code class="name">var <span class="ident">text_opacity</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def text_opacity(self):
+    return self.format.text_opacity</code></pre>
+</details>
+</dd>
+<dt id="mapnik._TextSymbolizer.text_ratio"><code class="name">var <span class="ident">text_ratio</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def text_ratio(self):
+    return self.properties.text_ratio</code></pre>
+</details>
+</dd>
+<dt id="mapnik._TextSymbolizer.text_size"><code class="name">var <span class="ident">text_size</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def text_size(self):
+    return self.format.text_size</code></pre>
+</details>
+</dd>
+<dt id="mapnik._TextSymbolizer.text_transform"><code class="name">var <span class="ident">text_transform</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def text_transform(self):
+    return self.format.text_transform</code></pre>
+</details>
+</dd>
+<dt id="mapnik._TextSymbolizer.vertical_alignment"><code class="name">var <span class="ident">vertical_alignment</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def vertical_alignment(self):
+    return self.properties.vertical_alignment</code></pre>
+</details>
+</dd>
+<dt id="mapnik._TextSymbolizer.wrap_before"><code class="name">var <span class="ident">wrap_before</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def wrap_before(self):
+    return self.format.wrap_before</code></pre>
+</details>
+</dd>
+<dt id="mapnik._TextSymbolizer.wrap_width"><code class="name">var <span class="ident">wrap_width</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def wrap_width(self):
+    return self.properties.wrap_width</code></pre>
+</details>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="mapnik._TextSymbolizer.symbol"><code class="name flex">
+<span>def <span class="ident">symbol</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def symbol_for_subcls(self):
+    return self</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="mapnik.class"><code class="flex name class">
+<span>class <span class="ident">BoostPythonMetaclass</span></span>
+<span>(</span><span>*args, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>type(object) -&gt; the object's type
+type(name, bases, dict, **kwds) -&gt; a new type</p></div>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>builtins.type</li>
+</ul>
+<h3>Subclasses</h3>
+<ul class="hlist">
+<li>mapnik._MapnikMetaclass</li>
+</ul>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3><a href="#header-submodules">Sub-modules</a></h3>
+<ul>
+<li><code><a title="mapnik.mapnik_settings" href="mapnik_settings.html">mapnik.mapnik_settings</a></code></li>
+<li><code><a title="mapnik.printing" href="printing/index.html">mapnik.printing</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="mapnik.CSV" href="#mapnik.CSV">CSV</a></code></li>
+<li><code><a title="mapnik.Datasource" href="#mapnik.Datasource">Datasource</a></code></li>
+<li><code><a title="mapnik.Filter" href="#mapnik.Filter">Filter</a></code></li>
+<li><code><a title="mapnik.Gdal" href="#mapnik.Gdal">Gdal</a></code></li>
+<li><code><a title="mapnik.GeoJSON" href="#mapnik.GeoJSON">GeoJSON</a></code></li>
+<li><code><a title="mapnik.MemoryDatasource" href="#mapnik.MemoryDatasource">MemoryDatasource</a></code></li>
+<li><code><a title="mapnik.Occi" href="#mapnik.Occi">Occi</a></code></li>
+<li><code><a title="mapnik.Ogr" href="#mapnik.Ogr">Ogr</a></code></li>
+<li><code><a title="mapnik.Osm" href="#mapnik.Osm">Osm</a></code></li>
+<li><code><a title="mapnik.PgRaster" href="#mapnik.PgRaster">PgRaster</a></code></li>
+<li><code><a title="mapnik.PostGIS" href="#mapnik.PostGIS">PostGIS</a></code></li>
+<li><code><a title="mapnik.Python" href="#mapnik.Python">Python</a></code></li>
+<li><code><a title="mapnik.Raster" href="#mapnik.Raster">Raster</a></code></li>
+<li><code><a title="mapnik.Rasterlite" href="#mapnik.Rasterlite">Rasterlite</a></code></li>
+<li><code><a title="mapnik.SQLite" href="#mapnik.SQLite">SQLite</a></code></li>
+<li><code><a title="mapnik.Shapefile" href="#mapnik.Shapefile">Shapefile</a></code></li>
+<li><code><a title="mapnik.bootstrap_env" href="#mapnik.bootstrap_env">bootstrap_env</a></code></li>
+<li><code><a title="mapnik.mapnik_version_from_string" href="#mapnik.mapnik_version_from_string">mapnik_version_from_string</a></code></li>
+<li><code><a title="mapnik.register_fonts" href="#mapnik.register_fonts">register_fonts</a></code></li>
+<li><code><a title="mapnik.register_plugins" href="#mapnik.register_plugins">register_plugins</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="mapnik.Envelope" href="#mapnik.Envelope">Envelope</a></code></h4>
+</li>
+<li>
+<h4><code><a title="mapnik.PythonDatasource" href="#mapnik.PythonDatasource">PythonDatasource</a></code></h4>
+<ul class="">
+<li><code><a title="mapnik.PythonDatasource.features" href="#mapnik.PythonDatasource.features">features</a></code></li>
+<li><code><a title="mapnik.PythonDatasource.features_at_point" href="#mapnik.PythonDatasource.features_at_point">features_at_point</a></code></li>
+<li><code><a title="mapnik.PythonDatasource.wkb_features" href="#mapnik.PythonDatasource.wkb_features">wkb_features</a></code></li>
+<li><code><a title="mapnik.PythonDatasource.wkt_features" href="#mapnik.PythonDatasource.wkt_features">wkt_features</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="mapnik._Box2d" href="#mapnik._Box2d">_Box2d</a></code></h4>
+<ul class="two-column">
+<li><code><a title="mapnik._Box2d.center" href="#mapnik._Box2d.center">center</a></code></li>
+<li><code><a title="mapnik._Box2d.clip" href="#mapnik._Box2d.clip">clip</a></code></li>
+<li><code><a title="mapnik._Box2d.contains" href="#mapnik._Box2d.contains">contains</a></code></li>
+<li><code><a title="mapnik._Box2d.expand_to_include" href="#mapnik._Box2d.expand_to_include">expand_to_include</a></code></li>
+<li><code><a title="mapnik._Box2d.forward" href="#mapnik._Box2d.forward">forward</a></code></li>
+<li><code><a title="mapnik._Box2d.from_string" href="#mapnik._Box2d.from_string">from_string</a></code></li>
+<li><code><a title="mapnik._Box2d.height" href="#mapnik._Box2d.height">height</a></code></li>
+<li><code><a title="mapnik._Box2d.intersect" href="#mapnik._Box2d.intersect">intersect</a></code></li>
+<li><code><a title="mapnik._Box2d.intersects" href="#mapnik._Box2d.intersects">intersects</a></code></li>
+<li><code><a title="mapnik._Box2d.inverse" href="#mapnik._Box2d.inverse">inverse</a></code></li>
+<li><code><a title="mapnik._Box2d.maxx" href="#mapnik._Box2d.maxx">maxx</a></code></li>
+<li><code><a title="mapnik._Box2d.maxy" href="#mapnik._Box2d.maxy">maxy</a></code></li>
+<li><code><a title="mapnik._Box2d.minx" href="#mapnik._Box2d.minx">minx</a></code></li>
+<li><code><a title="mapnik._Box2d.miny" href="#mapnik._Box2d.miny">miny</a></code></li>
+<li><code><a title="mapnik._Box2d.pad" href="#mapnik._Box2d.pad">pad</a></code></li>
+<li><code><a title="mapnik._Box2d.valid" href="#mapnik._Box2d.valid">valid</a></code></li>
+<li><code><a title="mapnik._Box2d.width" href="#mapnik._Box2d.width">width</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="mapnik._Color" href="#mapnik._Color">_Color</a></code></h4>
+<ul class="two-column">
+<li><code><a title="mapnik._Color.a" href="#mapnik._Color.a">a</a></code></li>
+<li><code><a title="mapnik._Color.b" href="#mapnik._Color.b">b</a></code></li>
+<li><code><a title="mapnik._Color.demultiply" href="#mapnik._Color.demultiply">demultiply</a></code></li>
+<li><code><a title="mapnik._Color.g" href="#mapnik._Color.g">g</a></code></li>
+<li><code><a title="mapnik._Color.get_premultiplied" href="#mapnik._Color.get_premultiplied">get_premultiplied</a></code></li>
+<li><code><a title="mapnik._Color.packed" href="#mapnik._Color.packed">packed</a></code></li>
+<li><code><a title="mapnik._Color.premultiply" href="#mapnik._Color.premultiply">premultiply</a></code></li>
+<li><code><a title="mapnik._Color.r" href="#mapnik._Color.r">r</a></code></li>
+<li><code><a title="mapnik._Color.set_premultiplied" href="#mapnik._Color.set_premultiplied">set_premultiplied</a></code></li>
+<li><code><a title="mapnik._Color.to_hex_string" href="#mapnik._Color.to_hex_string">to_hex_string</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="mapnik._Coord" href="#mapnik._Coord">_Coord</a></code></h4>
+<ul class="">
+<li><code><a title="mapnik._Coord.forward" href="#mapnik._Coord.forward">forward</a></code></li>
+<li><code><a title="mapnik._Coord.inverse" href="#mapnik._Coord.inverse">inverse</a></code></li>
+<li><code><a title="mapnik._Coord.x" href="#mapnik._Coord.x">x</a></code></li>
+<li><code><a title="mapnik._Coord.y" href="#mapnik._Coord.y">y</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="mapnik._Feature" href="#mapnik._Feature">_Feature</a></code></h4>
+<ul class="two-column">
+<li><code><a title="mapnik._Feature.attributes" href="#mapnik._Feature.attributes">attributes</a></code></li>
+<li><code><a title="mapnik._Feature.context" href="#mapnik._Feature.context">context</a></code></li>
+<li><code><a title="mapnik._Feature.envelope" href="#mapnik._Feature.envelope">envelope</a></code></li>
+<li><code><a title="mapnik._Feature.from_geojson" href="#mapnik._Feature.from_geojson">from_geojson</a></code></li>
+<li><code><a title="mapnik._Feature.geometry" href="#mapnik._Feature.geometry">geometry</a></code></li>
+<li><code><a title="mapnik._Feature.has_key" href="#mapnik._Feature.has_key">has_key</a></code></li>
+<li><code><a title="mapnik._Feature.id" href="#mapnik._Feature.id">id</a></code></li>
+<li><code><a title="mapnik._Feature.to_geojson" href="#mapnik._Feature.to_geojson">to_geojson</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="mapnik._Geometry" href="#mapnik._Geometry">_Geometry</a></code></h4>
+<ul class="two-column">
+<li><code><a title="mapnik._Geometry.centroid" href="#mapnik._Geometry.centroid">centroid</a></code></li>
+<li><code><a title="mapnik._Geometry.correct" href="#mapnik._Geometry.correct">correct</a></code></li>
+<li><code><a title="mapnik._Geometry.envelope" href="#mapnik._Geometry.envelope">envelope</a></code></li>
+<li><code><a title="mapnik._Geometry.from_geojson" href="#mapnik._Geometry.from_geojson">from_geojson</a></code></li>
+<li><code><a title="mapnik._Geometry.from_wkb" href="#mapnik._Geometry.from_wkb">from_wkb</a></code></li>
+<li><code><a title="mapnik._Geometry.from_wkt" href="#mapnik._Geometry.from_wkt">from_wkt</a></code></li>
+<li><code><a title="mapnik._Geometry.is_empty" href="#mapnik._Geometry.is_empty">is_empty</a></code></li>
+<li><code><a title="mapnik._Geometry.is_simple" href="#mapnik._Geometry.is_simple">is_simple</a></code></li>
+<li><code><a title="mapnik._Geometry.is_valid" href="#mapnik._Geometry.is_valid">is_valid</a></code></li>
+<li><code><a title="mapnik._Geometry.to_geojson" href="#mapnik._Geometry.to_geojson">to_geojson</a></code></li>
+<li><code><a title="mapnik._Geometry.to_wkb" href="#mapnik._Geometry.to_wkb">to_wkb</a></code></li>
+<li><code><a title="mapnik._Geometry.to_wkt" href="#mapnik._Geometry.to_wkt">to_wkt</a></code></li>
+<li><code><a title="mapnik._Geometry.type" href="#mapnik._Geometry.type">type</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="mapnik._Projection" href="#mapnik._Projection">_Projection</a></code></h4>
+<ul class="">
+<li><code><a title="mapnik._Projection.expanded" href="#mapnik._Projection.expanded">expanded</a></code></li>
+<li><code><a title="mapnik._Projection.forward" href="#mapnik._Projection.forward">forward</a></code></li>
+<li><code><a title="mapnik._Projection.geographic" href="#mapnik._Projection.geographic">geographic</a></code></li>
+<li><code><a title="mapnik._Projection.inverse" href="#mapnik._Projection.inverse">inverse</a></code></li>
+<li><code><a title="mapnik._Projection.params" href="#mapnik._Projection.params">params</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="mapnik._SymbolizerBase" href="#mapnik._SymbolizerBase">_SymbolizerBase</a></code></h4>
+<ul class="">
+<li><code><a title="mapnik._SymbolizerBase.filename" href="#mapnik._SymbolizerBase.filename">filename</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="mapnik._TextSymbolizer" href="#mapnik._TextSymbolizer">_TextSymbolizer</a></code></h4>
+<ul class="">
+<li><code><a title="mapnik._TextSymbolizer.allow_overlap" href="#mapnik._TextSymbolizer.allow_overlap">allow_overlap</a></code></li>
+<li><code><a title="mapnik._TextSymbolizer.avoid_edges" href="#mapnik._TextSymbolizer.avoid_edges">avoid_edges</a></code></li>
+<li><code><a title="mapnik._TextSymbolizer.character_spacing" href="#mapnik._TextSymbolizer.character_spacing">character_spacing</a></code></li>
+<li><code><a title="mapnik._TextSymbolizer.displacement" href="#mapnik._TextSymbolizer.displacement">displacement</a></code></li>
+<li><code><a title="mapnik._TextSymbolizer.face_name" href="#mapnik._TextSymbolizer.face_name">face_name</a></code></li>
+<li><code><a title="mapnik._TextSymbolizer.fill" href="#mapnik._TextSymbolizer.fill">fill</a></code></li>
+<li><code><a title="mapnik._TextSymbolizer.fontset" href="#mapnik._TextSymbolizer.fontset">fontset</a></code></li>
+<li><code><a title="mapnik._TextSymbolizer.halo_fill" href="#mapnik._TextSymbolizer.halo_fill">halo_fill</a></code></li>
+<li><code><a title="mapnik._TextSymbolizer.halo_radius" href="#mapnik._TextSymbolizer.halo_radius">halo_radius</a></code></li>
+<li><code><a title="mapnik._TextSymbolizer.horizontal_alignment" href="#mapnik._TextSymbolizer.horizontal_alignment">horizontal_alignment</a></code></li>
+<li><code><a title="mapnik._TextSymbolizer.justify_alignment" href="#mapnik._TextSymbolizer.justify_alignment">justify_alignment</a></code></li>
+<li><code><a title="mapnik._TextSymbolizer.label_placement" href="#mapnik._TextSymbolizer.label_placement">label_placement</a></code></li>
+<li><code><a title="mapnik._TextSymbolizer.label_position_tolerance" href="#mapnik._TextSymbolizer.label_position_tolerance">label_position_tolerance</a></code></li>
+<li><code><a title="mapnik._TextSymbolizer.label_spacing" href="#mapnik._TextSymbolizer.label_spacing">label_spacing</a></code></li>
+<li><code><a title="mapnik._TextSymbolizer.line_spacing" href="#mapnik._TextSymbolizer.line_spacing">line_spacing</a></code></li>
+<li><code><a title="mapnik._TextSymbolizer.maximum_angle_char_delta" href="#mapnik._TextSymbolizer.maximum_angle_char_delta">maximum_angle_char_delta</a></code></li>
+<li><code><a title="mapnik._TextSymbolizer.minimum_distance" href="#mapnik._TextSymbolizer.minimum_distance">minimum_distance</a></code></li>
+<li><code><a title="mapnik._TextSymbolizer.minimum_padding" href="#mapnik._TextSymbolizer.minimum_padding">minimum_padding</a></code></li>
+<li><code><a title="mapnik._TextSymbolizer.minimum_path_length" href="#mapnik._TextSymbolizer.minimum_path_length">minimum_path_length</a></code></li>
+<li><code><a title="mapnik._TextSymbolizer.name" href="#mapnik._TextSymbolizer.name">name</a></code></li>
+<li><code><a title="mapnik._TextSymbolizer.orientation" href="#mapnik._TextSymbolizer.orientation">orientation</a></code></li>
+<li><code><a title="mapnik._TextSymbolizer.symbol" href="#mapnik._TextSymbolizer.symbol">symbol</a></code></li>
+<li><code><a title="mapnik._TextSymbolizer.text_opacity" href="#mapnik._TextSymbolizer.text_opacity">text_opacity</a></code></li>
+<li><code><a title="mapnik._TextSymbolizer.text_ratio" href="#mapnik._TextSymbolizer.text_ratio">text_ratio</a></code></li>
+<li><code><a title="mapnik._TextSymbolizer.text_size" href="#mapnik._TextSymbolizer.text_size">text_size</a></code></li>
+<li><code><a title="mapnik._TextSymbolizer.text_transform" href="#mapnik._TextSymbolizer.text_transform">text_transform</a></code></li>
+<li><code><a title="mapnik._TextSymbolizer.vertical_alignment" href="#mapnik._TextSymbolizer.vertical_alignment">vertical_alignment</a></code></li>
+<li><code><a title="mapnik._TextSymbolizer.wrap_before" href="#mapnik._TextSymbolizer.wrap_before">wrap_before</a></code></li>
+<li><code><a title="mapnik._TextSymbolizer.wrap_width" href="#mapnik._TextSymbolizer.wrap_width">wrap_width</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="mapnik.class" href="#mapnik.class">class</a></code></h4>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
+</footer>
+</body>
+</html>

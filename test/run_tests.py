@@ -5,7 +5,7 @@ import os
 import sys
 
 
-from .python_tests.utilities import TodoPlugin
+from python_tests.utilities import TodoPlugin
 
 try:
     import nose

@@ -43,6 +43,10 @@ import itertools
 import os
 import warnings
 
+# @TODO: Disabling paths module for now. See https://github.com/pdoc3/pdoc/issues/299
+__pdoc__ = {}
+__pdoc__["paths"] = False
+
 try:
     import json
 except ImportError:
