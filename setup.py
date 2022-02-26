@@ -32,7 +32,10 @@ def clean_boost_name(name):
 
 
 def find_boost_library(_id):
-    suffixes = ["", "-mt"]  # standard naming  # former naming schema for multithreading build
+    suffixes = [
+        "",
+        "-mt",
+    ]  # standard naming  # former naming schema for multithreading build
     if "python" in _id:
         # Debian naming convention for versions installed in parallel
         suffixes.insert(0, "-py%d%d" % (sys.version_info.major, sys.version_info.minor))
@@ -59,7 +62,8 @@ def get_boost_library_names():
         msg = ""
         for name in missing:
             msg += (
-                "\nMissing {} boost library, try to add its name with " "{}_LIB environment var."
+                "\nMissing {} boost library, try to add its name with {}_LIB"
+                " environment var."
             ).format(name, name.upper())
         raise EnvironmentError(msg)
     return found
@@ -76,7 +80,7 @@ class WhichBoostCommand(Command):
         pass
 
     def run(self):
-        print(("\n".join(get_boost_library_names())))
+        print("\n".join(get_boost_library_names()))
 
 
 cflags = sysconfig.get_config_var("CFLAGS")
@@ -84,7 +88,9 @@ sysconfig._config_vars["CFLAGS"] = re.sub(
     " +", " ", cflags.replace("-g ", "").replace("-Os", "").replace("-arch i386", "")
 )
 opt = sysconfig.get_config_var("OPT")
-sysconfig._config_vars["OPT"] = re.sub(" +", " ", opt.replace("-g ", "").replace("-Os", ""))
+sysconfig._config_vars["OPT"] = re.sub(
+    " +", " ", opt.replace("-g ", "").replace("-Os", "")
+)
 ldshared = sysconfig.get_config_var("LDSHARED")
 sysconfig._config_vars["LDSHARED"] = re.sub(
     " +", " ", ldshared.replace("-g ", "").replace("-Os", "").replace("-arch i386", "")
@@ -144,7 +150,9 @@ if mason_build:
     except shutil.Error:
         pass
     input_plugin_files = os.listdir(input_plugin_path)
-    input_plugin_files = [os.path.join(input_plugin_path, f) for f in input_plugin_files]
+    input_plugin_files = [
+        os.path.join(input_plugin_path, f) for f in input_plugin_files
+    ]
     if not os.path.exists(os.path.join("mapnik", "lib", "mapnik", "input")):
         os.makedirs(os.path.join("mapnik", "lib", "mapnik", "input"))
     for f in input_plugin_files:
@@ -166,10 +174,13 @@ if mason_build:
         except shutil.Error:
             pass
     f_paths.write(
-        'mapniklibpath = os.path.join(os.path.dirname(os.path.realpath(__file__)), "lib")\n'
+        "mapniklibpath = os.path.join(os.path.dirname(os.path.realpath(__file__)),"
+        ' "lib")\n'
     )
     f_paths.write("inputpluginspath = os.path.join(mapniklibpath, 'mapnik', 'input')\n")
-    f_paths.write("fontscollectionpath = os.path.join(mapniklibpath, 'mapnik', 'fonts')\n")
+    f_paths.write(
+        "fontscollectionpath = os.path.join(mapniklibpath, 'mapnik', 'fonts')\n"
+    )
     f_paths.write("__all__ = [mapniklibpath,inputpluginspath,fontscollectionpath]\n")
     f_paths.close()
 else:
@@ -199,14 +210,18 @@ if mason_build:
     if len(icu_files) != 1:
         raise Exception("Failed to find icu dat file at " + icu_path)
     for f in icu_files:
-        shutil.copyfile(f, os.path.join("mapnik", share_dir, "icu", os.path.basename(f)))
+        shutil.copyfile(
+            f, os.path.join("mapnik", share_dir, "icu", os.path.basename(f))
+        )
 
     gdal_path = "mason_packages/.link/share/gdal/"
     gdal_files = os.listdir(gdal_path)
     gdal_files = [os.path.join(gdal_path, f) for f in gdal_files]
     for f in gdal_files:
         try:
-            shutil.copyfile(f, os.path.join("mapnik", share_dir, "gdal", os.path.basename(f)))
+            shutil.copyfile(
+                f, os.path.join("mapnik", share_dir, "gdal", os.path.basename(f))
+            )
         except shutil.Error:
             pass
 
@@ -215,7 +230,9 @@ if mason_build:
     proj_files = [os.path.join(proj_path, f) for f in proj_files]
     for f in proj_files:
         try:
-            shutil.copyfile(f, os.path.join("mapnik", share_dir, "proj", os.path.basename(f)))
+            shutil.copyfile(
+                f, os.path.join("mapnik", share_dir, "proj", os.path.basename(f))
+            )
         except shutil.Error:
             pass
 
@@ -231,7 +248,7 @@ if os.environ.get("PYCAIRO", "false") == "true":
 
         cairo_inc = os.path.join(os.path.dirname(cairo.__file__), "include")
         extra_comp_args.append("-DHAVE_PYCAIRO")
-        print(("-I%s/include/pycairo".format(sys.exec_prefix)))
+        print("-I%s/include/pycairo".format(sys.exec_prefix))
         extra_comp_args.append("-I{0}/include/pycairo".format(sys.exec_prefix))
         extra_comp_args.append("-I{0}".format(cairo_inc))
         # extra_comp_args.extend(check_output(["pkg-config", '--cflags', 'pycairo']).strip().split(' '))
@@ -250,9 +267,9 @@ else:
     linkflags.append("-Wl,-z,origin")
     linkflags.append("-Wl,-rpath=$ORIGIN/lib")
 
-if os.environ.get("CC", False) == False:
+if os.environ.get("CC", False) is False:
     os.environ["CC"] = check_output([mapnik_config, "--cxx"])
-if os.environ.get("CXX", False) == False:
+if os.environ.get("CXX", False) is False:
     os.environ["CXX"] = check_output([mapnik_config, "--cxx"])
 
 setup(
@@ -265,6 +282,24 @@ setup(
     license="GNU LESSER GENERAL PUBLIC LICENSE",
     keywords="mapnik mapbox mapping cartography",
     url="http://mapnik.org/",
+    extras_require={
+        "dev": [
+            "sphinx",
+            "pylint",
+            "black",
+            "nose",
+            "flake8",
+            "myst-parser",
+            "sphinx_rtd_theme",
+        ],
+        "docs": [
+            "sphinx",
+            "sphinx_rtd_theme",
+            "myst-parser",
+        ],
+        "cairo": ["pycairo"],
+        "pdf": ["pypdf2"],
+    },
     tests_require=[
         "nose",
     ],

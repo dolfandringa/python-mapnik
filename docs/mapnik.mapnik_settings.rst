@@ -1,5 +1,5 @@
-mapnik.mapnik_settings
-==============
+mapnik.mapnik\_settings
+=======================
 
 .. module:: mapnik.mapnik_settings
 

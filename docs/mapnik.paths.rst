@@ -1,5 +1,5 @@
 mapnik.paths
-==============
+============
 
 .. module:: mapnik.paths
 
