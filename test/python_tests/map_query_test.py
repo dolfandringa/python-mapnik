@@ -73,7 +73,9 @@ if "shape" in mapnik.DatasourceCache.plugin_names():
     def test_map_query_works2():
         m = mapnik.Map(256, 256)
         mapnik.load_map(m, "../data/good_maps/merc2wgs84_reprojection.xml")
-        wgs84_bounds = mapnik.Box2d(-179.999999975, -85.0511287776, 179.999999975, 85.0511287776)
+        wgs84_bounds = mapnik.Box2d(
+            -179.999999975, -85.0511287776, 179.999999975, 85.0511287776
+        )
         m.maximum_extent = wgs84_bounds
         # caution - will go square due to evil aspect_fix_mode backhandedness
         m.zoom_all()
@@ -101,7 +103,9 @@ if "shape" in mapnik.DatasourceCache.plugin_names():
     def test_map_query_in_pixels_works2():
         m = mapnik.Map(256, 256)
         mapnik.load_map(m, "../data/good_maps/merc2wgs84_reprojection.xml")
-        wgs84_bounds = mapnik.Box2d(-179.999999975, -85.0511287776, 179.999999975, 85.0511287776)
+        wgs84_bounds = mapnik.Box2d(
+            -179.999999975, -85.0511287776, 179.999999975, 85.0511287776
+        )
         m.maximum_extent = wgs84_bounds
         # caution - will go square due to evil aspect_fix_mode backhandedness
         m.zoom_all()

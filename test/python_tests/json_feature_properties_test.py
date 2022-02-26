@@ -15,68 +15,107 @@ chars = [
     {
         "name": "single_quote",
         "test": "string with ' quote",
-        "json": '{"type":"Feature","id":1,"geometry":null,"properties":{"name":"string with \' quote"}}',
+        "json": (
+            '{"type":"Feature","id":1,"geometry":null,"properties":{"name":"string with'
+            " ' quote\"}}"
+        ),
     },
     {
         "name": "escaped_single_quote",
         "test": "string with ' quote",
-        "json": '{"type":"Feature","id":1,"geometry":null,"properties":{"name":"string with \' quote"}}',
+        "json": (
+            '{"type":"Feature","id":1,"geometry":null,"properties":{"name":"string with'
+            " ' quote\"}}"
+        ),
     },
     {
         "name": "double_quote",
         "test": 'string with " quote',
-        "json": '{"type":"Feature","id":1,"geometry":null,"properties":{"name":"string with \\" quote"}}',
+        "json": (
+            '{"type":"Feature","id":1,"geometry":null,"properties":{"name":"string with'
+            ' \\" quote"}}'
+        ),
     },
     {
         "name": "double_quote2",
         "test": 'string with " quote',
-        "json": '{"type":"Feature","id":1,"geometry":null,"properties":{"name":"string with \\" quote"}}',
+        "json": (
+            '{"type":"Feature","id":1,"geometry":null,"properties":{"name":"string with'
+            ' \\" quote"}}'
+        ),
     },
     {
         "name": "reverse_solidus",  # backslash
         "test": "string with \\ quote",
-        "json": '{"type":"Feature","id":1,"geometry":null,"properties":{"name":"string with \\\\ quote"}}',
+        "json": (
+            '{"type":"Feature","id":1,"geometry":null,"properties":{"name":"string with'
+            ' \\\\ quote"}}'
+        ),
     },
     {
         "name": "solidus",  # forward slash
         "test": "string with / quote",
-        "json": '{"type":"Feature","id":1,"geometry":null,"properties":{"name":"string with / quote"}}',
+        "json": (
+            '{"type":"Feature","id":1,"geometry":null,"properties":{"name":"string with'
+            ' / quote"}}'
+        ),
     },
     {
         "name": "backspace",
         "test": "string with \b quote",
-        "json": '{"type":"Feature","id":1,"geometry":null,"properties":{"name":"string with \\b quote"}}',
+        "json": (
+            '{"type":"Feature","id":1,"geometry":null,"properties":{"name":"string with'
+            ' \\b quote"}}'
+        ),
     },
     {
         "name": "formfeed",
         "test": "string with \f quote",
-        "json": '{"type":"Feature","id":1,"geometry":null,"properties":{"name":"string with \\f quote"}}',
+        "json": (
+            '{"type":"Feature","id":1,"geometry":null,"properties":{"name":"string with'
+            ' \\f quote"}}'
+        ),
     },
     {
         "name": "newline",
         "test": "string with \n quote",
-        "json": '{"type":"Feature","id":1,"geometry":null,"properties":{"name":"string with \\n quote"}}',
+        "json": (
+            '{"type":"Feature","id":1,"geometry":null,"properties":{"name":"string with'
+            ' \\n quote"}}'
+        ),
     },
     {
         "name": "carriage_return",
         "test": "string with \r quote",
-        "json": '{"type":"Feature","id":1,"geometry":null,"properties":{"name":"string with \\r quote"}}',
+        "json": (
+            '{"type":"Feature","id":1,"geometry":null,"properties":{"name":"string with'
+            ' \\r quote"}}'
+        ),
     },
     {
         "name": "horiztonal_tab",
         "test": "string with \t quote",
-        "json": '{"type":"Feature","id":1,"geometry":null,"properties":{"name":"string with \\t quote"}}',
+        "json": (
+            '{"type":"Feature","id":1,"geometry":null,"properties":{"name":"string with'
+            ' \\t quote"}}'
+        ),
     },
     # remainder are c++ reserved, but not json
     {
         "name": "vert_tab",
         "test": "string with \v quote",
-        "json": '{"type":"Feature","id":1,"geometry":null,"properties":{"name":"string with \\u000b quote"}}',
+        "json": (
+            '{"type":"Feature","id":1,"geometry":null,"properties":{"name":"string with'
+            ' \\u000b quote"}}'
+        ),
     },
     {
         "name": "alert",
         "test": "string with \a quote",
-        "json": '{"type":"Feature","id":1,"geometry":null,"properties":{"name":"string with \\u0007 quote"}}',
+        "json": (
+            '{"type":"Feature","id":1,"geometry":null,"properties":{"name":"string with'
+            ' \\u0007 quote"}}'
+        ),
     },
 ]
 

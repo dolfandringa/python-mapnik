@@ -120,7 +120,10 @@ if "sqlite" in mapnik.DatasourceCache.plugin_names():
     def test_attachdb_with_sql_join():
         ds = mapnik.SQLite(
             file="../data/sqlite/world.sqlite",
-            table="(select * from world_merc INNER JOIN business on world_merc.iso3 = business.ISO3 limit 100)",
+            table=(
+                "(select * from world_merc INNER JOIN business on world_merc.iso3 ="
+                " business.ISO3 limit 100)"
+            ),
             attachdb="busines@business.sqlite",
         )
         eq_(len(ds.fields()), 29)
@@ -240,7 +243,10 @@ if "sqlite" in mapnik.DatasourceCache.plugin_names():
     def test_attachdb_with_sql_join_count():
         ds = mapnik.SQLite(
             file="../data/sqlite/world.sqlite",
-            table="(select * from world_merc INNER JOIN business on world_merc.iso3 = business.ISO3 limit 100)",
+            table=(
+                "(select * from world_merc INNER JOIN business on world_merc.iso3 ="
+                " business.ISO3 limit 100)"
+            ),
             attachdb="busines@business.sqlite",
         )
         eq_(len(ds.fields()), 29)
@@ -324,7 +330,10 @@ if "sqlite" in mapnik.DatasourceCache.plugin_names():
         """
         ds = mapnik.SQLite(
             file="../data/sqlite/world.sqlite",
-            table="(select * from world_merc INNER JOIN business on world_merc.iso3 = business.ISO3)",
+            table=(
+                "(select * from world_merc INNER JOIN business on world_merc.iso3 ="
+                " business.ISO3)"
+            ),
             attachdb="busines@business.sqlite",
         )
         eq_(len(ds.fields()), 29)
@@ -406,7 +415,10 @@ if "sqlite" in mapnik.DatasourceCache.plugin_names():
         """
         ds = mapnik.SQLite(
             file="../data/sqlite/world.sqlite",
-            table="(select * from (select * from world_merc where !intersects!) as world_merc INNER JOIN business on world_merc.iso3 = business.ISO3)",
+            table=(
+                "(select * from (select * from world_merc where !intersects!) as"
+                " world_merc INNER JOIN business on world_merc.iso3 = business.ISO3)"
+            ),
             attachdb="busines@business.sqlite",
         )
         eq_(len(ds.fields()), 29)
@@ -488,7 +500,10 @@ if "sqlite" in mapnik.DatasourceCache.plugin_names():
         """
         ds = mapnik.SQLite(
             file="../data/sqlite/world.sqlite",
-            table="(select * from (select * from world_merc where !intersects! limit 1) as world_merc INNER JOIN business on world_merc.iso3 = business.ISO3)",
+            table=(
+                "(select * from (select * from world_merc where !intersects! limit 1)"
+                " as world_merc INNER JOIN business on world_merc.iso3 = business.ISO3)"
+            ),
             attachdb="busines@business.sqlite",
         )
         eq_(len(ds.fields()), 29)
@@ -570,7 +585,10 @@ if "sqlite" in mapnik.DatasourceCache.plugin_names():
         """
         ds = mapnik.SQLite(
             file="../data/sqlite/world.sqlite",
-            table="(select * from (select * from world_merc where !intersects! and 1=2) as world_merc INNER JOIN business on world_merc.iso3 = business.ISO3)",
+            table=(
+                "(select * from (select * from world_merc where !intersects! and 1=2)"
+                " as world_merc INNER JOIN business on world_merc.iso3 = business.ISO3)"
+            ),
             attachdb="busines@business.sqlite",
         )
         # nothing is able to join to business so we don't pick up business
@@ -900,7 +918,9 @@ if "sqlite" in mapnik.DatasourceCache.plugin_names():
 
     def test_that_64bit_int_fields_work():
         ds = mapnik.SQLite(
-            file="../data/sqlite/64bit_int.sqlite", table="int_table", use_spatial_index=False
+            file="../data/sqlite/64bit_int.sqlite",
+            table="int_table",
+            use_spatial_index=False,
         )
         eq_(len(ds.fields()), 3)
         eq_(ds.fields(), ["OGC_FID", "id", "bigint"])

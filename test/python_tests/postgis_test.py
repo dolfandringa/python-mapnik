@@ -215,7 +215,10 @@ INSERT INTO test12(name,geom) values ('MultiPolygonZM',GeomFromEWKT('SRID=4326;M
 
 def postgis_setup():
     call("dropdb %s" % MAPNIK_TEST_DBNAME, silent=True)
-    call("createdb -T %s %s" % (POSTGIS_TEMPLATE_DBNAME, MAPNIK_TEST_DBNAME), silent=False)
+    call(
+        "createdb -T %s %s" % (POSTGIS_TEMPLATE_DBNAME, MAPNIK_TEST_DBNAME),
+        silent=False,
+    )
     call(
         "shp2pgsql -s 3857 -g geom -W LATIN1 %s world_merc | psql -q %s"
         % (SHAPEFILE, MAPNIK_TEST_DBNAME),
@@ -280,7 +283,9 @@ if (
         eq_(meta["geometry_type"], mapnik.DataGeometryType.Polygon)
 
     def test_subquery():
-        ds = mapnik.PostGIS(dbname=MAPNIK_TEST_DBNAME, table="(select * from world_merc) as w")
+        ds = mapnik.PostGIS(
+            dbname=MAPNIK_TEST_DBNAME, table="(select * from world_merc) as w"
+        )
         fs = ds.featureset()
         feature = next(fs)
         eq_(feature["gid"], 1)
@@ -302,7 +307,8 @@ if (
         eq_(meta["geometry_type"], mapnik.DataGeometryType.Polygon)
 
         ds = mapnik.PostGIS(
-            dbname=MAPNIK_TEST_DBNAME, table="(select gid,geom,fips as _fips from world_merc) as w"
+            dbname=MAPNIK_TEST_DBNAME,
+            table="(select gid,geom,fips as _fips from world_merc) as w",
         )
         fs = ds.featureset()
         feature = next(fs)
@@ -360,7 +366,9 @@ if (
         eq_(meta["geometry_type"], None)
 
     def test_geometry_detection():
-        ds = mapnik.PostGIS(dbname=MAPNIK_TEST_DBNAME, table="test", geometry_field="geom")
+        ds = mapnik.PostGIS(
+            dbname=MAPNIK_TEST_DBNAME, table="test", geometry_field="geom"
+        )
         meta = ds.describe()
         eq_(meta["srid"], 4326)
         eq_(meta.get("key_field"), None)
@@ -717,7 +725,9 @@ if (
         eq_(meta["geometry_type"], mapnik.DataGeometryType.Point)
 
     def test_empty_geom():
-        ds = mapnik.PostGIS(dbname=MAPNIK_TEST_DBNAME, table="test7", geometry_field="geom")
+        ds = mapnik.PostGIS(
+            dbname=MAPNIK_TEST_DBNAME, table="test7", geometry_field="geom"
+        )
         fs = ds.featureset()
         eq_(fs.next()["gid"], 1)
 
@@ -767,7 +777,9 @@ if (
             t.join()
 
     def test_that_64bit_int_fields_work():
-        ds = mapnik.PostGIS(dbname=MAPNIK_TEST_DBNAME, table="test8", geometry_field="geom")
+        ds = mapnik.PostGIS(
+            dbname=MAPNIK_TEST_DBNAME, table="test8", geometry_field="geom"
+        )
         eq_(len(ds.fields()), 2)
         eq_(ds.fields(), ["gid", "int_field"])
         eq_(ds.field_types(), ["int", "int"])
@@ -798,7 +810,10 @@ if (
                 dbname=MAPNIK_TEST_DBNAME,
                 max_size=1,  # unused
                 persist_connection=False,
-                table="(select ST_MakePoint(0,0) as g, pg_backend_pid() as p, 1 as v) as w",
+                table=(
+                    "(select ST_MakePoint(0,0) as g, pg_backend_pid() as p, 1 as v)"
+                    " as w"
+                ),
                 geometry_field="g",
             )
             fs = ds.featureset()
@@ -809,7 +824,9 @@ if (
             eq_(meta["geometry_type"], mapnik.DataGeometryType.Point)
 
     def test_null_comparision():
-        ds = mapnik.PostGIS(dbname=MAPNIK_TEST_DBNAME, table="test9", geometry_field="geom")
+        ds = mapnik.PostGIS(
+            dbname=MAPNIK_TEST_DBNAME, table="test9", geometry_field="geom"
+        )
         fs = ds.featureset()
         feat = next(fs)
 
@@ -861,7 +878,9 @@ if (
         eq_(mapnik.Expression("[name] != false").evaluate(feat), True)
 
     def test_null_comparision2():
-        ds = mapnik.PostGIS(dbname=MAPNIK_TEST_DBNAME, table="test10", geometry_field="geom")
+        ds = mapnik.PostGIS(
+            dbname=MAPNIK_TEST_DBNAME, table="test10", geometry_field="geom"
+        )
         fs = ds.featureset()
         feat = next(fs)
 
@@ -936,7 +955,10 @@ if (
             "type": "postgis",
             "dbname": MAPNIK_TEST_DBNAME,
             "geometry_field": "geom",
-            "table": "(select null::bigint as osm_id, GeomFromEWKT('SRID=4326;POINT(0 0)') as geom) as tmp",
+            "table": (
+                "(select null::bigint as osm_id, GeomFromEWKT('SRID=4326;POINT(0 0)')"
+                " as geom) as tmp"
+            ),
         }
         ds = mapnik.Datasource(**opts)
         fs = ds.featureset()
@@ -956,7 +978,10 @@ if (
             "key_field": "osm_id",
             "dbname": MAPNIK_TEST_DBNAME,
             "geometry_field": "geom",
-            "table": "(select null::bigint as osm_id, GeomFromEWKT('SRID=4326;POINT(0 0)') as geom) as tmp",
+            "table": (
+                "(select null::bigint as osm_id, GeomFromEWKT('SRID=4326;POINT(0 0)')"
+                " as geom) as tmp"
+            ),
         }
         ds = mapnik.Datasource(**opts)
         fs = ds.featureset()
@@ -1018,7 +1043,10 @@ if (
         # We ensure the query wille be long enough
         buggy_layer.datasource = mapnik.PostGIS(
             dbname=MAPNIK_TEST_DBNAME,
-            table="(SELECT geom as geom, pg_sleep(0.1), fips::int from world_merc) as failure_tabl",
+            table=(
+                "(SELECT geom as geom, pg_sleep(0.1), fips::int from world_merc) as"
+                " failure_tabl"
+            ),
             max_async_connection=2,
             max_size=2,
             asynchronous_request=True,
@@ -1250,28 +1278,40 @@ if (
         eq_(feat.id(), 21)
         eq_(feat["gid"], 21)
         eq_(feat["name"], "MultiPolygon")
-        eq_(feat.geometry.to_wkt(), "MULTIPOLYGON(((0 0,1 1,2 2,0 0)),((0 0,1 1,2 2,0 0)))")
+        eq_(
+            feat.geometry.to_wkt(),
+            "MULTIPOLYGON(((0 0,1 1,2 2,0 0)),((0 0,1 1,2 2,0 0)))",
+        )
 
         # MultiPolygonZ
         feat = next(fs)
         eq_(feat.id(), 22)
         eq_(feat["gid"], 22)
         eq_(feat["name"], "MultiPolygonZ")
-        eq_(feat.geometry.to_wkt(), "MULTIPOLYGON(((0 0,1 1,2 2,0 0)),((0 0,1 1,2 2,0 0)))")
+        eq_(
+            feat.geometry.to_wkt(),
+            "MULTIPOLYGON(((0 0,1 1,2 2,0 0)),((0 0,1 1,2 2,0 0)))",
+        )
 
         # MultiPolygonM
         feat = next(fs)
         eq_(feat.id(), 23)
         eq_(feat["gid"], 23)
         eq_(feat["name"], "MultiPolygonM")
-        eq_(feat.geometry.to_wkt(), "MULTIPOLYGON(((0 0,1 1,2 2,0 0)),((0 0,1 1,2 2,0 0)))")
+        eq_(
+            feat.geometry.to_wkt(),
+            "MULTIPOLYGON(((0 0,1 1,2 2,0 0)),((0 0,1 1,2 2,0 0)))",
+        )
 
         # MultiPolygonZM
         feat = next(fs)
         eq_(feat.id(), 24)
         eq_(feat["gid"], 24)
         eq_(feat["name"], "MultiPolygonZM")
-        eq_(feat.geometry.to_wkt(), "MULTIPOLYGON(((0 0,1 1,2 2,0 0)),((0 0,1 1,2 2,0 0)))")
+        eq_(
+            feat.geometry.to_wkt(),
+            "MULTIPOLYGON(((0 0,1 1,2 2,0 0)),((0 0,1 1,2 2,0 0)))",
+        )
 
     def test_handling_of_discarded_key_field():
         ds = mapnik.PostGIS(

@@ -37,8 +37,15 @@ def compare_shape_between_mapnik_and_ogr(shapefile, query=None):
             eq_(
                 feat1.id(),
                 feat2.id(),
-                '%s : ogr feature id %s "%s" does not equal shapefile feature id %s "%s"'
-                % (count, feat1.id(), str(feat1.attributes), feat2.id(), str(feat2.attributes)),
+                '%s : ogr feature id %s "%s" does not equal shapefile feature id %s'
+                ' "%s"'
+                % (
+                    count,
+                    feat1.id(),
+                    str(feat1.attributes),
+                    feat2.id(),
+                    str(feat2.attributes),
+                ),
             )
     return True
 

@@ -124,10 +124,8 @@ def do_encoding():
         name = s[3]
         size = s[4]
         print(
-            (
-                "min: %sms | avg: %sms | total: %sms | len: %s <-- %s"
-                % (min_, avg, elapsed, size, name)
-            )
+            "min: %sms | avg: %sms | total: %sms | len: %s <-- %s"
+            % (min_, avg, elapsed, size, name)
         )
 
 

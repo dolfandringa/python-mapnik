@@ -30,7 +30,9 @@ def test_dataraster_coloring():
         sym = mapnik.RasterSymbolizer()
         # Assigning a colorizer to the RasterSymbolizer tells the later
         # that it should use it to colorize the raw data raster
-        colorizer = mapnik.RasterColorizer(mapnik.COLORIZER_DISCRETE, mapnik.Color("transparent"))
+        colorizer = mapnik.RasterColorizer(
+            mapnik.COLORIZER_DISCRETE, mapnik.Color("transparent")
+        )
 
         for value, color in [
             (0, "#0044cc"),
@@ -66,7 +68,8 @@ def test_dataraster_coloring():
         eq_(
             actual.tostring("png32"),
             expected.tostring("png32"),
-            "failed comparing actual (%s) and expected (%s)" % (actual_file, expected_file),
+            "failed comparing actual (%s) and expected (%s)"
+            % (actual_file, expected_file),
         )
 
 
@@ -165,7 +168,9 @@ def test_raster_warping():
             band=1,
         )
         sym = mapnik.RasterSymbolizer()
-        sym.colorizer = mapnik.RasterColorizer(mapnik.COLORIZER_DISCRETE, mapnik.Color(255, 255, 0))
+        sym.colorizer = mapnik.RasterColorizer(
+            mapnik.COLORIZER_DISCRETE, mapnik.Color(255, 255, 0)
+        )
         rule = mapnik.Rule()
         rule.symbols.append(sym)
         style = mapnik.Style()
@@ -191,7 +196,8 @@ def test_raster_warping():
         eq_(
             actual.tostring("png32"),
             expected.tostring("png32"),
-            "failed comparing actual (%s) and expected (%s)" % (actual_file, expected_file),
+            "failed comparing actual (%s) and expected (%s)"
+            % (actual_file, expected_file),
         )
 
 
@@ -205,7 +211,9 @@ def test_raster_warping_does_not_overclip_source():
             band=1,
         )
         sym = mapnik.RasterSymbolizer()
-        sym.colorizer = mapnik.RasterColorizer(mapnik.COLORIZER_DISCRETE, mapnik.Color(255, 255, 0))
+        sym.colorizer = mapnik.RasterColorizer(
+            mapnik.COLORIZER_DISCRETE, mapnik.Color(255, 255, 0)
+        )
         rule = mapnik.Rule()
         rule.symbols.append(sym)
         style = mapnik.Style()
@@ -229,7 +237,8 @@ def test_raster_warping_does_not_overclip_source():
         eq_(
             actual.tostring("png32"),
             expected.tostring("png32"),
-            "failed comparing actual (%s) and expected (%s)" % (actual_file, expected_file),
+            "failed comparing actual (%s) and expected (%s)"
+            % (actual_file, expected_file),
         )
 
 

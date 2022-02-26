@@ -81,7 +81,9 @@ if "shape" in mapnik.DatasourceCache.plugin_names():
                     % (actual, "tests/python_tests/" + expected)
                 )
                 fail_im = side_by_side_image(expected_im, im)
-                fail_im.save("/tmp/mapnik-style-image-filter-" + filename + ".fail.png", "png32")
+                fail_im.save(
+                    "/tmp/mapnik-style-image-filter-" + filename + ".fail.png", "png32"
+                )
         eq_(len(fails), 0, "\n" + "\n".join(fails))
 
 

@@ -15,7 +15,9 @@ def call(cmd, silent=True):
 
 
 prefix = env["PREFIX"]
-target_path = os.path.normpath(sysconfig.get_python_lib() + os.path.sep + env["MAPNIK_NAME"])
+target_path = os.path.normpath(
+    sysconfig.get_python_lib() + os.path.sep + env["MAPNIK_NAME"]
+)
 
 py_env = env.Clone()
 
@@ -112,7 +114,9 @@ py_env.Append(LINKFLAGS=python_link_flag)
 py_env.AppendUnique(LIBS="mapnik-json")
 py_env.AppendUnique(LIBS="mapnik-wkt")
 
-_mapnik = py_env.LoadableModule("mapnik/_mapnik", sources, LDMODULEPREFIX="", LDMODULESUFFIX=".so")
+_mapnik = py_env.LoadableModule(
+    "mapnik/_mapnik", sources, LDMODULEPREFIX="", LDMODULESUFFIX=".so"
+)
 
 Depends(_mapnik, env.subst("../../src/%s" % env["MAPNIK_LIB_NAME"]))
 Depends(_mapnik, env.subst("../../src/json/libmapnik-json${LIBSUFFIX}"))

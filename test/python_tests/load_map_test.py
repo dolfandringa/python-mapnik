@@ -39,7 +39,9 @@ def test_broken_files():
             m = mapnik.Map(512, 512)
             strict = True
             mapnik.load_map(m, filename, strict)
-            failures.append("Loading broken map (%s) did not raise RuntimeError!" % filename)
+            failures.append(
+                "Loading broken map (%s) did not raise RuntimeError!" % filename
+            )
         except RuntimeError:
             pass
     eq_(len(failures), 0, "\n" + "\n".join(failures))
@@ -58,10 +60,14 @@ def test_can_parse_xml_with_deprecated_properties():
             strict = True
             mapnik.load_map(m, filename, strict)
             base_path = os.path.dirname(filename)
-            mapnik.load_map_from_string(m, open(filename, "rb").read(), strict, base_path)
+            mapnik.load_map_from_string(
+                m, open(filename, "rb").read(), strict, base_path
+            )
         except RuntimeError as e:
             # only test datasources that we have installed
-            if not "Could not create datasource" in str(e) and not "could not connect" in str(e):
+            if not "Could not create datasource" in str(
+                e
+            ) and not "could not connect" in str(e):
                 failures.append("Failed to load valid map %s (%s)" % (filename, e))
     eq_(len(failures), 0, "\n" + "\n".join(failures))
     mapnik.logger.set_severity(default_logging_severity)
@@ -82,7 +88,9 @@ def test_good_files():
                 mapnik.load_map_from_string(m, f.read(), strict, base_path)
         except RuntimeError as e:
             # only test datasources that we have installed
-            if not "Could not create datasource" in str(e) and not "could not connect" in str(e):
+            if not "Could not create datasource" in str(
+                e
+            ) and not "could not connect" in str(e):
                 failures.append("Failed to load valid map %s (%s)" % (filename, e))
     eq_(len(failures), 0, "\n" + "\n".join(failures))
 

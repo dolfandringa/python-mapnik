@@ -132,7 +132,9 @@ if "sqlite" in mapnik.DatasourceCache.plugin_names():
         wkb = mapnik.Geometry.from_wkt(wkt).to_wkb(mapnik.wkbByteOrder.NDR)
         values = (None, sqlite3.Binary(wkb), "test point")
         cur = conn.cursor()
-        cur.execute("""INSERT into "point_table" (id,geometry,name) values (?,?,?)""", values)
+        cur.execute(
+            """INSERT into "point_table" (id,geometry,name) values (?,?,?)""", values
+        )
         conn.commit()
         cur.close()
         conn.close()
@@ -154,7 +156,9 @@ if "sqlite" in mapnik.DatasourceCache.plugin_names():
         eq_(wkb, wkb2)
 
         # ensure we can read this data back out properly with mapnik
-        ds = mapnik.Datasource(**{"type": "sqlite", "file": test_db, "table": "point_table"})
+        ds = mapnik.Datasource(
+            **{"type": "sqlite", "file": test_db, "table": "point_table"}
+        )
         fs = ds.featureset()
         feat = next(fs)
         eq_(feat.id(), 1)

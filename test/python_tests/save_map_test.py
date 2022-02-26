@@ -34,7 +34,9 @@ def compare_map(xml):
         mapnik.load_map(m, xml, False, absolute_base)
     except RuntimeError as e:
         # only test datasources that we have installed
-        if not "Could not create datasource" in str(e) and not "could not connect" in str(e):
+        if not "Could not create datasource" in str(
+            e
+        ) and not "could not connect" in str(e):
             raise RuntimeError(str(e))
         return
     (handle, test_map) = tempfile.mkstemp(suffix=".xml", prefix="mapnik-temp-map1-")
@@ -55,8 +57,8 @@ def compare_map(xml):
                 eq_(f1.read(), f2.read())
     except AssertionError as e:
         raise AssertionError(
-            'serialized map "%s" not the same after being reloaded, \ncompare with command:\n\n$%s'
-            % (xml, diff)
+            'serialized map "%s" not the same after being reloaded, \ncompare with'
+            " command:\n\n$%s" % (xml, diff)
         )
 
     if os.path.exists(test_map):

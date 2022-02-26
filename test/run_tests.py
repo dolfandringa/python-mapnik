@@ -57,7 +57,9 @@ def main():
 
     if prefix:
         # Allow python to find libraries for testing on the buildbot
-        sys.path.insert(0, os.path.join(prefix, "lib/python%s/site-packages" % sys.version[:3]))
+        sys.path.insert(
+            0, os.path.join(prefix, "lib/python%s/site-packages" % sys.version[:3])
+        )
 
     import mapnik
 
@@ -77,7 +79,12 @@ def main():
         if hasattr(mapnik, "fontscollectionpath"):
             print(("- Font path: %s" % mapnik.fontscollectionpath))
         if "MAPNIK_FONT_DIRECTORY" in os.environ:
-            print(("- MAPNIK_FONT_DIRECTORY env: %s" % os.environ.get("MAPNIK_FONT_DIRECTORY")))
+            print(
+                (
+                    "- MAPNIK_FONT_DIRECTORY env: %s"
+                    % os.environ.get("MAPNIK_FONT_DIRECTORY")
+                )
+            )
         print("")
         print("- Running nosetests:")
         print("")

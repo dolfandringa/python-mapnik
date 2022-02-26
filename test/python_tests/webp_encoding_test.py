@@ -47,7 +47,8 @@ if mapnik.has_webp():
 
     def gen_filepath(name, format):
         return os.path.join(
-            "images/support/encoding-opts", name + "-" + format.replace(":", "+") + ".webp"
+            "images/support/encoding-opts",
+            name + "-" + format.replace(":", "+") + ".webp",
         )
 
     def test_quality_threshold():
@@ -90,11 +91,14 @@ if mapnik.has_webp():
                     # this will happen if libweb is old, since it cannot open
                     # images created by more recent webp
                     print(
-                        "warning, cannot open webp expected image (your libwebp is likely too old)"
+                        "warning, cannot open webp expected image (your libwebp is"
+                        " likely too old)"
                     )
                     continue
                 if mapnik.Image.open(actual).tostring() != expected_bytes:
-                    fails.append("%s (actual) not == to %s (expected)" % (actual, expected))
+                    fails.append(
+                        "%s (actual) not == to %s (expected)" % (actual, expected)
+                    )
 
             for opt in opts:
                 im = mapnik.Image(256, 256)
@@ -111,11 +115,14 @@ if mapnik.has_webp():
                     # this will happen if libweb is old, since it cannot open
                     # images created by more recent webp
                     print(
-                        "warning, cannot open webp expected image (your libwebp is likely too old)"
+                        "warning, cannot open webp expected image (your libwebp is"
+                        " likely too old)"
                     )
                     continue
                 if mapnik.Image.open(actual).tostring() != expected_bytes:
-                    fails.append("%s (actual) not == to %s (expected)" % (actual, expected))
+                    fails.append(
+                        "%s (actual) not == to %s (expected)" % (actual, expected)
+                    )
 
             for opt in opts:
                 im = mapnik.Image.open("images/support/transparency/aerial_rgba.png")
@@ -131,11 +138,14 @@ if mapnik.has_webp():
                     # this will happen if libweb is old, since it cannot open
                     # images created by more recent webp
                     print(
-                        "warning, cannot open webp expected image (your libwebp is likely too old)"
+                        "warning, cannot open webp expected image (your libwebp is"
+                        " likely too old)"
                     )
                     continue
                 if mapnik.Image.open(actual).tostring() != expected_bytes:
-                    fails.append("%s (actual) not == to %s (expected)" % (actual, expected))
+                    fails.append(
+                        "%s (actual) not == to %s (expected)" % (actual, expected)
+                    )
             # disabled to avoid failures on ubuntu when using old webp packages
             # eq_(fails,[],'\n'+'\n'.join(fails))
         except RuntimeError as e:
@@ -170,7 +180,10 @@ if mapnik.has_webp():
             except RuntimeError:
                 # this will happen if libweb is old, since it cannot open
                 # images created by more recent webp
-                print("warning, cannot open webp expected image (your libwebp is likely too old)")
+                print(
+                    "warning, cannot open webp expected image (your libwebp is likely"
+                    " too old)"
+                )
                 return
             eq_(t0_len, len(expected_bytes))
         except RuntimeError as e:

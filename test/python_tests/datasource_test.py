@@ -150,7 +150,8 @@ def test_feature_attributes():
 def test_ogr_layer_by_sql():
     if "ogr" in mapnik.DatasourceCache.plugin_names():
         ds = mapnik.Ogr(
-            file="../data/shp/poly.shp", layer_by_sql="SELECT * FROM poly WHERE EAS_ID = 168"
+            file="../data/shp/poly.shp",
+            layer_by_sql="SELECT * FROM poly WHERE EAS_ID = 168",
         )
         features = ds.all_features()
         num_feats = len(list(features))

@@ -31,7 +31,9 @@ def teardown():
 if "csv" in mapnik.DatasourceCache.plugin_names():
 
     def get_csv_ds(filename):
-        return mapnik.Datasource(type="csv", file=os.path.join("../data/csv/", filename))
+        return mapnik.Datasource(
+            type="csv", file=os.path.join("../data/csv/", filename)
+        )
 
     def test_broken_files(visual=False):
         broken = glob.glob("../data/csv/fails/*.*")
@@ -525,7 +527,8 @@ if "csv" in mapnik.DatasourceCache.plugin_names():
 
     def test_that_feature_id_only_incremented_for_valid_rows(**kwargs):
         ds = mapnik.Datasource(
-            type="csv", file=os.path.join("../data/csv/warns", "feature_id_counting.csv")
+            type="csv",
+            file=os.path.join("../data/csv/warns", "feature_id_counting.csv"),
         )
         eq_(len(ds.fields()), 3)
         eq_(ds.fields(), ["x", "y", "id"])
@@ -584,7 +587,9 @@ if "csv" in mapnik.DatasourceCache.plugin_names():
     def test_dynamically_defining_headers3(**kwargs):
         ds = mapnik.Datasource(
             type="csv",
-            file=os.path.join("../data/csv/fails", "needs_headers_one_line_no_newline.csv"),
+            file=os.path.join(
+                "../data/csv/fails", "needs_headers_one_line_no_newline.csv"
+            ),
             headers="x,y,name",
         )
         eq_(len(ds.fields()), 3)
@@ -642,7 +647,9 @@ if "csv" in mapnik.DatasourceCache.plugin_names():
         csv_string = """
            wkt,Name
           """
-        ds = mapnik.Datasource(**{"type": "csv", "extent": "-180,-90,180,90", "inline": csv_string})
+        ds = mapnik.Datasource(
+            **{"type": "csv", "extent": "-180,-90,180,90", "inline": csv_string}
+        )
         b = ds.envelope()
         eq_(b.minx, -180)
         eq_(b.miny, -90)

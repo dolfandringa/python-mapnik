@@ -80,7 +80,9 @@ renderers = [
     {
         "name": "grid",
         "render": render_grid,
-        "compare": lambda actual, reference: compare_grids(actual, reference, alpha=False),
+        "compare": lambda actual, reference: compare_grids(
+            actual, reference, alpha=False
+        ),
         "threshold": grid_threshold,
         "filetype": "json",
         "dir": "grids",
@@ -187,7 +189,9 @@ class Reporting:
         if self.quiet:
             sys.stderr.write("\x1b[33m.\x1b[0m")
         else:
-            print("\x1b[33m?\x1b[0m (\x1b[34mReference file not found, creating\x1b[0m)")
+            print(
+                "\x1b[33m?\x1b[0m (\x1b[34mReference file not found, creating\x1b[0m)"
+            )
         contents = open(actual, "r").read()
         open(expected, "wb").write(contents)
 
@@ -230,7 +234,10 @@ class Reporting:
             print("\nAll %s visual tests passed: \x1b[1;32m✓ \x1b[0m" % self.passed)
             return 0
         sortable_errors = []
-        print("\nVisual rendering: %s failed / %s passed" % (len(self.errors), self.passed))
+        print(
+            "\nVisual rendering: %s failed / %s passed"
+            % (len(self.errors), self.passed)
+        )
         for idx, error in enumerate(self.errors):
             if error[0] == self.OTHER:
                 print(
@@ -244,7 +251,8 @@ class Reporting:
             elif error[0] == self.DIFF:
                 print(
                     str(idx + 1)
-                    + ") \x1b[34m%s different pixels\x1b[0m:\n\t%s (\x1b[31mactual\x1b[0m)\n\t%s (\x1b[32mexpected\x1b[0m)"
+                    + ") \x1b[34m%s different pixels\x1b[0m:\n\t%s"
+                    " (\x1b[31mactual\x1b[0m)\n\t%s (\x1b[32mexpected\x1b[0m)"
                     % (error[3], error[1], error[2])
                 )
                 if ".png" in error[1]:  # ignore grids
@@ -252,7 +260,8 @@ class Reporting:
             elif error[0] == self.REPLACE:
                 print(
                     str(idx + 1)
-                    + ") \x1b[31mreplaced reference with new version:\x1b[0m %s" % error[2]
+                    + ") \x1b[31mreplaced reference with new version:\x1b[0m %s"
+                    % error[2]
                 )
         if len(sortable_errors):
             # drop failure results in folder
@@ -275,7 +284,9 @@ class Reporting:
                 expected_new = os.path.join(vdir, os.path.basename(expected))
                 shutil.copy(expected, expected_new)
                 html_body += self.make_html_item(
-                    os.path.relpath(actual_new, vdir), os.path.relpath(expected_new, vdir), diff
+                    os.path.relpath(actual_new, vdir),
+                    os.path.relpath(expected_new, vdir),
+                    diff,
                 )
             html_out.write(html_template.replace("{{RESULTS}}", html_body))
             print("View failures by opening %s" % failures_realpath)
@@ -288,7 +299,9 @@ def render(filename, config, scale_factor, reporting):
     try:
         mapnik.load_map(m, os.path.join(dirname, "styles", filename), True)
 
-        if not (m.parameters["status"] if ("status" in m.parameters) else config["status"]):
+        if not (
+            m.parameters["status"] if ("status" in m.parameters) else config["status"]
+        ):
             return
     except Exception as e:
         if "Could not create datasource" in str(e) or "Bad connection" in str(e):
@@ -298,7 +311,10 @@ def render(filename, config, scale_factor, reporting):
 
     sizes = config["sizes"]
     if "sizes" in m.parameters:
-        sizes = [[int(i) for i in size.split(",")] for size in m.parameters["sizes"].split(";")]
+        sizes = [
+            [int(i) for i in size.split(",")]
+            for size in m.parameters["sizes"].split(";")
+        ]
 
     for size in sizes:
         m.width, m.height = size
@@ -316,7 +332,8 @@ def render(filename, config, scale_factor, reporting):
                 expected = os.path.join(
                     dirname,
                     renderer["dir"],
-                    "%s-%s-reference.%s" % (postfix, renderer["name"], renderer["filetype"]),
+                    "%s-%s-reference.%s"
+                    % (postfix, renderer["name"], renderer["filetype"]),
                 )
                 actual = os.path.join(
                     visual_output_dir,
@@ -357,7 +374,8 @@ if __name__ == "__main__":
         files = [name + ".xml" for name in sys.argv[1:]]
     else:
         files = [
-            os.path.basename(file) for file in glob.glob(os.path.join(dirname, "styles/*.xml"))
+            os.path.basename(file)
+            for file in glob.glob(os.path.join(dirname, "styles/*.xml"))
         ]
 
     if not os.path.exists(visual_output_dir):

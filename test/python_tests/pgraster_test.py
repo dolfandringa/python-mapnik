@@ -64,7 +64,10 @@ def psql_can_connect():
 
 
 def psql_run(cmd):
-    cmd = 'psql --set ON_ERROR_STOP=1 %s -c "%s"' % (MAPNIK_TEST_DBNAME, cmd.replace('"', '\\"'))
+    cmd = 'psql --set ON_ERROR_STOP=1 %s -c "%s"' % (
+        MAPNIK_TEST_DBNAME,
+        cmd.replace('"', '\\"'),
+    )
     log("DEBUG: running " + cmd)
     call(cmd)
 
@@ -98,7 +101,10 @@ def createdb_and_dropdb_on_path():
 
 def postgis_setup():
     call("dropdb %s" % MAPNIK_TEST_DBNAME, silent=True)
-    call("createdb -T %s %s" % (POSTGIS_TEMPLATE_DBNAME, MAPNIK_TEST_DBNAME), silent=False)
+    call(
+        "createdb -T %s %s" % (POSTGIS_TEMPLATE_DBNAME, MAPNIK_TEST_DBNAME),
+        silent=False,
+    )
 
 
 def postgis_takedown():
@@ -108,7 +114,14 @@ def postgis_takedown():
 
 
 def import_raster(filename, tabname, tilesize, constraint, overview):
-    log("tile: " + tilesize + " constraints: " + str(constraint) + " overviews: " + overview)
+    log(
+        "tile: "
+        + tilesize
+        + " constraints: "
+        + str(constraint)
+        + " overviews: "
+        + overview
+    )
     cmd = "raster2pgsql -Y -I -q"
     if constraint:
         cmd += " -C"
@@ -133,7 +146,9 @@ def drop_imported(tabname, overview):
 
 
 def compare_images(expected, im):
-    expected = os.path.join(os.path.dirname(expected), os.path.basename(expected).replace(":", "_"))
+    expected = os.path.join(
+        os.path.dirname(expected), os.path.basename(expected).replace(":", "_")
+    )
     if not os.path.exists(expected) or os.environ.get("UPDATE"):
         print(("generating expected image %s" % expected))
         im.save(expected, "png32")
@@ -251,7 +266,11 @@ if (
 
     def _test_dataraster_16bsi(lbl, tilesize, constraint, overview):
         import_raster(
-            "../data/raster/dataraster-small.tif", "dataRaster", tilesize, constraint, overview
+            "../data/raster/dataraster-small.tif",
+            "dataRaster",
+            tilesize,
+            constraint,
+            overview,
         )
         if constraint:
             lbl += " C"
@@ -320,7 +339,12 @@ if (
         mapnik.render(mm, im)
         lap = time.time() - t0
         log("T " + str(lap) + " -- " + lbl + " E:full")
-        expected = "images/support/pgraster/%s-%s-%s-%s-box1.png" % (lyr.name, lbl, overview, clip)
+        expected = "images/support/pgraster/%s-%s-%s-%s-box1.png" % (
+            lyr.name,
+            lbl,
+            overview,
+            clip,
+        )
         compare_images(expected, im)
         # no data
         eq_(hexlify(im.view(3, 3, 1, 1).tostring()), b"00000000")
@@ -333,7 +357,9 @@ if (
         match = re.match(apat, pxstr)
         assert match, "pixel " + pxstr + " does not match pattern " + apat
         alpha = match.group(1)
-        assert alpha != "ff" and alpha != "00", "unexpected full transparent/opaque pixel: " + alpha
+        assert alpha != "ff" and alpha != "00", (
+            "unexpected full transparent/opaque pixel: " + alpha
+        )
 
         # Now zoom over a portion of the env (1/10)
         newenv = mapnik.Box2d(166, -105, 191, -77)
@@ -343,7 +369,12 @@ if (
         mapnik.render(mm, im)
         lap = time.time() - t0
         log("T " + str(lap) + " -- " + lbl + " E:1/10")
-        expected = "images/support/pgraster/%s-%s-%s-%s-box2.png" % (lyr.name, lbl, overview, clip)
+        expected = "images/support/pgraster/%s-%s-%s-%s-box2.png" % (
+            lyr.name,
+            lbl,
+            overview,
+            clip,
+        )
         compare_images(expected, im)
         # no data
         eq_(hexlify(im.view(255, 255, 1, 1).tostring()), b"00000000")
@@ -356,10 +387,14 @@ if (
         match = re.match(apat, pxstr)
         assert match, "pixel " + pxstr + " does not match pattern " + apat
         alpha = match.group(1)
-        assert alpha != "ff" and alpha != "00", "unexpected full transparent/opaque pixel: " + alpha
+        assert alpha != "ff" and alpha != "00", (
+            "unexpected full transparent/opaque pixel: " + alpha
+        )
 
     def _test_rgba_8bui(lbl, tilesize, constraint, overview):
-        import_raster("../data/raster/river.tiff", "River", tilesize, constraint, overview)
+        import_raster(
+            "../data/raster/river.tiff", "River", tilesize, constraint, overview
+        )
         if constraint:
             lbl += " C"
         if tilesize:
@@ -479,7 +514,9 @@ if (
 
     def _test_rgb_8bui(lbl, tilesize, constraint, overview):
         tnam = "nodataedge"
-        import_raster("../data/raster/nodata-edge.tif", tnam, tilesize, constraint, overview)
+        import_raster(
+            "../data/raster/nodata-edge.tif", tnam, tilesize, constraint, overview
+        )
         if constraint:
             lbl += " C"
         if tilesize:
@@ -564,7 +601,12 @@ if (
         mapnik.render(mm, im)
         lap = time.time() - t0
         log("T " + str(lap) + " -- " + lbl + " E:full")
-        expected = "images/support/pgraster/%s-%s-%s-%s.png" % (lyr.name, lbl, pixtype, value)
+        expected = "images/support/pgraster/%s-%s-%s-%s.png" % (
+            lyr.name,
+            lbl,
+            pixtype,
+            value,
+        )
         compare_images(expected, im)
         h = format(value, "02x")
         hex_v = h + h + h + "ff"
@@ -690,7 +732,12 @@ if (
         mapnik.render(mm, im)
         lap = time.time() - t0
         log("T " + str(lap) + " -- " + lbl + " E:full")
-        expected = "images/support/pgraster/%s-%s-%s-%s.png" % (lyr.name, lbl, pixtype, value)
+        expected = "images/support/pgraster/%s-%s-%s-%s.png" % (
+            lyr.name,
+            lbl,
+            pixtype,
+            value,
+        )
         compare_images(expected, im)
 
     def test_data_2bui_subquery():

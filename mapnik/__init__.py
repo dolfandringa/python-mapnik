@@ -25,9 +25,9 @@ Several things happen when you do:
 
     >>> import mapnik
 
- 1) Mapnik C++ objects are imported via the '__init__.py' from the '_mapnik.so' shared object
-    (_mapnik.pyd on win) which references libmapnik.so (linux), libmapnik.dylib (mac), or
-    mapnik.dll (win32).
+ 1) Mapnik C++ objects are imported via the '__init__.py' from the '_mapnik.so' shared
+    object (_mapnik.pyd on win) which references libmapnik.so (linux),
+    libmapnik.dylib (mac), or mapnik.dll (win32).
 
  2) The paths to the input plugins and font directories are imported from the 'paths.py'
     file which was constructed and installed during SCons installation.
@@ -42,10 +42,6 @@ Several things happen when you do:
 import itertools
 import os
 import warnings
-
-# @TODO: Disabling paths module for now. See https://github.com/pdoc3/pdoc/issues/299
-__pdoc__ = {}
-__pdoc__["paths"] = False
 
 try:
     import json
@@ -102,7 +98,8 @@ def _injector():
 
 def Filter(*args, **kwargs):
     warnings.warn(
-        "'Filter' is deprecated and will be removed in Mapnik 3.x, use 'Expression' instead",
+        "'Filter' is deprecated and will be removed in Mapnik 3.x, use 'Expression'"
+        " instead",
         DeprecationWarning,
         2,
     )
@@ -112,7 +109,8 @@ def Filter(*args, **kwargs):
 class Envelope(Box2d):
     def __init__(self, *args, **kwargs):
         warnings.warn(
-            "'Envelope' is deprecated and will be removed in Mapnik 3.x, use 'Box2d' instead",
+            "'Envelope' is deprecated and will be removed in Mapnik 3.x, use 'Box2d'"
+            " instead",
             DeprecationWarning,
             2,
         )
@@ -383,7 +381,8 @@ def CSV(**keywords):
       file -- path to csv
 
     Optional keyword arguments:
-      inline -- inline CSV string (if provided 'file' argument will be ignored and non-needed)
+      inline -- inline CSV string (if provided 'file' argument will be ignored
+        and non-needed)
       base -- path prefix (default None)
       encoding -- file encoding (default 'utf-8')
       row_limit -- integer limit of rows to return (default: 0)
@@ -391,7 +390,8 @@ def CSV(**keywords):
       escape -- The escape character to use for parsing data
       quote -- The quote character to use for parsing data
       separator -- The separator character to use for parsing data
-      headers -- A comma separated list of header names that can be set to add headers to data that lacks them
+      headers -- A comma separated list of header names that can be set to add headers
+        to data that lacks them
       filesize_max -- The maximum filesize in MB that will be accepted
 
     >>> from mapnik import CSV
@@ -447,16 +447,22 @@ def PostGIS(**keywords):
 
     Optional table-level keyword arguments:
       extent -- manually specified data extent (comma delimited string, default: None)
-      estimate_extent -- boolean, direct PostGIS to use the faster, less accurate `estimate_extent` over `extent` (default: False)
-      extent_from_subquery -- boolean, direct Mapnik to query Postgis for the extent of the raw 'table' value (default: uses 'geometry_table')
-      geometry_table -- specify geometry table to use to look up metadata (default: automatically parsed from 'table' value)
-      geometry_field -- specify geometry field to use (default: first entry in geometry_columns)
+      estimate_extent -- boolean, direct PostGIS to use the faster, less accurate
+        `estimate_extent` over `extent` (default: False)
+      extent_from_subquery -- boolean, direct Mapnik to query Postgis for the extent
+        of the raw 'table' value (default: uses 'geometry_table')
+      geometry_table -- specify geometry table to use to look up metadata
+        (default: automatically parsed from 'table' value)
+      geometry_field -- specify geometry field to use (default: first entry in
+        geometry_columns)
       srid -- specify srid to use (default: auto-detected from geometry_field)
       row_limit -- integer limit of rows to return (default: 0)
-      cursor_size -- integer size of binary cursor to use (default: 0, no binary cursor is used)
+      cursor_size -- integer size of binary cursor to use (default: 0, no binary
+        cursor is used)
 
     >>> from mapnik import PostGIS, Layer
-    >>> params = dict(dbname=env['MAPNIK_NAME'],table='osm',user='postgres',password='gis')
+    >>> params = dict(
+            dbname=env['MAPNIK_NAME'],table='osm',user='postgres',password='gis')
     >>> params['estimate_extent'] = False
     >>> params['extent'] = '-20037508,-19929239,20037508,19929239'
     >>> postgis = PostGIS(**params)
@@ -490,9 +496,12 @@ def PgRaster(**keywords):
 
     Optional table-level keyword arguments:
       extent -- manually specified data extent (comma delimited string, default: None)
-      estimate_extent -- boolean, direct PostGIS to use the faster, less accurate `estimate_extent` over `extent` (default: False)
-      extent_from_subquery -- boolean, direct Mapnik to query Postgis for the extent of the raw 'table' value (default: uses 'geometry_table')
-      raster_table -- specify geometry table to use to look up metadata (default: automatically parsed from 'table' value)
+      estimate_extent -- boolean, direct PostGIS to use the faster, less accurate
+        `estimate_extent` over `extent` (default: False)
+      extent_from_subquery -- boolean, direct Mapnik to query Postgis for the extent of
+        the raw 'table' value (default: uses 'geometry_table')
+      raster_table -- specify geometry table to use to look up metadata
+        (default: automatically parsed from 'table' value)
       raster_field -- specify geometry field to use (default: first entry in raster_columns)
       srid -- specify srid to use (default: auto-detected from geometry_field)
       row_limit -- integer limit of rows to return (default: 0)
@@ -821,7 +830,9 @@ class _TextSymbolizer(TextSymbolizer, _injector()):
         else:
             # There is no single expression which could be returned as name
             raise RuntimeError(
-                "TextSymbolizer uses complex formatting features, but old compatibility interface is used to access it. Use self.properties.format_tree instead."
+                "TextSymbolizer uses complex formatting features, but old compatibility"
+                " interface is used to access it. Use self.properties.format_tree"
+                " instead."
             )
 
     @name.setter
@@ -1064,7 +1075,17 @@ def register_plugins(path=None):
 
 
 def register_fonts(
-    path=None, valid_extensions=[".ttf", ".otf", ".ttc", ".pfa", ".pfb", ".ttc", ".dfont", ".woff"]
+    path=None,
+    valid_extensions=[
+        ".ttf",
+        ".otf",
+        ".ttc",
+        ".pfa",
+        ".pfb",
+        ".ttc",
+        ".dfont",
+        ".woff",
+    ],
 ):
     """Recursively register fonts using path argument as base directory"""
     if not path:

@@ -66,7 +66,19 @@ if "shape" in mapnik.DatasourceCache.plugin_names():
         )
         eq_(
             ds.field_types(),
-            ["str", "str", "str", "int", "str", "int", "int", "int", "int", "float", "float"],
+            [
+                "str",
+                "str",
+                "str",
+                "int",
+                "str",
+                "int",
+                "int",
+                "int",
+                "int",
+                "float",
+                "float",
+            ],
         )
         query = mapnik.Query(ds.envelope())
         for fld in ds.fields():
@@ -79,7 +91,8 @@ if "shape" in mapnik.DatasourceCache.plugin_names():
         ds = mapnik.Shapefile(file="../data/shp/long_lat")
         eq_(len(ds.fields()), 7)
         eq_(
-            ds.fields(), ["LONG", "LAT", "LOGICAL_TR", "LOGICAL_FA", "CHARACTER", "NUMERIC", "DATE"]
+            ds.fields(),
+            ["LONG", "LAT", "LOGICAL_TR", "LOGICAL_FA", "CHARACTER", "NUMERIC", "DATE"],
         )
         eq_(ds.field_types(), ["str", "str", "bool", "bool", "str", "float", "str"])
         query = mapnik.Query(ds.envelope())
@@ -125,7 +138,15 @@ if "shape" in mapnik.DatasourceCache.plugin_names():
         eq_(len(ds.fields()), 7)
         eq_(
             ds.fields(),
-            ["interst_id", "state_d", "cnty_name", "latitude", "longitude", "Name", "Website"],
+            [
+                "interst_id",
+                "state_d",
+                "cnty_name",
+                "latitude",
+                "longitude",
+                "Name",
+                "Website",
+            ],
         )
         eq_(ds.field_types(), ["str", "str", "str", "float", "float", "str", "str"])
         eq_(len(list(ds.all_features())), 17)
@@ -136,7 +157,15 @@ if "shape" in mapnik.DatasourceCache.plugin_names():
         eq_(len(ds.fields()), 7)
         eq_(
             ds.fields(),
-            ["interst_id", "state_d", "cnty_name", "latitude", "longitude", "Name", "Website"],
+            [
+                "interst_id",
+                "state_d",
+                "cnty_name",
+                "latitude",
+                "longitude",
+                "Name",
+                "Website",
+            ],
         )
         eq_(ds.field_types(), ["str", "str", "str", "float", "float", "str", "str"])
         eq_(len(list(ds.all_features())), 17)

@@ -22,7 +22,9 @@ if "topojson" in mapnik.DatasourceCache.plugin_names():
     def test_topojson_init():
         # topojson tests/data/json/escaped.geojson -o tests/data/topojson/escaped.topojson --properties
         # topojson version 1.4.2
-        ds = mapnik.Datasource(type="topojson", file="../data/topojson/escaped.topojson")
+        ds = mapnik.Datasource(
+            type="topojson", file="../data/topojson/escaped.topojson"
+        )
         e = ds.envelope()
         assert_almost_equal(e.minx, -81.705583, places=7)
         assert_almost_equal(e.miny, 41.480573, places=6)
@@ -30,7 +32,9 @@ if "topojson" in mapnik.DatasourceCache.plugin_names():
         assert_almost_equal(e.maxy, 41.480573, places=3)
 
     def test_topojson_properties():
-        ds = mapnik.Datasource(type="topojson", file="../data/topojson/escaped.topojson")
+        ds = mapnik.Datasource(
+            type="topojson", file="../data/topojson/escaped.topojson"
+        )
         f = list(ds.features_at_point(ds.envelope().center()))[0]
         eq_(len(ds.fields()), 11)
         desc = ds.describe()
@@ -45,7 +49,9 @@ if "topojson" in mapnik.DatasourceCache.plugin_names():
         eq_(f["NOM_FR"], "Qu\xe9bec")
         eq_(f["NOM_FR"], "Québec")
 
-        ds = mapnik.Datasource(type="topojson", file="../data/topojson/escaped.topojson")
+        ds = mapnik.Datasource(
+            type="topojson", file="../data/topojson/escaped.topojson"
+        )
         f = list(ds.all_features())[0]
         eq_(len(ds.fields()), 11)
 
@@ -63,7 +69,8 @@ if "topojson" in mapnik.DatasourceCache.plugin_names():
 
     def test_geojson_from_in_memory_string():
         ds = mapnik.Datasource(
-            type="topojson", inline=open("../data/topojson/escaped.topojson", "r").read()
+            type="topojson",
+            inline=open("../data/topojson/escaped.topojson", "r").read(),
         )
         f = list(ds.all_features())[0]
         eq_(len(ds.fields()), 11)
@@ -82,7 +89,9 @@ if "topojson" in mapnik.DatasourceCache.plugin_names():
 
     #    @raises(RuntimeError)
     def test_that_nonexistant_query_field_throws(**kwargs):
-        ds = mapnik.Datasource(type="topojson", file="../data/topojson/escaped.topojson")
+        ds = mapnik.Datasource(
+            type="topojson", file="../data/topojson/escaped.topojson"
+        )
         eq_(len(ds.fields()), 11)
         # TODO - this sorting is messed up
         eq_(
@@ -103,7 +112,19 @@ if "topojson" in mapnik.DatasourceCache.plugin_names():
         )
         eq_(
             ds.field_types(),
-            ["str", "int", "str", "str", "float", "bool", "str", "str", "str", "str", "str"],
+            [
+                "str",
+                "int",
+                "str",
+                "str",
+                "float",
+                "bool",
+                "str",
+                "str",
+                "str",
+                "str",
+                "str",
+            ],
         )
 
 

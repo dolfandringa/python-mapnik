@@ -127,10 +127,14 @@ def get_paired_images(w, h, mapfile):
 
 def test_render_from_serialization():
     try:
-        im, im2 = get_paired_images(100, 100, "../data/good_maps/building_symbolizer.xml")
+        im, im2 = get_paired_images(
+            100, 100, "../data/good_maps/building_symbolizer.xml"
+        )
         eq_(im.tostring("png32"), im2.tostring("png32"))
 
-        im, im2 = get_paired_images(100, 100, "../data/good_maps/polygon_symbolizer.xml")
+        im, im2 = get_paired_images(
+            100, 100, "../data/good_maps/polygon_symbolizer.xml"
+        )
         eq_(im.tostring("png32"), im2.tostring("png32"))
     except RuntimeError as e:
         # only test datasources that we have installed
@@ -170,7 +174,10 @@ def test_render_points():
     lr_lonlat = mapnik.Coord(143.40, -38.80)
     # render for different projections
     projs = {
-        "google": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+        "google": (
+            "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0"
+            " +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over"
+        ),
         "latlon": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
         "merc": "+proj=merc +datum=WGS84 +k=1.0 +units=m +over +no_defs",
         "utm": "+proj=utm +zone=54 +datum=WGS84",
@@ -185,7 +192,9 @@ def test_render_points():
         m.zoom_to_box(tr.forward(mapnik.Box2d(ul_lonlat, lr_lonlat)))
         # Render to SVG so that it can be checked how many points are there
         # with string comparison
-        svg_file = os.path.join(tempfile.gettempdir(), "mapnik-render-points-%s.svg" % projdescr)
+        svg_file = os.path.join(
+            tempfile.gettempdir(), "mapnik-render-points-%s.svg" % projdescr
+        )
         mapnik.render_to_file(m, svg_file)
         num_points_present = len(list(ds.all_features()))
         with open(svg_file, "r") as f:
@@ -209,7 +218,10 @@ def test_render_with_scale_factor_zero_throws():
 def test_render_with_detector():
     ds = mapnik.MemoryDatasource()
     context = mapnik.Context()
-    geojson = '{ "type": "Feature", "geometry": { "type": "Point", "coordinates": [ 0, 0 ] } }'
+    geojson = (
+        '{ "type": "Feature", "geometry": { "type": "Point", "coordinates": [ 0, 0'
+        " ] } }"
+    )
     ds.add_feature(mapnik.Feature.from_geojson(geojson, context))
     s = mapnik.Style()
     r = mapnik.Rule()
@@ -263,7 +275,9 @@ if "shape" in mapnik.DatasourceCache.plugin_names():
         for size in sizes:
             im = mapnik.Image(256, 256)
             mapnik.render(m, im, size)
-            expected_file = "./images/support/marker-text-line-scale-factor-%s.png" % size
+            expected_file = (
+                "./images/support/marker-text-line-scale-factor-%s.png" % size
+            )
             actual_file = "/tmp/" + os.path.basename(expected_file)
             im.save(actual_file, "png32")
             if os.environ.get("UPDATE"):
@@ -275,7 +289,8 @@ if "shape" in mapnik.DatasourceCache.plugin_names():
             eq_(
                 actual.tostring("png32"),
                 expected.tostring("png32"),
-                "failed comparing actual (%s) and expected (%s)" % (actual_file, expected_file),
+                "failed comparing actual (%s) and expected (%s)"
+                % (actual_file, expected_file),
             )
 
 

@@ -128,8 +128,13 @@ def main():
     # A simple example ...
 
     qcdrain_lyr = mapnik.Layer("Quebec Hydrography")
-    qcdrain_lyr.srs = "+proj=lcc +ellps=GRS80 +lat_0=49 +lon_0=-95 +lat+1=49 +lat_2=77 +datum=NAD83 +units=m +no_defs"
-    qcdrain_lyr.datasource = mapnik.Shapefile(file=path.join(root, "../data/qcdrainage"))
+    qcdrain_lyr.srs = (
+        "+proj=lcc +ellps=GRS80 +lat_0=49 +lon_0=-95 +lat+1=49 +lat_2=77 +datum=NAD83"
+        " +units=m +no_defs"
+    )
+    qcdrain_lyr.datasource = mapnik.Shapefile(
+        file=path.join(root, "../data/qcdrainage")
+    )
 
     qcdrain_style = mapnik.Style()
     qcdrain_rule = mapnik.Rule()
@@ -149,8 +154,13 @@ def main():
     # re-use the style defined in the above layer for the next one.
 
     ondrain_lyr = mapnik.Layer("Ontario Hydrography")
-    ondrain_lyr.srs = "+proj=lcc +ellps=GRS80 +lat_0=49 +lon_0=-95 +lat+1=49 +lat_2=77 +datum=NAD83 +units=m +no_defs"
-    ondrain_lyr.datasource = mapnik.Shapefile(file=path.join(root, "../data/ontdrainage"))
+    ondrain_lyr.srs = (
+        "+proj=lcc +ellps=GRS80 +lat_0=49 +lon_0=-95 +lat+1=49 +lat_2=77 +datum=NAD83"
+        " +units=m +no_defs"
+    )
+    ondrain_lyr.datasource = mapnik.Shapefile(
+        file=path.join(root, "../data/ontdrainage")
+    )
 
     ondrain_lyr.styles.append("drainage")
     m.layers.append(ondrain_lyr)
@@ -158,8 +168,13 @@ def main():
     # Provincial boundaries
 
     provlines_lyr = mapnik.Layer("Provincial borders")
-    provlines_lyr.srs = "+proj=lcc +ellps=GRS80 +lat_0=49 +lon_0=-95 +lat+1=49 +lat_2=77 +datum=NAD83 +units=m +no_defs"
-    provlines_lyr.datasource = mapnik.Shapefile(file=path.join(root, "../data/boundaries_l"))
+    provlines_lyr.srs = (
+        "+proj=lcc +ellps=GRS80 +lat_0=49 +lon_0=-95 +lat+1=49 +lat_2=77 +datum=NAD83"
+        " +units=m +no_defs"
+    )
+    provlines_lyr.datasource = mapnik.Shapefile(
+        file=path.join(root, "../data/boundaries_l")
+    )
 
     # Here we define a "dash dot dot dash" pattern for the provincial boundaries.
 
@@ -180,7 +195,10 @@ def main():
     # Roads 3 and 4 (The "grey" roads)
 
     roads34_lyr = mapnik.Layer("Roads")
-    roads34_lyr.srs = "+proj=lcc +ellps=GRS80 +lat_0=49 +lon_0=-95 +lat+1=49 +lat_2=77 +datum=NAD83 +units=m +no_defs"
+    roads34_lyr.srs = (
+        "+proj=lcc +ellps=GRS80 +lat_0=49 +lon_0=-95 +lat+1=49 +lat_2=77 +datum=NAD83"
+        " +units=m +no_defs"
+    )
     # create roads datasource (we're going to re-use it later)
 
     roads34_lyr.datasource = mapnik.Shapefile(file=path.join(root, "../data/roads"))
@@ -214,7 +232,10 @@ def main():
     # Roads 2 (The thin yellow ones)
 
     roads2_lyr = mapnik.Layer("Roads")
-    roads2_lyr.srs = "+proj=lcc +ellps=GRS80 +lat_0=49 +lon_0=-95 +lat+1=49 +lat_2=77 +datum=NAD83 +units=m +no_defs"
+    roads2_lyr.srs = (
+        "+proj=lcc +ellps=GRS80 +lat_0=49 +lon_0=-95 +lat+1=49 +lat_2=77 +datum=NAD83"
+        " +units=m +no_defs"
+    )
     # Just get a copy from roads34_lyr
     roads2_lyr.datasource = roads34_lyr.datasource
 
@@ -251,7 +272,10 @@ def main():
     # Roads 1 (The big orange ones, the highways)
 
     roads1_lyr = mapnik.Layer("Roads")
-    roads1_lyr.srs = "+proj=lcc +ellps=GRS80 +lat_0=49 +lon_0=-95 +lat+1=49 +lat_2=77 +datum=NAD83 +units=m +no_defs"
+    roads1_lyr.srs = (
+        "+proj=lcc +ellps=GRS80 +lat_0=49 +lon_0=-95 +lat+1=49 +lat_2=77 +datum=NAD83"
+        " +units=m +no_defs"
+    )
     roads1_lyr.datasource = roads34_lyr.datasource
 
     roads1_style_1 = mapnik.Style()
@@ -284,7 +308,10 @@ def main():
     # Populated Places
 
     popplaces_lyr = mapnik.Layer("Populated Places")
-    popplaces_lyr.srs = "+proj=lcc +ellps=GRS80 +lat_0=49 +lon_0=-95 +lat+1=49 +lat_2=77 +datum=NAD83 +units=m +no_defs"
+    popplaces_lyr.srs = (
+        "+proj=lcc +ellps=GRS80 +lat_0=49 +lon_0=-95 +lat+1=49 +lat_2=77 +datum=NAD83"
+        " +units=m +no_defs"
+    )
     popplaces_lyr.datasource = mapnik.Shapefile(
         file=path.join(root, "../data/popplaces"), encoding="latin1"
     )
@@ -319,7 +346,9 @@ def main():
     # Draw map
 
     # Set the initial extent of the map in 'master' spherical Mercator projection
-    m.zoom_to_box(mapnik.Box2d(-8024477.28459, 5445190.38849, -7381388.20071, 5662941.44855))
+    m.zoom_to_box(
+        mapnik.Box2d(-8024477.28459, 5445190.38849, -7381388.20071, 5662941.44855)
+    )
 
     # Render map
     im = mapnik.Image(m.width, m.height)

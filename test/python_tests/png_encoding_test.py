@@ -44,7 +44,8 @@ if mapnik.has_png():
 
     def gen_filepath(name, format):
         return os.path.join(
-            "images/support/encoding-opts", name + "-" + format.replace(":", "+") + ".png"
+            "images/support/encoding-opts",
+            name + "-" + format.replace(":", "+") + ".png",
         )
 
     generate = os.environ.get("UPDATE")
@@ -122,7 +123,11 @@ if mapnik.has_png():
         t0_len = len(im_in.tostring(format))
         eq_(
             t0_len,
-            len(mapnik.Image.open("images/support/transparency/white0.png").tostring(format)),
+            len(
+                mapnik.Image.open("images/support/transparency/white0.png").tostring(
+                    format
+                )
+            ),
         )
         format = "png8:m=o:t=1"
         im.save(t1, format)
@@ -130,7 +135,11 @@ if mapnik.has_png():
         t1_len = len(im_in.tostring(format))
         eq_(
             len(im.tostring(format)),
-            len(mapnik.Image.open("images/support/transparency/white1.png").tostring(format)),
+            len(
+                mapnik.Image.open("images/support/transparency/white1.png").tostring(
+                    format
+                )
+            ),
         )
         format = "png8:m=o:t=2"
         im.save(t2, format)
@@ -138,7 +147,11 @@ if mapnik.has_png():
         t2_len = len(im_in.tostring(format))
         eq_(
             len(im.tostring(format)),
-            len(mapnik.Image.open("images/support/transparency/white2.png").tostring(format)),
+            len(
+                mapnik.Image.open("images/support/transparency/white2.png").tostring(
+                    format
+                )
+            ),
         )
 
         eq_(t0_len < t1_len < t2_len, True)
@@ -150,7 +163,11 @@ if mapnik.has_png():
         t0_len = len(im_in.tostring(format))
         eq_(
             t0_len,
-            len(mapnik.Image.open("images/support/transparency/white0.png").tostring(format)),
+            len(
+                mapnik.Image.open("images/support/transparency/white0.png").tostring(
+                    format
+                )
+            ),
         )
         format = "png8:m=h:t=1"
         im.save(t1, format)
@@ -158,7 +175,11 @@ if mapnik.has_png():
         t1_len = len(im_in.tostring(format))
         eq_(
             len(im.tostring(format)),
-            len(mapnik.Image.open("images/support/transparency/white1.png").tostring(format)),
+            len(
+                mapnik.Image.open("images/support/transparency/white1.png").tostring(
+                    format
+                )
+            ),
         )
         format = "png8:m=h:t=2"
         im.save(t2, format)
@@ -166,7 +187,11 @@ if mapnik.has_png():
         t2_len = len(im_in.tostring(format))
         eq_(
             len(im.tostring(format)),
-            len(mapnik.Image.open("images/support/transparency/white2.png").tostring(format)),
+            len(
+                mapnik.Image.open("images/support/transparency/white2.png").tostring(
+                    format
+                )
+            ),
         )
 
         eq_(t0_len < t1_len < t2_len, True)

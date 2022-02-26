@@ -77,7 +77,19 @@ if "ogr" in mapnik.DatasourceCache.plugin_names():
         )
         eq_(
             ds.field_types(),
-            ["str", "str", "str", "int", "str", "int", "int", "int", "int", "float", "float"],
+            [
+                "str",
+                "str",
+                "str",
+                "int",
+                "str",
+                "int",
+                "int",
+                "int",
+                "int",
+                "float",
+                "float",
+            ],
         )
         query = mapnik.Query(ds.envelope())
         for fld in ds.fields():
@@ -94,7 +106,9 @@ if "ogr" in mapnik.DatasourceCache.plugin_names():
 
     # OGR plugin extent parameter
     def test_ogr_extent_parameter():
-        ds = mapnik.Ogr(file="../data/shp/world_merc.shp", layer_by_index=0, extent="-1,-1,1,1")
+        ds = mapnik.Ogr(
+            file="../data/shp/world_merc.shp", layer_by_index=0, extent="-1,-1,1,1"
+        )
         e = ds.envelope()
         eq_(e.minx, -1)
         eq_(e.miny, -1)
@@ -164,7 +178,10 @@ if "ogr" in mapnik.DatasourceCache.plugin_names():
         eq_(
             actual,
             {
-                "geometry": {"type": "LineString", "coordinates": [[30, 10], [10, 30], [40, 40]]},
+                "geometry": {
+                    "type": "LineString",
+                    "coordinates": [[30, 10], [10, 30], [40, 40]],
+                },
                 "type": "Feature",
                 "id": 3,
                 "properties": {
@@ -206,7 +223,10 @@ if "ogr" in mapnik.DatasourceCache.plugin_names():
                 "id": 5,
                 "properties": {
                     "type": "polygon",
-                    "WKT": "         POLYGON ((35 10, 10 20, 15 40, 45 45, 35 10),(20 30, 35 35, 30 20, 20 30))",
+                    "WKT": (
+                        "         POLYGON ((35 10, 10 20, 15 40, 45 45, 35 10),(20 30,"
+                        " 35 35, 30 20, 20 30))"
+                    ),
                 },
             },
         )
@@ -243,7 +263,10 @@ if "ogr" in mapnik.DatasourceCache.plugin_names():
                 "id": 7,
                 "properties": {
                     "type": "multilinestring",
-                    "WKT": " MULTILINESTRING ((10 10, 20 20, 10 40),(40 40, 30 30, 40 20, 30 10))",
+                    "WKT": (
+                        " MULTILINESTRING ((10 10, 20 20, 10 40),(40 40, 30 30, 40 20,"
+                        " 30 10))"
+                    ),
                 },
             },
         )
@@ -263,7 +286,10 @@ if "ogr" in mapnik.DatasourceCache.plugin_names():
                 "id": 8,
                 "properties": {
                     "type": "multipolygon",
-                    "WKT": "    MULTIPOLYGON (((30 20, 10 40, 45 40, 30 20)),((15 5, 40 10, 10 20, 5 10, 15 5)))",
+                    "WKT": (
+                        "    MULTIPOLYGON (((30 20, 10 40, 45 40, 30 20)),((15 5, 40"
+                        " 10, 10 20, 5 10, 15 5)))"
+                    ),
                 },
             },
         )
@@ -286,7 +312,10 @@ if "ogr" in mapnik.DatasourceCache.plugin_names():
                 "id": 9,
                 "properties": {
                     "type": "multipolygon",
-                    "WKT": "    MULTIPOLYGON (((40 40, 20 45, 45 30, 40 40)),((20 35, 45 20, 30 5, 10 10, 10 30, 20 35),(30 20, 20 25, 20 15, 30 20)))",
+                    "WKT": (
+                        "    MULTIPOLYGON (((40 40, 20 45, 45 30, 40 40)),((20 35, 45"
+                        " 20, 30 5, 10 10, 10 30, 20 35),(30 20, 20 25, 20 15, 30 20)))"
+                    ),
                 },
             },
         )
@@ -310,7 +339,10 @@ if "ogr" in mapnik.DatasourceCache.plugin_names():
                 "id": 10,
                 "properties": {
                     "type": "collection",
-                    "WKT": "      GEOMETRYCOLLECTION(POLYGON((1 1,2 1,2 2,1 2,1 1)),POINT(2 3),LINESTRING(2 3,3 4))",
+                    "WKT": (
+                        "      GEOMETRYCOLLECTION(POLYGON((1 1,2 1,2 2,1 2,1"
+                        " 1)),POINT(2 3),LINESTRING(2 3,3 4))"
+                    ),
                 },
             },
         )

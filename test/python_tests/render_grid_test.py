@@ -656,7 +656,9 @@ if mapnik.has_grid_renderer():
         context.push("Name")
         f = mapnik.Feature(context, pixel_key)
         f["Name"] = str(pixel_key)
-        f.geometry = mapnik.Geometry.from_wkt("POLYGON ((0 0, 0 256, 256 256, 256 0, 0 0))")
+        f.geometry = mapnik.Geometry.from_wkt(
+            "POLYGON ((0 0, 0 256, 256 256, 256 0, 0 0))"
+        )
         ds.add_feature(f)
         s = mapnik.Style()
         r = mapnik.Rule()

@@ -9,13 +9,19 @@ import math
 from mapnik import Box2d, Coord, Geometry, Layer, Map, Projection, Style, render
 from mapnik.printing.conversions import m2pt, m2px
 from mapnik.printing.formats import pagesizes
-from mapnik.printing.scales import any_scale, default_scale, deg_min_sec_scale, sequence_scale
+from mapnik.printing.scales import (
+    any_scale,
+    default_scale,
+    deg_min_sec_scale,
+    sequence_scale,
+)
 
 try:
     import cairo
 except ImportError:
     raise ImportError(
-        "Could not import pycairo; PDF rendering only available when pycairo is available"
+        "Could not import pycairo; PDF rendering only available when pycairo is"
+        " available"
     )
 
 try:
@@ -151,7 +157,9 @@ class PDFPrinter(object):
 
     def render_map(self, m, filename):
         """Renders the given map to filename."""
-        self._surface = cairo.PDFSurface(filename, m2pt(self._pagesize[0]), m2pt(self._pagesize[1]))
+        self._surface = cairo.PDFSurface(
+            filename, m2pt(self._pagesize[0]), m2pt(self._pagesize[1])
+        )
         ctx = cairo.Context(self._surface)
 
         # store the output filename so that we can post-process the PDF
@@ -252,8 +260,14 @@ class PDFPrinter(object):
         if (
             self._centering == CENTERING_BOTH
             or self._centering == CENTERING_HORIZONTAL
-            or (self._centering == CENTERING_CONSTRAINED_AXIS and is_map_size_constrained)
-            or (self._centering == CENTERING_UNCONSTRAINED_AXIS and not is_map_size_constrained)
+            or (
+                self._centering == CENTERING_CONSTRAINED_AXIS
+                and is_map_size_constrained
+            )
+            or (
+                self._centering == CENTERING_UNCONSTRAINED_AXIS
+                and not is_map_size_constrained
+            )
         ):
             return True
         else:
@@ -266,8 +280,14 @@ class PDFPrinter(object):
         if (
             self._centering == CENTERING_BOTH
             or self._centering == CENTERING_VERTICAL
-            or (self._centering == CENTERING_CONSTRAINED_AXIS and not is_map_size_constrained)
-            or (self._centering == CENTERING_UNCONSTRAINED_AXIS and is_map_size_constrained)
+            or (
+                self._centering == CENTERING_CONSTRAINED_AXIS
+                and not is_map_size_constrained
+            )
+            or (
+                self._centering == CENTERING_UNCONSTRAINED_AXIS
+                and is_map_size_constrained
+            )
         ):
             return True
         else:
@@ -317,7 +337,12 @@ class PDFPrinter(object):
                 else:
                     delta = -360
                 m.zoom_to_box(
-                    Box2d(old_env.minx + delta, old_env.miny, old_env.maxx + delta, old_env.maxy)
+                    Box2d(
+                        old_env.minx + delta,
+                        old_env.miny,
+                        old_env.maxx + delta,
+                        old_env.maxy,
+                    )
                 )
                 self._render_layer_map(layer_map, ctx, tx, ty)
                 # restore the original env
@@ -406,13 +431,17 @@ class PDFPrinter(object):
 
         return (div_size, page_div_size)
 
-    def _get_scale_axes_first_values(self, div_size, map_envelope_start, map_envelope_side_length):
+    def _get_scale_axes_first_values(
+        self, div_size, map_envelope_start, map_envelope_side_length
+    ):
         """
         Returns the first value and the first value percent - how far is that value on the map side length -
         for the scale axes.
         """
         first_value = (math.floor(map_envelope_start / div_size) + 1) * div_size
-        first_value_percent = (first_value - map_envelope_start) / map_envelope_side_length
+        first_value_percent = (
+            first_value - map_envelope_start
+        ) / map_envelope_side_length
 
         return (first_value, first_value_percent)
 
@@ -445,7 +474,9 @@ class PDFPrinter(object):
 
             ctx.translate(m2pt(self.map_box.center().x), m2pt(self.map_box.center().y))
             ctx.rotate(-math.pi / 2)
-            ctx.translate(-m2pt(self.map_box.center().y), -m2pt(self.map_box.center().x))
+            ctx.translate(
+                -m2pt(self.map_box.center().y), -m2pt(self.map_box.center().x)
+            )
 
         label_value = first - div_size
         if self._is_latlon and label_value < -180:
@@ -467,7 +498,13 @@ class PDFPrinter(object):
                 line_width=0.5,
             )
             self._render_grid_boxes(
-                ctx, boundary_start, boundary_end, prev, value, text=text, fill_color=fill_color
+                ctx,
+                boundary_start,
+                boundary_end,
+                prev,
+                value,
+                text=text,
+                fill_color=fill_color,
             )
 
             prev = value
@@ -484,7 +521,14 @@ class PDFPrinter(object):
             )
 
     def _draw_line(
-        self, ctx, start_x, start_y, end_x, end_y, line_width=1, stroke_color=(0.5, 0.5, 0.5)
+        self,
+        ctx,
+        start_x,
+        start_y,
+        end_x,
+        end_y,
+        line_width=1,
+        stroke_color=(0.5, 0.5, 0.5),
     ):
         """
         Draws a line from (start_x, start_y) to (end_x, end_y) on the specified cairo context.
@@ -517,7 +561,12 @@ class PDFPrinter(object):
             self._render_box(ctx, rectangle, text, fill_color=fill_color)
 
     def _render_box(
-        self, ctx, rectangle, text=None, stroke_color=(0.0, 0.0, 0.0), fill_color=(1.0, 1.0, 1.0)
+        self,
+        ctx,
+        rectangle,
+        text=None,
+        stroke_color=(0.0, 0.0, 0.0),
+        fill_color=(1.0, 1.0, 1.0),
     ):
         """
         Renders a box with top left corner positioned at (x,y).
@@ -539,13 +588,22 @@ class PDFPrinter(object):
         if text:
             ctx.move_to(rectangle.x + 1, rectangle.y)
             self.write_text(
-                ctx, text, size=rectangle.height - 2, stroke_color=[1 - z for z in fill_color]
+                ctx,
+                text,
+                size=rectangle.height - 2,
+                stroke_color=[1 - z for z in fill_color],
             )
 
         ctx.restore()
 
     def write_text(
-        self, ctx, text, box_width=None, size=10, stroke_color=(0.0, 0.0, 0.0), alignment=None
+        self,
+        ctx,
+        text,
+        box_width=None,
+        size=10,
+        stroke_color=(0.0, 0.0, 0.0),
+        alignment=None,
     ):
         """
         Writes the text to the specified context.
@@ -563,10 +621,18 @@ class PDFPrinter(object):
                 alignment=alignment,
             )
         else:
-            return self._write_text_cairo(ctx, text, size=size, stroke_color=stroke_color)
+            return self._write_text_cairo(
+                ctx, text, size=size, stroke_color=stroke_color
+            )
 
     def _write_text_pangocairo(
-        self, ctx, text, box_width=None, size=10, stroke_color=(0.0, 0.0, 0.0), alignment=None
+        self,
+        ctx,
+        text,
+        box_width=None,
+        size=10,
+        stroke_color=(0.0, 0.0, 0.0),
+        alignment=None,
     ):
         """
         Use a pango.Layout object to write text to the cairo Context specified as a parameter.
@@ -603,7 +669,9 @@ class PDFPrinter(object):
             A rectangle (x, y, width, height) representing the extents of the text drawn
         """
         ctx.rel_move_to(0, size)
-        ctx.select_font_face(self.font_name, cairo.FONT_SLANT_NORMAL, cairo.FONT_WEIGHT_NORMAL)
+        ctx.select_font_face(
+            self.font_name, cairo.FONT_SLANT_NORMAL, cairo.FONT_WEIGHT_NORMAL
+        )
         ctx.set_font_size(size)
         ctx.set_source_rgb(*stroke_color)
         ctx.show_text(text)
@@ -655,7 +723,9 @@ class PDFPrinter(object):
                 )
                 ctx.translate(m2pt(tx), m2pt(ty))
 
-            (w, h) = self._render_scale_bar(m, ctx, width, w, h, num_divisions, bar_size)
+            (w, h) = self._render_scale_bar(
+                m, ctx, width, w, h, num_divisions, bar_size
+            )
 
             # renders the scale representative fraction text
             if with_representative_fraction:
@@ -669,7 +739,9 @@ class PDFPrinter(object):
 
         return (w, h)
 
-    def _render_scale_bar(self, m, ctx, width=0.05, w=0, h=0, num_divisions=3, bar_size=8.0):
+    def _render_scale_bar(
+        self, m, ctx, width=0.05, w=0, h=0, num_divisions=3, bar_size=8.0
+    ):
         """
         Renders a graphic scale bar.
 
@@ -694,7 +766,9 @@ class PDFPrinter(object):
             ctx.translate(m2pt(width - num_divisions * page_div_size) / 2, 0)
         for ii in range(num_divisions):
             fill = (ii % 2,) * 3
-            rectangle = Rectangle(m2pt(ii * page_div_size), h, m2pt(page_div_size), bar_size)
+            rectangle = Rectangle(
+                m2pt(ii * page_div_size), h, m2pt(page_div_size), bar_size
+            )
             self._render_box(ctx, rectangle, text, fill_color=fill)
             fill = [1 - z for z in fill]
             text = "{0}{1}".format((ii + 1) * div_size, div_unit)
@@ -837,11 +911,17 @@ class PDFPrinter(object):
         """
         if proj.inverse(m.envelope().center()).x > latlon_bounds.maxx:
             latlon_bounds = Box2d(
-                latlon_bounds.maxx, latlon_bounds.miny, latlon_bounds.minx + 360, latlon_bounds.maxy
+                latlon_bounds.maxx,
+                latlon_bounds.miny,
+                latlon_bounds.minx + 360,
+                latlon_bounds.maxy,
             )
         if proj.inverse(m.envelope().center()).y > latlon_bounds.maxy:
             latlon_bounds = Box2d(
-                latlon_bounds.miny, latlon_bounds.maxy, latlon_bounds.maxx, latlon_bounds.miny + 360
+                latlon_bounds.miny,
+                latlon_bounds.maxy,
+                latlon_bounds.maxx,
+                latlon_bounds.miny + 360,
             )
 
         return latlon_bounds
@@ -876,7 +956,9 @@ class PDFPrinter(object):
         ctx.rectangle(0, 0, m2pt(self.map_box.width()), m2pt(self.map_box.height()))
         ctx.clip()
 
-        ctx.select_font_face(self.font_name, cairo.FONT_SLANT_NORMAL, cairo.FONT_WEIGHT_NORMAL)
+        ctx.select_font_face(
+            self.font_name, cairo.FONT_SLANT_NORMAL, cairo.FONT_WEIGHT_NORMAL
+        )
         ctx.set_font_size(latlon_labelsize)
 
         if is_x_axis:
@@ -894,9 +976,13 @@ class PDFPrinter(object):
                 latlon_bounds.minx,
                 latlon_bounds.maxx,
             )
-            ctx.translate(m2pt(self.map_box.width() / 2), m2pt(self.map_box.height() / 2))
+            ctx.translate(
+                m2pt(self.map_box.width() / 2), m2pt(self.map_box.height() / 2)
+            )
             ctx.rotate(-math.pi / 2)
-            ctx.translate(-m2pt(self.map_box.height() / 2), -m2pt(self.map_box.width() / 2))
+            ctx.translate(
+                -m2pt(self.map_box.height() / 2), -m2pt(self.map_box.width() / 2)
+            )
             box_top = self.map_box.width()
 
         for xvalue in self.round_grid_generator(
@@ -907,7 +993,9 @@ class PDFPrinter(object):
             end_cross = None
             while yvalue < y2 + latlon_buffer:
                 if is_x_axis:
-                    start = m.view_transform().forward(p2.forward(Coord(xvalue, yvalue)))
+                    start = m.view_transform().forward(
+                        p2.forward(Coord(xvalue, yvalue))
+                    )
                 else:
                     temp = m.view_transform().forward(p2.forward(Coord(yvalue, xvalue)))
                     start = Coord(m2pt(self.map_box.height()) - temp.y, temp.x)
@@ -1066,7 +1154,10 @@ class PDFPrinter(object):
                 )
 
                 ctx.move_to(
-                    render_box.x + legend_map_size[0] + m2pt(current_column * column_width) + 2,
+                    render_box.x
+                    + legend_map_size[0]
+                    + m2pt(current_column * column_width)
+                    + 2,
                     render_box.y,
                 )
 
@@ -1173,7 +1264,10 @@ class PDFPrinter(object):
                     sym.avoid_edges = False
                 except AttributeError:
                     L.warning("Could not set avoid_edges for rule %s", r.name)
-            if r.min_scale <= m.scale_denominator() and m.scale_denominator() < r.max_scale:
+            if (
+                r.min_scale <= m.scale_denominator()
+                and m.scale_denominator() < r.max_scale
+            ):
                 legend_rule = r
                 legend_rule.min_scale = 0
                 legend_rule.max_scale = float("inf")
@@ -1283,7 +1377,9 @@ class PDFPrinter(object):
                 reverse_all_but_last=True,
             )
 
-    def convert_pdf_pages_to_layers(self, filename, layer_names=None, reverse_all_but_last=True):
+    def convert_pdf_pages_to_layers(
+        self, filename, layer_names=None, reverse_all_but_last=True
+    ):
         """
         Takes a multi pages PDF as input and converts each page to a layer in a single page PDF.
 
@@ -1308,7 +1404,8 @@ class PDFPrinter(object):
 
             template_page_size = file_reader.pages[0].mediaBox
             output_pdf = file_writer.addBlankPage(
-                width=template_page_size.getWidth(), height=template_page_size.getHeight()
+                width=template_page_size.getWidth(),
+                height=template_page_size.getHeight(),
             )
 
             content_key = NameObject("/Contents")
@@ -1322,7 +1419,9 @@ class PDFPrinter(object):
             )
 
             properties_key = NameObject("/Properties")
-            output_pdf[resource_key][properties_key] = file_writer._addObject(properties)
+            output_pdf[resource_key][properties_key] = file_writer._addObject(
+                properties
+            )
 
             ocproperties = DictionaryObject()
             ocproperties[NameObject("/OCGs")] = ocgs
@@ -1330,9 +1429,9 @@ class PDFPrinter(object):
             default_view = self._get_pdf_default_view(ocgs, reverse_all_but_last)
             ocproperties[NameObject("/D")] = file_writer._addObject(default_view)
 
-            file_writer._root_object[NameObject("/OCProperties")] = file_writer._addObject(
-                ocproperties
-            )
+            file_writer._root_object[
+                NameObject("/OCProperties")
+            ] = file_writer._addObject(ocproperties)
 
             f.seek(0)
             file_writer.write(f)
@@ -1428,9 +1527,11 @@ class PDFPrinter(object):
 
             # preserve OCProperties at document root if we have one
             if NameObject("/OCProperties") in file_reader.trailer["/Root"]:
-                file_writer._root_object[NameObject("/OCProperties")] = file_reader.trailer[
-                    "/Root"
-                ].getObject()[NameObject("/OCProperties")]
+                file_writer._root_object[
+                    NameObject("/OCProperties")
+                ] = file_reader.trailer["/Root"].getObject()[
+                    NameObject("/OCProperties")
+                ]
 
             for page in file_reader.pages:
                 gcs = DictionaryObject()

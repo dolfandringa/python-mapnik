@@ -98,7 +98,11 @@ if "geojson" in mapnik.DatasourceCache.plugin_names():
         # works since it is a featurecollection
         ds = mapnik.Datasource(
             type="geojson",
-            inline='{ "type":"FeatureCollection", "features": [ { "type":"Feature", "properties":{"name":"test"}, "geometry": { "type":"LineString","coordinates":[[0,0],[10,10]] } } ]}',
+            inline=(
+                '{ "type":"FeatureCollection", "features": [ { "type":"Feature",'
+                ' "properties":{"name":"test"}, "geometry": {'
+                ' "type":"LineString","coordinates":[[0,0],[10,10]] } } ]}'
+            ),
         )
         eq_(len(ds.fields()), 1)
         f = list(ds.all_features())[0]

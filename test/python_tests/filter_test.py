@@ -146,14 +146,17 @@ def test_geometry_type_eval():
 
     # POLYGON = 3
     f = mapnik.Feature(context, 0)
-    f.geometry = mapnik.Geometry.from_wkt("POLYGON ((30 10, 10 20, 20 40, 40 40, 30 10))")
+    f.geometry = mapnik.Geometry.from_wkt(
+        "POLYGON ((30 10, 10 20, 20 40, 40 40, 30 10))"
+    )
     eq_(expr.evaluate(f), 3)
     eq_(mapnik.Expression("[mapnik::geometry_type] = polygon").evaluate(f), True)
 
     # COLLECTION = 4
     f = mapnik.Feature(context, 0)
     geom = mapnik.Geometry.from_wkt(
-        "GEOMETRYCOLLECTION(POLYGON((1 1,2 1,2 2,1 2,1 1)),POINT(2 3),LINESTRING(2 3,3 4))"
+        "GEOMETRYCOLLECTION(POLYGON((1 1,2 1,2 2,1 2,1 1)),POINT(2 3),LINESTRING(2"
+        " 3,3 4))"
     )
     f.geometry = geom
     eq_(expr.evaluate(f), 4)
@@ -464,7 +467,12 @@ def test_filtering_nulls_and_empty_strings():
     eq_(mapnik.Expression("[prop5] != null and [prop5] != ''").to_bool(f), True)
     # note, we need to do [prop5] != 0 here instead of false due to this bug:
     # https://github.com/mapnik/mapnik/issues/1873
-    eq_(mapnik.Expression("[prop5] != null and [prop5] != '' and [prop5] != 0").to_bool(f), False)
+    eq_(
+        mapnik.Expression("[prop5] != null and [prop5] != '' and [prop5] != 0").to_bool(
+            f
+        ),
+        False,
+    )
 
 
 # https://github.com/mapnik/mapnik/issues/1872

@@ -39,15 +39,20 @@ def test_tiff_round_trip_scanline():
     # premultiplied and im2 is
     assert_not_equal(hashstr(im.tostring()), hashstr(im2.tostring()))
     assert_not_equal(
-        hashstr(im.tostring("tiff:method=scanline")), hashstr(im2.tostring("tiff:method=scanline"))
+        hashstr(im.tostring("tiff:method=scanline")),
+        hashstr(im2.tostring("tiff:method=scanline")),
     )
     # Now premultiply
     im.premultiply()
     eq_(hashstr(im.tostring()), hashstr(im2.tostring()))
-    eq_(hashstr(im.tostring("tiff:method=scanline")), hashstr(im2.tostring("tiff:method=scanline")))
+    eq_(
+        hashstr(im.tostring("tiff:method=scanline")),
+        hashstr(im2.tostring("tiff:method=scanline")),
+    )
     eq_(hashstr(im2.tostring()), hashstr(im3.tostring()))
     eq_(
-        hashstr(im2.tostring("tiff:method=scanline")), hashstr(im3.tostring("tiff:method=scanline"))
+        hashstr(im2.tostring("tiff:method=scanline")),
+        hashstr(im3.tostring("tiff:method=scanline")),
     )
 
 
@@ -69,17 +74,22 @@ def test_tiff_round_trip_stripped():
     # difference in tags.
     assert_not_equal(hashstr(im.tostring()), hashstr(im2.tostring()))
     assert_not_equal(
-        hashstr(im.tostring("tiff:method=stripped")), hashstr(im2.tostring("tiff:method=stripped"))
+        hashstr(im.tostring("tiff:method=stripped")),
+        hashstr(im2.tostring("tiff:method=stripped")),
     )
     # Now if we premultiply they will be exactly the same
     im.premultiply()
     eq_(hashstr(im.tostring()), hashstr(im2.tostring()))
-    eq_(hashstr(im.tostring("tiff:method=stripped")), hashstr(im2.tostring("tiff:method=stripped")))
+    eq_(
+        hashstr(im.tostring("tiff:method=stripped")),
+        hashstr(im2.tostring("tiff:method=stripped")),
+    )
     eq_(hashstr(im2.tostring()), hashstr(im3.tostring()))
     # Both of these started out premultiplied, so this round trip should be
     # exactly the same!
     eq_(
-        hashstr(im2.tostring("tiff:method=stripped")), hashstr(im3.tostring("tiff:method=stripped"))
+        hashstr(im2.tostring("tiff:method=stripped")),
+        hashstr(im3.tostring("tiff:method=stripped")),
     )
 
 
@@ -198,16 +208,23 @@ def test_tiff_round_trip_tiled():
     # difference in tags.
     assert_not_equal(hashstr(im.tostring()), hashstr(im2.tostring()))
     assert_not_equal(
-        hashstr(im.tostring("tiff:method=tiled")), hashstr(im2.tostring("tiff:method=tiled"))
+        hashstr(im.tostring("tiff:method=tiled")),
+        hashstr(im2.tostring("tiff:method=tiled")),
     )
     # Now premultiply the first image and they will be exactly the same.
     im.premultiply()
     eq_(hashstr(im.tostring()), hashstr(im2.tostring()))
-    eq_(hashstr(im.tostring("tiff:method=tiled")), hashstr(im2.tostring("tiff:method=tiled")))
+    eq_(
+        hashstr(im.tostring("tiff:method=tiled")),
+        hashstr(im2.tostring("tiff:method=tiled")),
+    )
     eq_(hashstr(im2.tostring()), hashstr(im3.tostring()))
     # Both of these started out premultiplied, so this round trip should be
     # exactly the same!
-    eq_(hashstr(im2.tostring("tiff:method=tiled")), hashstr(im3.tostring("tiff:method=tiled")))
+    eq_(
+        hashstr(im2.tostring("tiff:method=tiled")),
+        hashstr(im3.tostring("tiff:method=tiled")),
+    )
 
 
 def test_tiff_rgb8_compare():
@@ -223,7 +240,11 @@ def test_tiff_rgb8_compare():
     # should not be a blank image
     eq_(
         hashstr(im.tostring("tiff"))
-        != hashstr(mapnik.Image(im.width(), im.height(), mapnik.ImageType.rgba8).tostring("tiff")),
+        != hashstr(
+            mapnik.Image(im.width(), im.height(), mapnik.ImageType.rgba8).tostring(
+                "tiff"
+            )
+        ),
         True,
     )
 
@@ -237,11 +258,18 @@ def test_tiff_rgba8_compare_scanline():
     eq_(im.width(), im2.width())
     eq_(im.height(), im2.height())
     eq_(hashstr(im.tostring()), hashstr(im2.tostring()))
-    eq_(hashstr(im.tostring("tiff:method=scanline")), hashstr(im2.tostring("tiff:method=scanline")))
+    eq_(
+        hashstr(im.tostring("tiff:method=scanline")),
+        hashstr(im2.tostring("tiff:method=scanline")),
+    )
     # should not be a blank image
     eq_(
         hashstr(im.tostring("tiff"))
-        != hashstr(mapnik.Image(im.width(), im.height(), mapnik.ImageType.rgba8).tostring("tiff")),
+        != hashstr(
+            mapnik.Image(im.width(), im.height(), mapnik.ImageType.rgba8).tostring(
+                "tiff"
+            )
+        ),
         True,
     )
 
@@ -255,11 +283,18 @@ def test_tiff_rgba8_compare_stripped():
     eq_(im.width(), im2.width())
     eq_(im.height(), im2.height())
     eq_(hashstr(im.tostring()), hashstr(im2.tostring()))
-    eq_(hashstr(im.tostring("tiff:method=stripped")), hashstr(im2.tostring("tiff:method=stripped")))
+    eq_(
+        hashstr(im.tostring("tiff:method=stripped")),
+        hashstr(im2.tostring("tiff:method=stripped")),
+    )
     # should not be a blank image
     eq_(
         hashstr(im.tostring("tiff"))
-        != hashstr(mapnik.Image(im.width(), im.height(), mapnik.ImageType.rgba8).tostring("tiff")),
+        != hashstr(
+            mapnik.Image(im.width(), im.height(), mapnik.ImageType.rgba8).tostring(
+                "tiff"
+            )
+        ),
         True,
     )
 
@@ -273,11 +308,18 @@ def test_tiff_rgba8_compare_tiled():
     eq_(im.width(), im2.width())
     eq_(im.height(), im2.height())
     eq_(hashstr(im.tostring()), hashstr(im2.tostring()))
-    eq_(hashstr(im.tostring("tiff:method=tiled")), hashstr(im2.tostring("tiff:method=tiled")))
+    eq_(
+        hashstr(im.tostring("tiff:method=tiled")),
+        hashstr(im2.tostring("tiff:method=tiled")),
+    )
     # should not be a blank image
     eq_(
         hashstr(im.tostring("tiff"))
-        != hashstr(mapnik.Image(im.width(), im.height(), mapnik.ImageType.rgba8).tostring("tiff")),
+        != hashstr(
+            mapnik.Image(im.width(), im.height(), mapnik.ImageType.rgba8).tostring(
+                "tiff"
+            )
+        ),
         True,
     )
 
@@ -291,11 +333,18 @@ def test_tiff_gray8_compare_scanline():
     eq_(im.width(), im2.width())
     eq_(im.height(), im2.height())
     eq_(hashstr(im.tostring()), hashstr(im2.tostring()))
-    eq_(hashstr(im.tostring("tiff:method=scanline")), hashstr(im2.tostring("tiff:method=scanline")))
+    eq_(
+        hashstr(im.tostring("tiff:method=scanline")),
+        hashstr(im2.tostring("tiff:method=scanline")),
+    )
     # should not be a blank image
     eq_(
         hashstr(im.tostring("tiff"))
-        != hashstr(mapnik.Image(im.width(), im.height(), mapnik.ImageType.gray8).tostring("tiff")),
+        != hashstr(
+            mapnik.Image(im.width(), im.height(), mapnik.ImageType.gray8).tostring(
+                "tiff"
+            )
+        ),
         True,
     )
 
@@ -309,11 +358,18 @@ def test_tiff_gray8_compare_stripped():
     eq_(im.width(), im2.width())
     eq_(im.height(), im2.height())
     eq_(hashstr(im.tostring()), hashstr(im2.tostring()))
-    eq_(hashstr(im.tostring("tiff:method=stripped")), hashstr(im2.tostring("tiff:method=stripped")))
+    eq_(
+        hashstr(im.tostring("tiff:method=stripped")),
+        hashstr(im2.tostring("tiff:method=stripped")),
+    )
     # should not be a blank image
     eq_(
         hashstr(im.tostring("tiff"))
-        != hashstr(mapnik.Image(im.width(), im.height(), mapnik.ImageType.gray8).tostring("tiff")),
+        != hashstr(
+            mapnik.Image(im.width(), im.height(), mapnik.ImageType.gray8).tostring(
+                "tiff"
+            )
+        ),
         True,
     )
 
@@ -327,11 +383,18 @@ def test_tiff_gray8_compare_tiled():
     eq_(im.width(), im2.width())
     eq_(im.height(), im2.height())
     eq_(hashstr(im.tostring()), hashstr(im2.tostring()))
-    eq_(hashstr(im.tostring("tiff:method=tiled")), hashstr(im2.tostring("tiff:method=tiled")))
+    eq_(
+        hashstr(im.tostring("tiff:method=tiled")),
+        hashstr(im2.tostring("tiff:method=tiled")),
+    )
     # should not be a blank image
     eq_(
         hashstr(im.tostring("tiff"))
-        != hashstr(mapnik.Image(im.width(), im.height(), mapnik.ImageType.gray8).tostring("tiff")),
+        != hashstr(
+            mapnik.Image(im.width(), im.height(), mapnik.ImageType.gray8).tostring(
+                "tiff"
+            )
+        ),
         True,
     )
 
@@ -345,11 +408,18 @@ def test_tiff_gray16_compare_scanline():
     eq_(im.width(), im2.width())
     eq_(im.height(), im2.height())
     eq_(hashstr(im.tostring()), hashstr(im2.tostring()))
-    eq_(hashstr(im.tostring("tiff:method=scanline")), hashstr(im2.tostring("tiff:method=scanline")))
+    eq_(
+        hashstr(im.tostring("tiff:method=scanline")),
+        hashstr(im2.tostring("tiff:method=scanline")),
+    )
     # should not be a blank image
     eq_(
         hashstr(im.tostring("tiff"))
-        != hashstr(mapnik.Image(im.width(), im.height(), mapnik.ImageType.gray16).tostring("tiff")),
+        != hashstr(
+            mapnik.Image(im.width(), im.height(), mapnik.ImageType.gray16).tostring(
+                "tiff"
+            )
+        ),
         True,
     )
 
@@ -363,11 +433,18 @@ def test_tiff_gray16_compare_stripped():
     eq_(im.width(), im2.width())
     eq_(im.height(), im2.height())
     eq_(hashstr(im.tostring()), hashstr(im2.tostring()))
-    eq_(hashstr(im.tostring("tiff:method=stripped")), hashstr(im2.tostring("tiff:method=stripped")))
+    eq_(
+        hashstr(im.tostring("tiff:method=stripped")),
+        hashstr(im2.tostring("tiff:method=stripped")),
+    )
     # should not be a blank image
     eq_(
         hashstr(im.tostring("tiff"))
-        != hashstr(mapnik.Image(im.width(), im.height(), mapnik.ImageType.gray16).tostring("tiff")),
+        != hashstr(
+            mapnik.Image(im.width(), im.height(), mapnik.ImageType.gray16).tostring(
+                "tiff"
+            )
+        ),
         True,
     )
 
@@ -381,11 +458,18 @@ def test_tiff_gray16_compare_tiled():
     eq_(im.width(), im2.width())
     eq_(im.height(), im2.height())
     eq_(hashstr(im.tostring()), hashstr(im2.tostring()))
-    eq_(hashstr(im.tostring("tiff:method=tiled")), hashstr(im2.tostring("tiff:method=tiled")))
+    eq_(
+        hashstr(im.tostring("tiff:method=tiled")),
+        hashstr(im2.tostring("tiff:method=tiled")),
+    )
     # should not be a blank image
     eq_(
         hashstr(im.tostring("tiff"))
-        != hashstr(mapnik.Image(im.width(), im.height(), mapnik.ImageType.gray16).tostring("tiff")),
+        != hashstr(
+            mapnik.Image(im.width(), im.height(), mapnik.ImageType.gray16).tostring(
+                "tiff"
+            )
+        ),
         True,
     )
 
@@ -399,12 +483,17 @@ def test_tiff_gray32f_compare_scanline():
     eq_(im.width(), im2.width())
     eq_(im.height(), im2.height())
     eq_(hashstr(im.tostring()), hashstr(im2.tostring()))
-    eq_(hashstr(im.tostring("tiff:method=scanline")), hashstr(im2.tostring("tiff:method=scanline")))
+    eq_(
+        hashstr(im.tostring("tiff:method=scanline")),
+        hashstr(im2.tostring("tiff:method=scanline")),
+    )
     # should not be a blank image
     eq_(
         hashstr(im.tostring("tiff"))
         != hashstr(
-            mapnik.Image(im.width(), im.height(), mapnik.ImageType.gray32f).tostring("tiff")
+            mapnik.Image(im.width(), im.height(), mapnik.ImageType.gray32f).tostring(
+                "tiff"
+            )
         ),
         True,
     )
@@ -419,12 +508,17 @@ def test_tiff_gray32f_compare_stripped():
     eq_(im.width(), im2.width())
     eq_(im.height(), im2.height())
     eq_(hashstr(im.tostring()), hashstr(im2.tostring()))
-    eq_(hashstr(im.tostring("tiff:method=stripped")), hashstr(im2.tostring("tiff:method=stripped")))
+    eq_(
+        hashstr(im.tostring("tiff:method=stripped")),
+        hashstr(im2.tostring("tiff:method=stripped")),
+    )
     # should not be a blank image
     eq_(
         hashstr(im.tostring("tiff"))
         != hashstr(
-            mapnik.Image(im.width(), im.height(), mapnik.ImageType.gray32f).tostring("tiff")
+            mapnik.Image(im.width(), im.height(), mapnik.ImageType.gray32f).tostring(
+                "tiff"
+            )
         ),
         True,
     )
@@ -439,12 +533,17 @@ def test_tiff_gray32f_compare_tiled():
     eq_(im.width(), im2.width())
     eq_(im.height(), im2.height())
     eq_(hashstr(im.tostring()), hashstr(im2.tostring()))
-    eq_(hashstr(im.tostring("tiff:method=tiled")), hashstr(im2.tostring("tiff:method=tiled")))
+    eq_(
+        hashstr(im.tostring("tiff:method=tiled")),
+        hashstr(im2.tostring("tiff:method=tiled")),
+    )
     # should not be a blank image
     eq_(
         hashstr(im.tostring("tiff"))
         != hashstr(
-            mapnik.Image(im.width(), im.height(), mapnik.ImageType.gray32f).tostring("tiff")
+            mapnik.Image(im.width(), im.height(), mapnik.ImageType.gray32f).tostring(
+                "tiff"
+            )
         ),
         True,
     )

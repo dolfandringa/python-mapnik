@@ -66,16 +66,21 @@ def test_adding_datasource_to_layer():
 
         # and since we have now added a shapefile in spherical mercator, adjust
         # the projection
-        lyr.srs = "+proj=merc +lon_0=0 +lat_ts=0 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs"
+        lyr.srs = (
+            "+proj=merc +lon_0=0 +lat_ts=0 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84"
+            " +units=m +no_defs"
+        )
 
         # test that assignment
         eq_(
             m.layers[0].srs,
-            "+proj=merc +lon_0=0 +lat_ts=0 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",
+            "+proj=merc +lon_0=0 +lat_ts=0 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84"
+            " +units=m +no_defs",
         )
         eq_(
             lyr.srs,
-            "+proj=merc +lon_0=0 +lat_ts=0 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",
+            "+proj=merc +lon_0=0 +lat_ts=0 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84"
+            " +units=m +no_defs",
         )
     except RuntimeError as e:
         # only test datasources that we have installed

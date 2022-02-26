@@ -22,7 +22,9 @@ def sequence_scale(scale, scale_sequence):
 
 def default_scale(scale):
     """Default scale helper, this rounds scale to a 'sensible' value."""
-    return sequence_scale(scale, (1, 1.25, 1.5, 1.75, 2, 2.5, 3, 4, 5, 6, 7.5, 8, 9, 10))
+    return sequence_scale(
+        scale, (1, 1.25, 1.5, 1.75, 2, 2.5, 3, 4, 5, 6, 7.5, 8, 9, 10)
+    )
 
 
 def deg_min_sec_scale(scale):
